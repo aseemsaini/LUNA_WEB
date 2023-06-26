@@ -6,16 +6,13 @@
 GET     /                           controllers.HomeController.index
 
 #TaskList Route
-
-
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
 #Login Route
 
-GET     /login2                         controllers.TaskList5.login
+GET     /login                         controllers.tweet.login
 
-POST   /createUserForm2                 controllers.TaskList5.createUserForm
-
-
-
+POST   /createUserForm2                 controllers.tweet.createUserForm
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(file)

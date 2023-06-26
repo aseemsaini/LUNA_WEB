@@ -24,8 +24,23 @@ package controllers {
   
   }
 
+  // @LINE:10
+  class ReverseAsyncController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:10
+    def message: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "message")
+    }
+  
+  }
+
   // @LINE:13
-  class ReverseTaskList5(_prefix: => String) {
+  class Reversetweet(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
@@ -34,7 +49,7 @@ package controllers {
     // @LINE:13
     def login: Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "login2")
+      Call("GET", _prefix + { _defaultPrefix } + "login")
     }
   
     // @LINE:15
@@ -45,14 +60,14 @@ package controllers {
   
   }
 
-  // @LINE:21
+  // @LINE:18
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:21
+    // @LINE:18
     def versioned(file:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[String]].unbind("file", file))

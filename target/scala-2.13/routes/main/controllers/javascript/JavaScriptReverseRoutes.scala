@@ -29,8 +29,28 @@ package controllers.javascript {
   
   }
 
+  // @LINE:10
+  class ReverseAsyncController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:10
+    def message: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.AsyncController.message",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "message"})
+        }
+      """
+    )
+  
+  }
+
   // @LINE:13
-  class ReverseTaskList5(_prefix: => String) {
+  class Reversetweet(_prefix: => String) {
 
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
@@ -39,17 +59,17 @@ package controllers.javascript {
   
     // @LINE:13
     def login: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.TaskList5.login",
+      "controllers.tweet.login",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "login2"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "login"})
         }
       """
     )
   
     // @LINE:15
     def createUserForm: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.TaskList5.createUserForm",
+      "controllers.tweet.createUserForm",
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "createUserForm2"})
@@ -59,7 +79,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:21
+  // @LINE:18
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -67,7 +87,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:21
+    // @LINE:18
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

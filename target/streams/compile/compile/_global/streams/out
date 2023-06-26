@@ -1,22 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login1.scala.html:1:1: not found: type LoginData[0m
-[0m[[0m[31merror[0m] [0m[0m@* Login Template File*@[0m
-[0m[[0m[31merror[0m] [0m[0m^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login1.scala.html:3:19: not found: type LoginData[0m
-[0m[[0m[31merror[0m] [0m[0m@(loginForm: Form[LoginData])(implicit request: MessagesRequestHeader, flash: Flash)[0m
-[0m[[0m[31merror[0m] [0m[0m                  ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login1.scala.html:20:41: value TaskList1 is not a member of object controllers.routes[0m
-[0m[[0m[31merror[0m] [0m[0mdid you mean TaskList5?[0m
-[0m[[0m[31merror[0m] [0m[0m  <form method = "post" action="@routes.TaskList1.validateLoginPost">[0m
-[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login1.scala.html:28:41: value TaskList1 is not a member of object controllers.routes[0m
-[0m[[0m[31merror[0m] [0m[0mdid you mean TaskList5?[0m
-[0m[[0m[31merror[0m] [0m[0m  <form method = "post" action="@routes.TaskList1.createUser">[0m
-[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login1.scala.html:36:32: value TaskList1 is not a member of object controllers.routes[0m
-[0m[[0m[31merror[0m] [0m[0mdid you mean TaskList5?[0m
-[0m[[0m[31merror[0m] [0m[0m  @helper.form(action = routes.TaskList1.createUserForm) {[0m
-[0m[[0m[31merror[0m] [0m[0m                               ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login1.scala.html:48:8: not found: type LoginData[0m
-[0m[[0m[31merror[0m] [0m[0m</html>[0m
-[0m[[0m[31merror[0m] [0m[0m       ^[0m
-[0m[[0m[31merror[0m] [0m[0m6 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/Models/Tables.scala:4:23: early initializers are deprecated; they will be replaced by trait parameters in 3.0, see the migration guide on avoiding var/val in traits.[0m
+[0m[[0m[31merror[0m] [0m[0mobject Tables extends {[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

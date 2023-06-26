@@ -1,0 +1,66 @@
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-form {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 400px;
+}
+
+.login-form h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #1da1f2; /* Twitter blue color */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #1da1f2; /* Twitter blue color */
+}
+
+.form-group input {
+    border: 1px solid #1da1f2; /* Twitter blue color */
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.form-actions button {
+    background-color: #1da1f2; /* Twitter blue color */
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 20px;
+}
+
+.form-actions button:hover {
+    background-color: #0c82bf; /* Darker shade of Twitter blue color */
+}

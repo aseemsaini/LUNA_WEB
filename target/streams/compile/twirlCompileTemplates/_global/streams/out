@@ -1,3 +1,3 @@
-[0m[[0m[31merror[0m] [0m[0m[Error] /Users/aseemsaini/Documents/GitHub/Scala_Play/app/views/welcome.scala.html:50[0m
-[0m[[0m[31merror[0m] [0m[0m    : Expected ending '}'[0m
+[0m[[0m[31merror[0m] [0m[0m[Error] /Users/aseemsaini/Desktop/ACM/acm_app/app/views/login2.scala.html:74[0m
+[0m[[0m[31merror[0m] [0m[0m                <img class="ellipse-icon" alt="" src="./public/ellipse-3@2x.png" />: Invalid '@' symbol[0m
 [0m[[0m[31merror[0m] [0m[0m(Compile / [31mtwirlCompileTemplates[0m) Twirl compilation failed[0m

@@ -17,24 +17,20 @@ import play.api.data._
 
 object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[String,AssetsFinder,play.twirl.api.HtmlFormat.Appendable] {
 
-  /*
- * This template takes a two arguments, a String containing a
- * message to display and an AssetsFinder to locate static assets.
- */
-  def apply/*5.2*/(message: String)(implicit assetsFinder: AssetsFinder):play.twirl.api.HtmlFormat.Appendable = {
+  /**/
+  def apply/*1.2*/(message: String)(implicit assetsFinder: AssetsFinder):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*6.1*/("""
-"""),format.raw/*11.4*/("""
+Seq[Any](format.raw/*2.1*/("""
+"""),format.raw/*7.4*/("""
 
-"""),_display_(/*13.2*/main("Welcome to My World")/*13.29*/ {_display_(Seq[Any](format.raw/*13.31*/("""
+"""),_display_(/*9.2*/main("Welcome to LUNA")/*9.25*/ {_display_(Seq[Any](format.raw/*9.27*/("""
 
-    """),format.raw/*18.8*/("""
-    """),_display_(/*19.6*/welcome(message, style = "scala")),format.raw/*19.39*/("""
+    """),_display_(/*11.6*/welcome(message, style = "scala")),format.raw/*11.39*/("""
 
-""")))}),format.raw/*21.2*/("""
+""")))}),format.raw/*13.2*/("""
 """))
       }
     }
@@ -52,9 +48,9 @@ Seq[Any](format.raw/*6.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: 50d54884d2a35b82823f9365eef926a6270510b4
-                  MATRIX: 873->137|1021->192|1049->387|1078->390|1114->417|1154->419|1187->548|1219->554|1273->587|1306->590
-                  LINES: 24->5|29->6|30->11|32->13|32->13|32->13|34->18|35->19|35->19|37->21
+                  HASH: 913b4de5c008abb4445e22630f021552d4217300
+                  MATRIX: 742->1|890->56|917->251|945->254|976->277|1015->279|1048->286|1102->319|1135->322
+                  LINES: 21->1|26->2|27->7|29->9|29->9|29->9|31->11|31->11|33->13
                   -- GENERATED --
               */
           

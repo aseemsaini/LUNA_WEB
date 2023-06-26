@@ -14,10 +14,12 @@ class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:6
   HomeController_0: controllers.HomeController,
+  // @LINE:10
+  AsyncController_1: controllers.AsyncController,
   // @LINE:13
-  TaskList5_1: controllers.TaskList5,
-  // @LINE:21
-  Assets_2: controllers.Assets,
+  tweet_2: controllers.tweet,
+  // @LINE:18
+  Assets_3: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
 
@@ -25,16 +27,18 @@ class Routes(
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
     HomeController_0: controllers.HomeController,
+    // @LINE:10
+    AsyncController_1: controllers.AsyncController,
     // @LINE:13
-    TaskList5_1: controllers.TaskList5,
-    // @LINE:21
-    Assets_2: controllers.Assets
-  ) = this(errorHandler, HomeController_0, TaskList5_1, Assets_2, "/")
+    tweet_2: controllers.tweet,
+    // @LINE:18
+    Assets_3: controllers.Assets
+  ) = this(errorHandler, HomeController_0, AsyncController_1, tweet_2, Assets_3, "/")
 
   def withPrefix(addPrefix: String): Routes = {
     val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_0, TaskList5_1, Assets_2, prefix)
+    new Routes(errorHandler, HomeController_0, AsyncController_1, tweet_2, Assets_3, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -43,8 +47,9 @@ class Routes(
 
   def documentation = List(
     ("""GET""", this.prefix, """controllers.HomeController.index"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """login2""", """controllers.TaskList5.login"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """createUserForm2""", """controllers.TaskList5.createUserForm"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """message""", """controllers.AsyncController.message"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """login""", """controllers.tweet.login"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """createUserForm2""", """controllers.tweet.createUserForm"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(file:String)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -71,33 +76,52 @@ class Routes(
     )
   )
 
-  // @LINE:13
-  private[this] lazy val controllers_TaskList5_login1_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("login2")))
+  // @LINE:10
+  private[this] lazy val controllers_AsyncController_message1_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("message")))
   )
-  private[this] lazy val controllers_TaskList5_login1_invoker = createInvoker(
-    TaskList5_1.login,
+  private[this] lazy val controllers_AsyncController_message1_invoker = createInvoker(
+    AsyncController_1.message,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.TaskList5",
+      "controllers.AsyncController",
+      "message",
+      Nil,
+      "GET",
+      this.prefix + """message""",
+      """TaskList Route
+ An example controller showing how to write asynchronous code""",
+      Seq()
+    )
+  )
+
+  // @LINE:13
+  private[this] lazy val controllers_tweet_login2_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("login")))
+  )
+  private[this] lazy val controllers_tweet_login2_invoker = createInvoker(
+    tweet_2.login,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
       "login",
       Nil,
       "GET",
-      this.prefix + """login2""",
+      this.prefix + """login""",
       """""",
       Seq()
     )
   )
 
   // @LINE:15
-  private[this] lazy val controllers_TaskList5_createUserForm2_route = Route("POST",
+  private[this] lazy val controllers_tweet_createUserForm3_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("createUserForm2")))
   )
-  private[this] lazy val controllers_TaskList5_createUserForm2_invoker = createInvoker(
-    TaskList5_1.createUserForm,
+  private[this] lazy val controllers_tweet_createUserForm3_invoker = createInvoker(
+    tweet_2.createUserForm,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.TaskList5",
+      "controllers.tweet",
       "createUserForm",
       Nil,
       "POST",
@@ -107,12 +131,12 @@ class Routes(
     )
   )
 
-  // @LINE:21
-  private[this] lazy val controllers_Assets_versioned3_route = Route("GET",
+  // @LINE:18
+  private[this] lazy val controllers_Assets_versioned4_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned3_invoker = createInvoker(
-    Assets_2.versioned(fakeValue[String]),
+  private[this] lazy val controllers_Assets_versioned4_invoker = createInvoker(
+    Assets_3.versioned(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Assets",
@@ -134,22 +158,28 @@ class Routes(
         controllers_HomeController_index0_invoker.call(HomeController_0.index)
       }
   
-    // @LINE:13
-    case controllers_TaskList5_login1_route(params@_) =>
+    // @LINE:10
+    case controllers_AsyncController_message1_route(params@_) =>
       call { 
-        controllers_TaskList5_login1_invoker.call(TaskList5_1.login)
+        controllers_AsyncController_message1_invoker.call(AsyncController_1.message)
+      }
+  
+    // @LINE:13
+    case controllers_tweet_login2_route(params@_) =>
+      call { 
+        controllers_tweet_login2_invoker.call(tweet_2.login)
       }
   
     // @LINE:15
-    case controllers_TaskList5_createUserForm2_route(params@_) =>
+    case controllers_tweet_createUserForm3_route(params@_) =>
       call { 
-        controllers_TaskList5_createUserForm2_invoker.call(TaskList5_1.createUserForm)
+        controllers_tweet_createUserForm3_invoker.call(tweet_2.createUserForm)
       }
   
-    // @LINE:21
-    case controllers_Assets_versioned3_route(params@_) =>
+    // @LINE:18
+    case controllers_Assets_versioned4_route(params@_) =>
       call(params.fromPath[String]("file", None)) { (file) =>
-        controllers_Assets_versioned3_invoker.call(Assets_2.versioned(file))
+        controllers_Assets_versioned4_invoker.call(Assets_3.versioned(file))
       }
   }
 }
