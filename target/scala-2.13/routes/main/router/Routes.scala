@@ -51,6 +51,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """login""", """controllers.tweet.login"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """createUserForm2""", """controllers.tweet.createUserForm"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(file:String)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """home""", """controllers.tweet.home"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -149,6 +150,24 @@ class Routes(
     )
   )
 
+  // @LINE:21
+  private[this] lazy val controllers_tweet_home5_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("home")))
+  )
+  private[this] lazy val controllers_tweet_home5_invoker = createInvoker(
+    tweet_2.home,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
+      "home",
+      Nil,
+      "GET",
+      this.prefix + """home""",
+      """Home Page""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -180,6 +199,12 @@ class Routes(
     case controllers_Assets_versioned4_route(params@_) =>
       call(params.fromPath[String]("file", None)) { (file) =>
         controllers_Assets_versioned4_invoker.call(Assets_3.versioned(file))
+      }
+  
+    // @LINE:21
+    case controllers_tweet_home5_route(params@_) =>
+      call { 
+        controllers_tweet_home5_invoker.call(tweet_2.home)
       }
   }
 }

@@ -1,7 +1,7 @@
 package Models
 // AUTO-GENERATED Slick data model
 /** Stand-alone Slick data model for immediate use */
-object Tables extends Tables{
+object Tables extends Tables {
   val profile = slick.jdbc.MySQLProfile
 }
 
@@ -46,30 +46,30 @@ trait Tables {
 
   /** Entity class storing rows of table Messages
    *  @param messageId Database column message_id SqlType(BIGINT UNSIGNED), AutoInc, PrimaryKey
-   *  @param userId Database column user_id SqlType(INT), Default(None)
-   *  @param text Database column text SqlType(VARCHAR), Length(2000,true), Default(None)
-   *  @param likes Database column likes SqlType(INT), Default(Some(0))
+   *  @param userId Database column user_id SqlType(INT)
+   *  @param text Database column text SqlType(VARCHAR), Length(2000,true)
+   *  @param likes Database column likes SqlType(INT), Default(0)
    *  @param createdAt Database column created_at SqlType(TIMESTAMP) */
-  case class MessagesRow(messageId: Long, userId: Option[Int] = None, text: Option[String] = None, likes: Option[Int] = Some(0), createdAt: Option[java.sql.Timestamp])
+  case class MessagesRow(messageId: Long, userId: Int, text: String, likes: Int = 0, createdAt: Option[java.sql.Timestamp])
   /** GetResult implicit for fetching MessagesRow objects using plain SQL queries */
-  implicit def GetResultMessagesRow(implicit e0: GR[Long], e1: GR[Option[Int]], e2: GR[Option[String]], e3: GR[Option[java.sql.Timestamp]]): GR[MessagesRow] = GR{
+  implicit def GetResultMessagesRow(implicit e0: GR[Long], e1: GR[Int], e2: GR[String], e3: GR[Option[java.sql.Timestamp]]): GR[MessagesRow] = GR{
     prs => import prs._
-    MessagesRow.tupled((<<[Long], <<?[Int], <<?[String], <<?[Int], <<?[java.sql.Timestamp]))
+    MessagesRow.tupled((<<[Long], <<[Int], <<[String], <<[Int], <<?[java.sql.Timestamp]))
   }
   /** Table description of table messages. Objects of this class serve as prototypes for rows in queries. */
   class Messages(_tableTag: Tag) extends profile.api.Table[MessagesRow](_tableTag, Some("luna"), "messages") {
     def * = (messageId, userId, text, likes, createdAt) <> (MessagesRow.tupled, MessagesRow.unapply)
     /** Maps whole row to an option. Useful for outer joins. */
-    def ? = ((Rep.Some(messageId), userId, text, likes, createdAt)).shaped.<>({r=>import r._; _1.map(_=> MessagesRow.tupled((_1.get, _2, _3, _4, _5)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
+    def ? = ((Rep.Some(messageId), Rep.Some(userId), Rep.Some(text), Rep.Some(likes), createdAt)).shaped.<>({r=>import r._; _1.map(_=> MessagesRow.tupled((_1.get, _2.get, _3.get, _4.get, _5)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
     /** Database column message_id SqlType(BIGINT UNSIGNED), AutoInc, PrimaryKey */
     val messageId: Rep[Long] = column[Long]("message_id", O.AutoInc, O.PrimaryKey)
-    /** Database column user_id SqlType(INT), Default(None) */
-    val userId: Rep[Option[Int]] = column[Option[Int]]("user_id", O.Default(None))
-    /** Database column text SqlType(VARCHAR), Length(2000,true), Default(None) */
-    val text: Rep[Option[String]] = column[Option[String]]("text", O.Length(2000,varying=true), O.Default(None))
-    /** Database column likes SqlType(INT), Default(Some(0)) */
-    val likes: Rep[Option[Int]] = column[Option[Int]]("likes", O.Default(Some(0)))
+    /** Database column user_id SqlType(INT) */
+    val userId: Rep[Int] = column[Int]("user_id")
+    /** Database column text SqlType(VARCHAR), Length(2000,true) */
+    val text: Rep[String] = column[String]("text", O.Length(2000,varying=true))
+    /** Database column likes SqlType(INT), Default(0) */
+    val likes: Rep[Int] = column[Int]("likes", O.Default(0))
     /** Database column created_at SqlType(TIMESTAMP) */
     val createdAt: Rep[Option[java.sql.Timestamp]] = column[Option[java.sql.Timestamp]]("created_at")
   }

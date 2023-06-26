@@ -17,4 +17,5 @@ POST   /createUserForm2                 controllers.tweet.createUserForm
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(file)
 
-
+#Home Page
+GET     /home                       controllers.tweet.home

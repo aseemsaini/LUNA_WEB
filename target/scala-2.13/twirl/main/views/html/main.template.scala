@@ -33,16 +33,15 @@ Seq[Any](format.raw/*9.1*/("""
 """),format.raw/*10.1*/("""<!DOCTYPE html>
 <html lang="en">
     <head>
-        """),format.raw/*13.62*/("""
-        """),format.raw/*14.9*/("""<title>"""),_display_(/*14.17*/title),format.raw/*14.22*/("""</title>
+        <title>"""),_display_(/*13.17*/title),format.raw/*13.22*/("""</title>
 
-        <link rel="shortcut icon" type="image/png" href=""""),_display_(/*16.59*/assetsFinder/*16.71*/.path("images/favicon.png")),format.raw/*16.98*/("""">
-        <script src=""""),_display_(/*17.23*/assetsFinder/*17.35*/.path("javascripts/hello.js")),format.raw/*17.64*/("""" type="text/javascript"></script>
+        <link rel="shortcut icon" type="image/png" href=""""),_display_(/*15.59*/assetsFinder/*15.71*/.path("images/favicon.png")),format.raw/*15.98*/("""">
+        <script src=""""),_display_(/*16.23*/assetsFinder/*16.35*/.path("javascripts/hello.js")),format.raw/*16.64*/("""" type="text/javascript"></script>
     </head>
     <body>
-        """),format.raw/*21.32*/("""
-        """),_display_(/*22.10*/content),format.raw/*22.17*/("""
-    """),format.raw/*23.5*/("""</body>
+        """),format.raw/*20.32*/("""
+        """),_display_(/*21.10*/content),format.raw/*21.17*/("""
+    """),format.raw/*22.5*/("""</body>
 </html>
 """))
       }
@@ -61,9 +60,9 @@ Seq[Any](format.raw/*9.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/main.scala.html
-                  HASH: 10aa177d54e1d2a4c9eb69c22a881eb431075d95
-                  MATRIX: 1067->327|1228->395|1256->396|1336->501|1372->510|1407->518|1433->523|1528->591|1549->603|1597->630|1649->655|1670->667|1720->696|1814->852|1851->862|1879->869|1911->874
-                  LINES: 27->8|32->9|33->10|36->13|37->14|37->14|37->14|39->16|39->16|39->16|40->17|40->17|40->17|43->21|44->22|44->22|45->23
+                  HASH: c07b97b603e4d0ea09365c588b4ea3821c31c3ea
+                  MATRIX: 1067->327|1228->395|1256->396|1343->456|1369->461|1464->529|1485->541|1533->568|1585->593|1606->605|1656->634|1750->790|1787->800|1815->807|1847->812
+                  LINES: 27->8|32->9|33->10|36->13|36->13|38->15|38->15|38->15|39->16|39->16|39->16|42->20|43->21|43->21|44->22
                   -- GENERATED --
               */
           

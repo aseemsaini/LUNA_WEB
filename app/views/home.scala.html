@@ -1,0 +1,24 @@
+@(messages: Seq[Models.Tables.MessagesRow], users: Seq[Models.Tables.UsersRow])(implicit request: MessagesRequestHeader, flash: Flash)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/assets/stylesheets/index.css">
+</head>
+<body>
+<h2>Welcome To Luna</h2>
+
+<h3>Last 10 Messages:</h3>
+<ul>
+    @for(message <- messages) {
+    <li>
+        <p>Message: @message.text</p>
+        <p>User: @users.find(_.id == message.userId).map(_.username).getOrElse("")</p>
+    </li>
+    }
+</ul>
+
+</body>
+</html>

@@ -77,6 +77,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:21
+    def home: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.home",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "home"})
+        }
+      """
+    )
+  
   }
 
   // @LINE:18

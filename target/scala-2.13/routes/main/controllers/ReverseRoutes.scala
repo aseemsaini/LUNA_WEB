@@ -58,6 +58,12 @@ package controllers {
       Call("POST", _prefix + { _defaultPrefix } + "createUserForm2")
     }
   
+    // @LINE:21
+    def home: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "home")
+    }
+  
   }
 
   // @LINE:18

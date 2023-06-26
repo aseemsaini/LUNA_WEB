@@ -8,6 +8,8 @@ import play.api.data.Forms._
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
+import Models.Tables.MessagesRow
+import Models.Tables.UsersRow
 import slick.jdbc.MySQLProfile.api._
 
 import scala.concurrent.ExecutionContext
@@ -27,6 +29,22 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
     Ok(views.html.login2(loginForm))
   }
 
+
+  import Models.Tables.MessagesRow
+
+  import Models.Tables.MessagesRow
+
+  def home = Action.async { implicit request =>
+    val limit = 10
+    val messagesWithUsers: Future[Seq[(MessagesRow, UsersRow)]] = model.getMessagesWithUsers(limit)
+
+    messagesWithUsers.map { messagesAndUsers =>
+      val messages: Seq[MessagesRow] = messagesAndUsers.map { case (message, _) => message }
+      val users: Seq[UsersRow] = messagesAndUsers.map { case (_, user) => user }
+      Ok(views.html.home(messages, users))
+    }
+  }
+
   import scala.concurrent.ExecutionContext.Implicits.global
 
   def createUserForm = Action.async { implicit request =>
@@ -42,7 +60,7 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
         model.validate(username)(executionContext).flatMap { exists =>
           if (exists) {
             // Username already exists, return a flashing error
-            Future.successful(Redirect(routes.tweet.login).flashing("error" -> "User already exists."))
+            Future.successful(Redirect(routes.tweet.home).flashing("error" -> "User already exists."))
           } else {
             // Username doesn't exist, create a new user
             model.createUser(username, password)(executionContext).map { _ =>
