@@ -27,21 +27,36 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
     Ok(views.html.login2(loginForm))
   }
 
+  import scala.concurrent.ExecutionContext.Implicits.global
+
   def createUserForm = Action.async { implicit request =>
+    val executionContext = scala.concurrent.ExecutionContext.global
+
     loginForm.bindFromRequest().fold(
       formWithErrors => Future.successful(BadRequest(views.html.login2(formWithErrors))),
       ld => {
         val username = ld.username
         val password = ld.password
-        model.createUser(username, password).map { _ =>
-          Redirect(routes.tweet.login).flashing("Done" -> "User creation Done.")
-        }.recover {
-          case _ =>
-            Redirect(routes.tweet.login).flashing("error" -> "User creation failed.")
-        }
+
+        // Validate if the username already exists
+        model.validate(username)(executionContext).flatMap { exists =>
+          if (exists) {
+            // Username already exists, return a flashing error
+            Future.successful(Redirect(routes.tweet.login).flashing("error" -> "User already exists."))
+          } else {
+            // Username doesn't exist, create a new user
+            model.createUser(username, password)(executionContext).map { _ =>
+              Redirect(routes.tweet.login).flashing("Done" -> "User creation Done.")
+            }(executionContext).recover {
+              case _ =>
+                Redirect(routes.tweet.login).flashing("error" -> "User creation failed.")
+            }(executionContext)
+          }
+        }(executionContext)
       }
     )
   }
+
 
 
 }

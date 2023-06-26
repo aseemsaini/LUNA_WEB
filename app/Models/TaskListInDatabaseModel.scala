@@ -6,14 +6,15 @@ import org.mindrot.jbcrypt.BCrypt
 import Models.Tables._
 
 class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
-  def validate(username: String, password: String): Boolean = { ???
-    //db.run(Users.filter(userRow => userRow.username === username && userRow.password === password).result)
+  def validate(username: String)(implicit ec: ExecutionContext): Future[Boolean] = {
+    db.run(Users.filter(_.username === username).exists.result)
   }
 
-  def createUser(username: String, password: String): Future[Unit] = {
+  def createUser(username: String, password: String)(implicit ec: ExecutionContext): Future[Unit] = {
     val hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt())
     db.run(Users += UsersRow(-1, username, hashedPassword)).map(_ => ())
   }
+
 
   def getTasks(username: String): Seq[String] = { ???
   }

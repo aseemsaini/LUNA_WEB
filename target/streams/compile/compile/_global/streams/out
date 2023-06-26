@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/Models/Tables.scala:4:23: early initializers are deprecated; they will be replaced by trait parameters in 3.0, see the migration guide on avoiding var/val in traits.[0m
-[0m[[0m[31merror[0m] [0m[0mobject Tables extends {[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/controllers/tweet.scala:48:49: scala.concurrent.Future[Unit] does not take parameters[0m
+[0m[[0m[31merror[0m] [0m[0m            model.createUser(username, password)(executionContext).map { _ =>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
