@@ -84,15 +84,27 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
     }(ec)
   }
 
-  def addTweet = Action { implicit request =>
+  def addTweet = Action.async { implicit request =>
     val usernameOption = request.session.get("username")
     usernameOption.map { username =>
       val postVals = request.body.asFormUrlEncoded
       postVals.map { args =>
         val tweet = args("newTweet").head
-        model.addTweet(username, tweet)
-        Redirect(routes.tweet.home)
-      }.getOrElse(Redirect(routes.tweet.home))
-    }.getOrElse(Redirect(routes.tweet.login))
+        val addTweetFuture = model.addTweet(username, tweet)
+        addTweetFuture.map(_ => Redirect(routes.tweet.home))(ec)
+      }.getOrElse(Future.successful(Redirect(routes.tweet.home)))
+    }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
+  }
+
+  def deleteTweet = Action.async {implicit request =>
+    val usernameOption = request.session.get("username")
+    usernameOption.map { username =>
+      val postVals = request.body.asFormUrlEncoded
+      postVals.map { args =>
+        val tweet = args("deleteTweet").head
+        val delTweetFuture = model.deleteTweet(username, tweet)
+        delTweetFuture.map(_ => Redirect(routes.tweet.showProfile))(ec)
+      }.getOrElse(Future.successful(Redirect(routes.tweet.showProfile)))
+    }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
   }
 }

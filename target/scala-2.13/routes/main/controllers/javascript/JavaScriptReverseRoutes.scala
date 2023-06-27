@@ -67,6 +67,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:26
+    def deleteTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.deleteTweet",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "dtweet"})
+        }
+      """
+    )
+  
     // @LINE:23
     def logout: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.logout",

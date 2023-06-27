@@ -23,3 +23,4 @@ GET     /home                       controllers.tweet.home
 GET     /logout                    controllers.tweet.logout
 GET     /profile                    controllers.tweet.showProfile
 POST    /tweet                      controllers.tweet.addTweet
+POST    /dtweet                     controllers.tweet.deleteTweet

@@ -1,10 +1,13 @@
 package Models
 import slick.jdbc.MySQLProfile.api._
+
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import org.mindrot.jbcrypt.BCrypt
 import Models.Tables._
 import slick.jdbc.MySQLProfile.api._
+
+import java.sql.Timestamp
 
 
 class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
@@ -32,13 +35,23 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     db.run(query.sortBy(_.createdAt.desc.nullsLast).result)
   }
 
-  def addTweet(username:String, message:String):Future[Unit] = {
-    ???
+  def addTweet(username: String, message: String): Future[Unit] = {
+    val userID = Users.filter(_.username === username).map(_.id).result.head
+    val createMessageAction = userID.flatMap { userId =>
+      val messageRow = MessagesRow(-1, userId.toInt, message, 0, Some(new Timestamp(System.currentTimeMillis())))
+      Messages += messageRow
+    }
+    db.run(createMessageAction).map(_ => ())
   }
 
 
-  def deleteTweet =  {
-    ???
+  def deleteTweet(username:String, message:String):Future[Boolean] =  {
+    val query = for {
+      user <- Users if (user.username === username)
+      tweet <- Messages if (tweet.text === message && tweet.userId === user.id.asColumnOf[Int])
+    }yield tweet
+
+    db.run(query.delete).map(count => count > 0)
   }
 
   def followers =  {

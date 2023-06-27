@@ -52,6 +52,12 @@ package controllers {
       Call("POST", _prefix + { _defaultPrefix } + "createUserForm2")
     }
   
+    // @LINE:26
+    def deleteTweet: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "dtweet")
+    }
+  
     // @LINE:23
     def logout: Call = {
       
