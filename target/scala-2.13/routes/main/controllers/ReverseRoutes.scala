@@ -46,22 +46,40 @@ package controllers {
     }
 
   
-    // @LINE:13
-    def login: Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "login")
-    }
-  
     // @LINE:15
     def createUserForm: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "createUserForm2")
     }
   
+    // @LINE:23
+    def logout: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "logout")
+    }
+  
     // @LINE:21
     def home: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "home")
+    }
+  
+    // @LINE:25
+    def addTweet: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "tweet")
+    }
+  
+    // @LINE:24
+    def showProfile: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "profile")
+    }
+  
+    // @LINE:13
+    def login: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "login")
     }
   
   }

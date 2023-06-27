@@ -52,6 +52,9 @@ class Routes(
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """createUserForm2""", """controllers.tweet.createUserForm"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(file:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """home""", """controllers.tweet.home"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """logout""", """controllers.tweet.logout"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """profile""", """controllers.tweet.showProfile"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """tweet""", """controllers.tweet.addTweet"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -168,6 +171,60 @@ class Routes(
     )
   )
 
+  // @LINE:23
+  private[this] lazy val controllers_tweet_logout6_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("logout")))
+  )
+  private[this] lazy val controllers_tweet_logout6_invoker = createInvoker(
+    tweet_2.logout,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
+      "logout",
+      Nil,
+      "GET",
+      this.prefix + """logout""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:24
+  private[this] lazy val controllers_tweet_showProfile7_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("profile")))
+  )
+  private[this] lazy val controllers_tweet_showProfile7_invoker = createInvoker(
+    tweet_2.showProfile,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
+      "showProfile",
+      Nil,
+      "GET",
+      this.prefix + """profile""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:25
+  private[this] lazy val controllers_tweet_addTweet8_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("tweet")))
+  )
+  private[this] lazy val controllers_tweet_addTweet8_invoker = createInvoker(
+    tweet_2.addTweet,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
+      "addTweet",
+      Nil,
+      "POST",
+      this.prefix + """tweet""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -205,6 +262,24 @@ class Routes(
     case controllers_tweet_home5_route(params@_) =>
       call { 
         controllers_tweet_home5_invoker.call(tweet_2.home)
+      }
+  
+    // @LINE:23
+    case controllers_tweet_logout6_route(params@_) =>
+      call { 
+        controllers_tweet_logout6_invoker.call(tweet_2.logout)
+      }
+  
+    // @LINE:24
+    case controllers_tweet_showProfile7_route(params@_) =>
+      call { 
+        controllers_tweet_showProfile7_invoker.call(tweet_2.showProfile)
+      }
+  
+    // @LINE:25
+    case controllers_tweet_addTweet8_route(params@_) =>
+      call { 
+        controllers_tweet_addTweet8_invoker.call(tweet_2.addTweet)
       }
   }
 }

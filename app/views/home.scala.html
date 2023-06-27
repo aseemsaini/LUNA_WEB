@@ -10,6 +10,12 @@
 <body>
 <h2>Welcome To Luna</h2>
 
+<form method="post" action="@routes.tweet.addTweet">
+    @helper.CSRF.formField
+    <input type="text" name="newTweet"></input>
+    <input type="submit"></input>
+</form>
+
 <h3>Last 10 Messages:</h3>
 <ul>
     @for(message <- messages) {
@@ -19,6 +25,15 @@
     </li>
     }
 </ul>
+
+<div>
+    <a href="@routes.tweet.logout" id="logout">Logout</a>
+</div>
+
+<div>
+    <a href="@routes.tweet.showProfile" id="profile">Profile</a>
+</div>
+
 
 </body>
 </html>

@@ -34,15 +34,30 @@ Seq[Any](format.raw/*2.1*/("""
 <body>
 <h2>Welcome To Luna</h2>
 
+<form method="post" action=""""),_display_(/*13.30*/routes/*13.36*/.tweet.addTweet),format.raw/*13.51*/("""">
+    """),_display_(/*14.6*/helper/*14.12*/.CSRF.formField),format.raw/*14.27*/("""
+    """),format.raw/*15.5*/("""<input type="text" name="newTweet"></input>
+    <input type="submit"></input>
+</form>
+
 <h3>Last 10 Messages:</h3>
 <ul>
-    """),_display_(/*15.6*/for(message <- messages) yield /*15.30*/ {_display_(Seq[Any](format.raw/*15.32*/("""
-    """),format.raw/*16.5*/("""<li>
-        <p>Message: """),_display_(/*17.22*/message/*17.29*/.text),format.raw/*17.34*/("""</p>
-        <p>User: """),_display_(/*18.19*/users/*18.24*/.find(_.id == message.userId).map(_.username).getOrElse("")),format.raw/*18.83*/("""</p>
+    """),_display_(/*21.6*/for(message <- messages) yield /*21.30*/ {_display_(Seq[Any](format.raw/*21.32*/("""
+    """),format.raw/*22.5*/("""<li>
+        <p>Message: """),_display_(/*23.22*/message/*23.29*/.text),format.raw/*23.34*/("""</p>
+        <p>User: """),_display_(/*24.19*/users/*24.24*/.find(_.id == message.userId).map(_.username).getOrElse("")),format.raw/*24.83*/("""</p>
     </li>
-    """)))}),format.raw/*20.6*/("""
-"""),format.raw/*21.1*/("""</ul>
+    """)))}),format.raw/*26.6*/("""
+"""),format.raw/*27.1*/("""</ul>
+
+<div>
+    <a href=""""),_display_(/*30.15*/routes/*30.21*/.tweet.logout),format.raw/*30.34*/("""" id="logout">Logout</a>
+</div>
+
+<div>
+    <a href=""""),_display_(/*34.15*/routes/*34.21*/.tweet.showProfile),format.raw/*34.39*/("""" id="profile">Profile</a>
+</div>
+
 
 </body>
 </html>
@@ -63,9 +78,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/home.scala.html
-                  HASH: de034927dfc370a5133099395a1a63ea49cd7d18
-                  MATRIX: 808->1|1035->135|1062->136|1323->371|1363->395|1403->397|1435->402|1488->428|1504->435|1530->440|1580->463|1594->468|1674->527|1724->547|1752->548
-                  LINES: 21->1|26->2|27->3|39->15|39->15|39->15|40->16|41->17|41->17|41->17|42->18|42->18|42->18|44->20|45->21
+                  HASH: 8151c75e3b5b238101767b64ba7a6863901b4520
+                  MATRIX: 808->1|1035->135|1062->136|1316->363|1331->369|1367->384|1401->392|1416->398|1452->413|1484->418|1634->542|1674->566|1714->568|1746->573|1799->599|1815->606|1841->611|1891->634|1905->639|1985->698|2035->718|2063->719|2117->746|2132->752|2166->765|2246->818|2261->824|2300->842
+                  LINES: 21->1|26->2|27->3|37->13|37->13|37->13|38->14|38->14|38->14|39->15|45->21|45->21|45->21|46->22|47->23|47->23|47->23|48->24|48->24|48->24|50->26|51->27|54->30|54->30|54->30|58->34|58->34|58->34
                   -- GENERATED --
               */
           

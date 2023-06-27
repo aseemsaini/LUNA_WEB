@@ -57,16 +57,6 @@ package controllers.javascript {
     }
 
   
-    // @LINE:13
-    def login: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.tweet.login",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "login"})
-        }
-      """
-    )
-  
     // @LINE:15
     def createUserForm: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.createUserForm",
@@ -77,12 +67,52 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:23
+    def logout: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.logout",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "logout"})
+        }
+      """
+    )
+  
     // @LINE:21
     def home: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.home",
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "home"})
+        }
+      """
+    )
+  
+    // @LINE:25
+    def addTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.addTweet",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "tweet"})
+        }
+      """
+    )
+  
+    // @LINE:24
+    def showProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.showProfile",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "profile"})
+        }
+      """
+    )
+  
+    // @LINE:13
+    def login: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.login",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "login"})
         }
       """
     )

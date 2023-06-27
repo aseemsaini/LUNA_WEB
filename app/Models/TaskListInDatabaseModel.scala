@@ -4,6 +4,7 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import org.mindrot.jbcrypt.BCrypt
 import Models.Tables._
+import slick.jdbc.MySQLProfile.api._
 
 
 class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
@@ -16,11 +17,6 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     db.run(Users += UsersRow(-1, username, hashedPassword)).map(_ => ())
   }
 
-  import Models.Tables._
-
-  import Models.Tables._
-  import slick.jdbc.MySQLProfile.api._
-
   def getMessagesWithUsers(limit: Int): Future[Seq[(MessagesRow, UsersRow)]] = {
     val query = for {
       (message, user) <- Messages.sortBy(_.createdAt.desc.nullsLast).take(limit) join Users on (_.userId === _.id.asColumnOf[Int])
@@ -28,6 +24,30 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     db.run(query.result)
   }
 
+  def getTweets(username: String): Future[Seq[MessagesRow]] = {
+    val query = for {
+      userId <- Users.filter(_.username === username).map(_.id)
+      messages <- Messages.filter(_.userId === userId.asColumnOf[Int])
+    } yield messages
+    db.run(query.sortBy(_.createdAt.desc.nullsLast).result)
+  }
+
+  def addTweet(username:String, message:String):Future[Unit] = {
+    ???
+  }
+
+
+  def deleteTweet =  {
+    ???
+  }
+
+  def followers =  {
+    ???
+  }
+
+  def followedBy =  {
+    ???
+  }
 
 
   def addTask(username: String, task: String): Unit = { ???
