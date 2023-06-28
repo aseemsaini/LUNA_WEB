@@ -1,0 +1,25 @@
+@(tweets: Seq[Models.Tables.MessagesRow])(implicit request: MessagesRequestHeader, flash: Flash)
+
+<html>
+<body>
+<h1>Profile Search</h1>
+@if(tweets.isEmpty) {
+<p>User not found</p>
+} else {
+<ul>
+    @for(message <- tweets) {
+    <li>
+        <p>Message: @message.text</p>
+    </li>
+    }
+</ul>
+}
+<div>
+    <a href="@routes.tweet.logout" id="logout">Logout</a>
+</div>
+
+<div>
+    <a href="@routes.tweet.home" id="home">Home</a>
+</div>
+</body>
+</html>

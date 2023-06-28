@@ -13,9 +13,12 @@
 
 <form method="post" action="@routes.tweet.addTweet">
     @helper.CSRF.formField
-    <input type="text" name="newTweet"></input>
-    <input type="submit"></input>
+    <div>
+        <input type="text" name="newTweet">
+        <button type="submit">Post Tweet</button>
+    </div>
 </form>
+
 
 <h3>Last 10 Messages:</h3>
 <ul>
@@ -26,6 +29,17 @@
     </li>
     }
 </ul>
+
+<form method="post" action="@routes.tweet.searchProfile">
+    @helper.CSRF.formField
+    <div>
+        <label>
+            <input type="text" name="search">
+            <button type="submit">Search</button>
+        </label>
+    </div>
+</form>
+
 
 <div>
     <a href="@routes.tweet.logout" id="logout">Logout</a>

@@ -77,6 +77,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:27
+    def searchProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.searchProfile",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "search"})
+        }
+      """
+    )
+  
     // @LINE:23
     def logout: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.logout",

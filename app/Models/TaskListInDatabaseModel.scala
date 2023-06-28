@@ -45,13 +45,11 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
   }
 
 
-  def deleteTweet(username:String, message:String):Future[Boolean] =  {
-    val query = for {
-      user <- Users if (user.username === username)
-      tweet <- Messages if (tweet.text === message && tweet.userId === user.id.asColumnOf[Int])
-    }yield tweet
-
-    db.run(query.delete).map(count => count > 0)
+  def deleteTweet(username: String, message: String): Future[Boolean] = {
+    val deleteAction = Messages
+      .filter(msg => msg.text === message && msg.userId.in(Users.filter(_.username === username).map(_.id.asColumnOf[Int])))
+      .delete
+    db.run(deleteAction).map(_ > 0)
   }
 
   def followers =  {

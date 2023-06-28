@@ -107,4 +107,26 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
       }.getOrElse(Future.successful(Redirect(routes.tweet.showProfile)))
     }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
   }
+
+  def searchProfile = Action.async { implicit request =>
+    val postVals = request.body.asFormUrlEncoded
+    val searchUser: Future[Seq[MessagesRow]] = postVals.map { args =>
+      val tweet = args("search").head
+      val exist = model.validate(tweet)(ec)
+      exist.flatMap { yes =>
+        if (yes)
+          model.getTweets(tweet)
+        else
+          Future.successful(Seq.empty[MessagesRow])
+      }(ec)
+    }.getOrElse(Future.successful(Seq.empty[MessagesRow]))
+
+    searchUser.map { tweetSeq =>
+      Ok(views.html.searchProfile(tweetSeq))
+    }(ec)
+  }
+
+
+
+
 }
