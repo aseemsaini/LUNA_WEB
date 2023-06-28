@@ -7,12 +7,13 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
+import scala.concurrent.duration._
 
-import scala.concurrent.{ExecutionContext, Future}
+
+import scala.concurrent.{Await, ExecutionContext, Future}
 import Models.Tables.{FollowersRow, MessagesRow, UsersRow}
 import slick.jdbc.MySQLProfile.api._
 
-import scala.concurrent.ExecutionContext
 import javax.inject._
 case class LoginData2(username: String, password: String)
 
@@ -120,20 +121,28 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
 
   def searchProfile = Action.async { implicit request =>
     val postVals = request.body.asFormUrlEncoded
-    val searchUser: Future[Seq[MessagesRow]] = postVals.map { args =>
+    val searchUser: Future[(Seq[MessagesRow],Seq[String],Boolean)] = postVals.map { args =>
       val tweet = args("search").head
-      val exist = model.validate(tweet)(ec)
-      exist.flatMap { yes =>
-        if (yes)
+      val follower: Future[Seq[String]] = model.getFollowers(tweet)
+      val exist:Future[Boolean] = model.validate(tweet)(ec).flatMap(result => Future.successful(result))(ec)
+      println(tweet)
+      val existFuture =  exist.flatMap { yes =>
+        if (yes) {
+          println(exist)
           model.getTweets(tweet)
-        else
+        } else
           Future.successful(Seq.empty[MessagesRow])
       }(ec)
-    }.getOrElse(Future.successful(Seq.empty[MessagesRow]))
+      existFuture.flatMap { tweets =>
+        val userExists = Await.result(exist, Duration.Inf)
+        println(tweets.nonEmpty)
+        follower.map(followers => (tweets, followers, userExists))(ec)
+      }(ec)
+    }.getOrElse(Future.successful((Seq.empty[MessagesRow], Seq.empty[String], false)))
 
-
-    searchUser.map { tweetSeq =>
-      Ok(views.html.searchProfile(tweetSeq))
+    searchUser.map { case(tweets, followers,userExists) =>
+      println(userExists)
+      Ok(views.html.searchProfile(tweets,followers,userExists))
     }(ec)
   }
 

@@ -1,13 +1,20 @@
-@(tweets: Seq[Models.Tables.MessagesRow])(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String], exists:Any)(implicit request: MessagesRequestHeader, flash: Flash)
 
 <html>
 <body>
 <h1>Profile Search</h1>
-    @if(tweets.isEmpty) {
-<p>User not found</p>
+@if(exists == false) {
+    <p>User not found</p>
 } else {
 <div id ="follow">
     <a href="@routes.tweet.follow">Follow</a>
+</div>
+
+<div id="followers">
+    <h3>Following</h3>
+    @for(people <- followers){
+    <p>@people</p>
+    }
 </div>
 <ul>
     @for(message <- tweets) {
@@ -26,3 +33,4 @@
 </div>
 </body>
 </html>
+

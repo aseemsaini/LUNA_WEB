@@ -61,8 +61,12 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     db.run(query.result)
   }
 
-  def followedBy = {
-    ???
+  def followedBy(username:String):Future[Seq[String]] = {???
+//    val query = for{
+//      userID <- Users.filter(_.username === username).map(_.id)
+//      followed <- Followers.filter()
+//
+//    }yield followedUsernames
   }
 }
 
