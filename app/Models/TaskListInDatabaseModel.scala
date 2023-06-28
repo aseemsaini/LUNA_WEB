@@ -49,7 +49,10 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     val deleteAction = Messages
       .filter(msg => msg.text === message && msg.userId.in(Users.filter(_.username === username).map(_.id.asColumnOf[Int])))
       .delete
-    db.run(deleteAction).map(_ > 0)
+    println(deleteAction)
+    println(username)
+    println(message)
+    db.run(deleteAction).map(count => count > 0)
   }
 
   def getFollowers(username: String):Future[Seq[String]] = {
