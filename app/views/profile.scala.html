@@ -1,8 +1,13 @@
-@(tweets: Seq[Models.Tables.MessagesRow])(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String])(implicit request: MessagesRequestHeader, flash: Flash)
 
 <html>
 <body>
 <h1>Hello, Welcome to your profile</h1>
+<h3>Followers</h3>
+    @for(people <- followers){
+        <p>Followers: @people</p>
+    }
+
 <ul>
     @for(message <- tweets) {
     <li>

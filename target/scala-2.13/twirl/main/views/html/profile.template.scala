@@ -15,10 +15,10 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object profile extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[Seq[Models.Tables.MessagesRow],MessagesRequestHeader,Flash,play.twirl.api.HtmlFormat.Appendable] {
+object profile extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template4[Seq[Models.Tables.MessagesRow],Seq[String],MessagesRequestHeader,Flash,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(tweets: Seq[Models.Tables.MessagesRow])(implicit request: MessagesRequestHeader, flash: Flash):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String])(implicit request: MessagesRequestHeader, flash: Flash):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
@@ -27,24 +27,29 @@ Seq[Any](format.raw/*2.1*/("""
 """),format.raw/*3.1*/("""<html>
 <body>
 <h1>Hello, Welcome to your profile</h1>
-<ul>
-    """),_display_(/*7.6*/for(message <- tweets) yield /*7.28*/ {_display_(Seq[Any](format.raw/*7.30*/("""
-    """),format.raw/*8.5*/("""<li>
-        <p>Message: """),_display_(/*9.22*/message/*9.29*/.text),format.raw/*9.34*/("""</p>
-        <form method="post" action=""""),_display_(/*10.38*/routes/*10.44*/.tweet.deleteTweet),format.raw/*10.62*/("""">
-            """),_display_(/*11.14*/helper/*11.20*/.CSRF.formField),format.raw/*11.35*/("""
-            """),format.raw/*12.13*/("""<input type="hidden" name="deleteTweet" value=""""),_display_(/*12.61*/message/*12.68*/.messageId),format.raw/*12.78*/("""">
+<h3>Followers</h3>
+    """),_display_(/*7.6*/for(people <- followers) yield /*7.30*/{_display_(Seq[Any](format.raw/*7.31*/("""
+        """),format.raw/*8.9*/("""<p>Followers: """),_display_(/*8.24*/people),format.raw/*8.30*/("""</p>
+    """)))}),format.raw/*9.6*/("""
+
+"""),format.raw/*11.1*/("""<ul>
+    """),_display_(/*12.6*/for(message <- tweets) yield /*12.28*/ {_display_(Seq[Any](format.raw/*12.30*/("""
+    """),format.raw/*13.5*/("""<li>
+        <p>Message: """),_display_(/*14.22*/message/*14.29*/.text),format.raw/*14.34*/("""</p>
+        <form method="post" action=""""),_display_(/*15.38*/routes/*15.44*/.tweet.deleteTweet),format.raw/*15.62*/("""">
+            """),_display_(/*16.14*/helper/*16.20*/.CSRF.formField),format.raw/*16.35*/("""
+            """),format.raw/*17.13*/("""<input type="hidden" name="deleteTweet" value=""""),_display_(/*17.61*/message/*17.68*/.messageId),format.raw/*17.78*/("""">
             <button type="submit">Delete</button>
         </form>
     </li>
-    """)))}),format.raw/*16.6*/("""
-"""),format.raw/*17.1*/("""</ul>
+    """)))}),format.raw/*21.6*/("""
+"""),format.raw/*22.1*/("""</ul>
 <div>
-    <a href=""""),_display_(/*19.15*/routes/*19.21*/.tweet.logout),format.raw/*19.34*/("""" id="logout">Logout</a>
+    <a href=""""),_display_(/*24.15*/routes/*24.21*/.tweet.logout),format.raw/*24.34*/("""" id="logout">Logout</a>
 </div>
 
 <div>
-    <a href=""""),_display_(/*23.15*/routes/*23.21*/.tweet.home),format.raw/*23.32*/("""" id="home">Home</a>
+    <a href=""""),_display_(/*28.15*/routes/*28.21*/.tweet.home),format.raw/*28.32*/("""" id="home">Home</a>
 </div>
 </body>
 </html>
@@ -53,9 +58,9 @@ Seq[Any](format.raw/*2.1*/("""
     }
   }
 
-  def render(tweets:Seq[Models.Tables.MessagesRow],request:MessagesRequestHeader,flash:Flash): play.twirl.api.HtmlFormat.Appendable = apply(tweets)(request,flash)
+  def render(tweets:Seq[Models.Tables.MessagesRow],followers:Seq[String],request:MessagesRequestHeader,flash:Flash): play.twirl.api.HtmlFormat.Appendable = apply(tweets,followers)(request,flash)
 
-  def f:((Seq[Models.Tables.MessagesRow]) => (MessagesRequestHeader,Flash) => play.twirl.api.HtmlFormat.Appendable) = (tweets) => (request,flash) => apply(tweets)(request,flash)
+  def f:((Seq[Models.Tables.MessagesRow],Seq[String]) => (MessagesRequestHeader,Flash) => play.twirl.api.HtmlFormat.Appendable) = (tweets,followers) => (request,flash) => apply(tweets,followers)(request,flash)
 
   def ref: this.type = this
 
@@ -65,9 +70,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/profile.scala.html
-                  HASH: 53841424f4c0aefe2d911a793ae3a9163a981f50
-                  MATRIX: 783->1|972->97|999->98|1088->162|1125->184|1164->186|1195->191|1247->217|1262->224|1287->229|1356->271|1371->277|1410->295|1453->311|1468->317|1504->332|1545->345|1620->393|1636->400|1667->410|1781->494|1809->495|1862->521|1877->527|1911->540|1991->593|2006->599|2038->610
-                  LINES: 21->1|26->2|27->3|31->7|31->7|31->7|32->8|33->9|33->9|33->9|34->10|34->10|34->10|35->11|35->11|35->11|36->12|36->12|36->12|36->12|40->16|41->17|43->19|43->19|43->19|47->23|47->23|47->23
+                  HASH: 5053c76dabfbc68693e13407b2ebcc81ed969fdc
+                  MATRIX: 795->1|1008->121|1035->122|1138->200|1177->224|1215->225|1250->234|1291->249|1317->255|1356->265|1385->267|1421->277|1459->299|1499->301|1531->306|1584->332|1600->339|1626->344|1695->386|1710->392|1749->410|1792->426|1807->432|1843->447|1884->460|1959->508|1975->515|2006->525|2120->609|2148->610|2201->636|2216->642|2250->655|2330->708|2345->714|2377->725
+                  LINES: 21->1|26->2|27->3|31->7|31->7|31->7|32->8|32->8|32->8|33->9|35->11|36->12|36->12|36->12|37->13|38->14|38->14|38->14|39->15|39->15|39->15|40->16|40->16|40->16|41->17|41->17|41->17|41->17|45->21|46->22|48->24|48->24|48->24|52->28|52->28|52->28
                   -- GENERATED --
               */
           

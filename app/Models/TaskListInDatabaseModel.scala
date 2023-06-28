@@ -52,18 +52,17 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     db.run(deleteAction).map(_ > 0)
   }
 
-  def followers =  {
+  def getFollowers(username: String):Future[Seq[String]] = {
+    val query = for {
+      userId <- Users.filter(_.username === username).map(_.id)
+      followers <- Followers.filter(_.followerId === userId.asColumnOf[Int])
+      followerUsernames <- Users.filter(_.id === followers.followedId.asColumnOf[Long]).map(_.username)
+    } yield followerUsernames
+    db.run(query.result)
+  }
+
+  def followedBy = {
     ???
   }
-
-  def followedBy =  {
-    ???
-  }
-
-
-  def addTask(username: String, task: String): Unit = { ???
-  }
-
-
-  def removeTask(username: String, index: Int): Boolean = ???
 }
+

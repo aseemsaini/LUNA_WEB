@@ -3,9 +3,12 @@
 <html>
 <body>
 <h1>Profile Search</h1>
-@if(tweets.isEmpty) {
+    @if(tweets.isEmpty) {
 <p>User not found</p>
 } else {
+<div id ="follow">
+    <a href="@routes.tweet.follow">Follow</a>
+</div>
 <ul>
     @for(message <- tweets) {
     <li>

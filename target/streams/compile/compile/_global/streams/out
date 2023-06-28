@@ -1,7 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/controllers/tweet.scala:116:25: ambiguous implicit values:[0m
-[0m[[0m[31merror[0m] [0m[0m both value ec in class tweet of type scala.concurrent.ExecutionContext[0m
-[0m[[0m[31merror[0m] [0m[0m and method global in object Implicits of type scala.concurrent.ExecutionContext[0m
-[0m[[0m[31merror[0m] [0m[0m match expected type scala.concurrent.ExecutionContext[0m
-[0m[[0m[31merror[0m] [0m[0m          model.validate(tweet).flatMap { exists =>[0m
-[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/profile.scala.html:9:31: value text is not a member of String[0m
+[0m[[0m[31merror[0m] [0m[0m        <p>Followers: @people.text</p>[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

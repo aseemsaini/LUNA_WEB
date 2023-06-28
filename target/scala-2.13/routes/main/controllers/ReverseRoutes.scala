@@ -58,6 +58,12 @@ package controllers {
       Call("POST", _prefix + { _defaultPrefix } + "dtweet")
     }
   
+    // @LINE:29
+    def follow: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "follow")
+    }
+  
     // @LINE:27
     def searchProfile: Call = {
       

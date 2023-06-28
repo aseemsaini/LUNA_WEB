@@ -82,8 +82,12 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views[0m
 [0m[[0m[0mdebug[0m] [0m[0m	views/html[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html[0m
+[0m[[0m[0mdebug[0m] [0m[0m	views/html/profile$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/profile$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	views/html/main$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	views/html/searchProfile$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/searchProfile$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	views/html/index.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/index.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	views/html/welcome.class[0m
@@ -96,6 +100,10 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/home$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	views/html/home.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/home.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	views/html/profile.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/profile.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	views/html/searchProfile.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/searchProfile.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	views/html/index$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/aseemsaini/Desktop/ACM/acm_app/target/scala-2.13/classes/views/html/index$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	views/html/main.class[0m

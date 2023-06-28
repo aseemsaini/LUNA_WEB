@@ -7,9 +7,9 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
+
 import scala.concurrent.{ExecutionContext, Future}
-import Models.Tables.MessagesRow
-import Models.Tables.UsersRow
+import Models.Tables.{FollowersRow, MessagesRow, UsersRow}
 import slick.jdbc.MySQLProfile.api._
 
 import scala.concurrent.ExecutionContext
@@ -75,14 +75,24 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
   }
 
   def showProfile = Action.async { implicit request =>
-    val tweets: Future[Seq[MessagesRow]] = request.session.get("username").map { username =>
-      model.getTweets(username)
-    }.getOrElse(Future.successful(Seq.empty[MessagesRow]))
+    val usernameOption = request.session.get("username")
 
-    tweets.map { tweetSeq =>
-      Ok(views.html.profile(tweetSeq))
-    }(ec)
+    usernameOption match {
+      case Some(username) =>
+        val tweetsFuture: Future[Seq[MessagesRow]] = model.getTweets(username)
+        val followersFuture: Future[Seq[String]] = model.getFollowers(username)
+
+        tweetsFuture.flatMap { tweets =>
+          followersFuture.map { followers =>
+            Ok(views.html.profile(tweets, followers))
+          }(ec)
+        }(ec)
+      case None =>
+        Future.successful(Redirect(routes.tweet.login))
+    }
   }
+
+
 
   def addTweet = Action.async { implicit request =>
     val usernameOption = request.session.get("username")
@@ -121,9 +131,14 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
       }(ec)
     }.getOrElse(Future.successful(Seq.empty[MessagesRow]))
 
+
     searchUser.map { tweetSeq =>
       Ok(views.html.searchProfile(tweetSeq))
     }(ec)
+  }
+
+  def follow = Action {implicit request =>
+    ???
   }
 
 
