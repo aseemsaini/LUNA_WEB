@@ -29,3 +29,5 @@ GET     /search                     controllers.tweet.searchProfile
 GET    /follow                     controllers.tweet.follow
 GET    /unfollow                   controllers.tweet.unfollow
 GET    /searchMessage              controllers.tweet.searchMessage
+
+POST    /editmessage                controllers.tweet.editTweet

@@ -121,7 +121,17 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
   }
 
   def editTweet = Action.async {implicit request =>
-  ???
+    val formValues = request.body.asFormUrlEncoded
+    val messageIdOption = formValues.flatMap(_.get("editTweetId").flatMap(_.headOption))
+    val newTextOption = formValues.flatMap(_.get("editTweetText").flatMap(_.headOption))
+
+    (messageIdOption, newTextOption) match {
+      case (Some(messageId), Some(newText)) =>
+        val messageIdLong = messageId.toLong
+        model.editMessage(newText, messageIdLong).map(_ => Redirect(routes.tweet.showProfile))(ec)
+      case _ =>
+        Future.successful(BadRequest("Invalid form data"))
+    }
   }
 
 

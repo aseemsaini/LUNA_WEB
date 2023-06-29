@@ -137,5 +137,10 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     }
     messageFuture
   }
+
+  def editMessage(message:String, messageID:Long): Future[Unit] = {
+    val query = Messages.filter(_.messageId === messageID).map(_.text).update(message)
+    db.run(query).map(_ => ())
+  }
 }
 

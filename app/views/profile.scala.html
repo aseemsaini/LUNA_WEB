@@ -4,27 +4,53 @@
 <body>
 <h1>Hello, Welcome to your profile</h1>
 <h3>Following</h3>
-    @for(people <- following){
-        <p>@people</p>
-    }
+@for(people <- following){
+<p>@people</p>
+}
 
 <h3>Followers</h3>
-    @for(people <- followers){
-    <p>@people</p>
-    }
+@for(people <- followers){
+<p>@people</p>
+}
 
 <ul>
     @for(message <- tweets) {
     <li>
         <p>Message: @message.text</p>
+        <form method="post" action="@routes.tweet.editTweet">
+            @helper.CSRF.formField
+            <input type="hidden" name="editTweetId" value="@message.messageId">
+            <input type="text" name="editTweetText" value="" style="display:none;">
+            <button type="button" onclick="toggleEditField(this)">Edit</button>
+            <button type="submit" style="display:none;">Save</button>
+        </form>
         <form method="post" action="@routes.tweet.deleteTweet">
             @helper.CSRF.formField
             <input type="hidden" name="deleteTweet" value="@message.text">
             <button type="submit">Delete</button>
         </form>
+        <script>
+          function toggleEditField(button) {
+            var inputField = button.parentNode.querySelector('input[name="editTweetText"]');
+            var saveButton = button.parentNode.querySelector('button[type="submit"]');
+            if (inputField.style.display === "none") {
+              inputField.value = "@message.text";
+              inputField.style.display = "inline-block";
+              saveButton.style.display = "inline-block";
+              button.textContent = "Cancel";
+            } else {
+              inputField.style.display = "none";
+              saveButton.style.display = "none";
+              button.textContent = "Edit";
+            }
+          }
+        </script>
+
     </li>
     }
 </ul>
+
+
 <div>
     <a href="@routes.tweet.logout" id="logout">Logout</a>
 </div>
