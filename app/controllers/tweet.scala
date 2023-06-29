@@ -120,6 +120,10 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
     }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
   }
 
+  def editTweet = Action.async {implicit request =>
+  ???
+  }
+
 
   def searchProfile = Action.async { implicit request =>
     val userOption = request.session.get("username")
@@ -184,7 +188,8 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
     val searchMessageOption = request.queryString.get("messageSearch").flatMap(_.headOption).getOrElse("")
     val message = model.searchMessageUser(searchMessageOption)
     message.map {
-      extractedMessage => Ok(extractedMessage).as(HTML)
+      case (extractedMessage,extractedUser) =>
+        Ok(s"<h1>Matching Message: $extractedMessage</h1>\n<h2>User: $extractedUser</h2>").as(HTML)
     }(ec)
   }
 

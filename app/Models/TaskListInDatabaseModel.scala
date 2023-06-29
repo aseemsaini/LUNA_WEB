@@ -125,11 +125,15 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     result
   }
 
-  def searchMessageUser(message:String):(Future[String]) = {
-    val messageQuery = Messages.filter(m => m.text.like(s"%$message%")).result.headOption
+  def searchMessageUser(message:String):Future[(String,String)] = {
+    val messageQuery = Messages
+      .filter(m => m.text.like(s"%$message%"))
+      .join(Users)
+      .on(_.userId === _.id.asColumnOf[Int])
+      .result.headOption
     val messageFuture = db.run(messageQuery).map {
-      case Some(matchingMessage) => matchingMessage.text
-      case None => "No matching message found"
+      case Some((matchingMessage, matchingUser)) => (matchingMessage.text, matchingUser.username)
+      case None => ("No matching message found","")
     }
     messageFuture
   }
