@@ -59,8 +59,17 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   def getFollowing(username: String): Future[Seq[String]] = {
     val query = for {
       userId <- Users.filter(_.username === username).map(_.id)
-      followers <- Followers.filter(_.followerId === userId.asColumnOf[Int])
-      followerUsernames <- Users.filter(_.id === followers.followedId.asColumnOf[Long]).map(_.username)
+      following <- Followers.filter(_.followerId === userId.asColumnOf[Int])
+      followingUsernames <- Users.filter(_.id === following.followedId.asColumnOf[Long]).map(_.username)
+    } yield followingUsernames
+    db.run(query.result)
+  }
+
+  def getFollowers(username:String):Future[Seq[String]] = {
+    val query = for {
+      userId <- Users.filter(_.username === username).map(_.id)
+      followerID <- Followers.filter(_.followedId === userId.asColumnOf[Int])
+      followerUsernames <- Users.filter(_.id === followerID.followerId.asColumnOf[Long]).map(_.username)
     } yield followerUsernames
     db.run(query.result)
   }

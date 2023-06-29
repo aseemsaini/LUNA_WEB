@@ -1,4 +1,4 @@
-@(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String], user:String, exists:Boolean, followExist:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], user:String, exists:Boolean, followExist:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
 
 <html>
 <body>
@@ -16,12 +16,13 @@
 </div>
 }
 
-<div id="followers">
+<div id="following">
     <h3>Following</h3>
-    @for(people <- followers){
+    @for(people <- following){
     <p>@people</p>
     }
 </div>
+
 <ul>
     @for(message <- tweets) {
     <li>

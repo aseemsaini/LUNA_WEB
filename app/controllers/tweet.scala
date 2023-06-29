@@ -12,11 +12,12 @@ import scala.concurrent.{Await, ExecutionContext, Future}
 import Models.Tables.{FollowersRow, MessagesRow, UsersRow}
 import slick.jdbc.MySQLProfile.api._
 import javax.inject._
+import scala.concurrent.Future
 
 case class LoginData2(username: String, password: String)
 
 @Singleton
-class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc: MessagesControllerComponents)(implicit assetsFinder: AssetsFinder, ec:ExecutionContext)
+class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc: MessagesControllerComponents)(implicit assetsFinder: AssetsFinder, ec: ExecutionContext)
   extends MessagesAbstractController(cc) with HasDatabaseConfigProvider[JdbcProfile] {
 
   private val model = new TaskListInDatabaseModel(db)
@@ -80,17 +81,19 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
     usernameOption match {
       case Some(username) =>
         val tweetsFuture: Future[Seq[MessagesRow]] = model.getTweets(username)
-        val followersFuture: Future[Seq[String]] = model.getFollowing(username)
+        val followingFuture: Future[Seq[String]] = model.getFollowing(username)
+        val followerFuture: Future[Seq[String]] = model.getFollowers(username)
         tweetsFuture.flatMap { tweets =>
-          followersFuture.map { followers =>
-            Ok(views.html.profile(tweets, followers))
+          followingFuture.flatMap { following =>
+            followerFuture.map { followers =>
+              Ok(views.html.profile(tweets, following, followers))
+            }(ec)
           }(ec)
         }(ec)
       case None =>
         Future.successful(Redirect(routes.tweet.login))
     }
   }
-
 
 
   def addTweet = Action.async { implicit request =>
@@ -105,7 +108,7 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
     }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
   }
 
-  def deleteTweet = Action.async {implicit request =>
+  def deleteTweet = Action.async { implicit request =>
     val usernameOption = request.session.get("username")
     usernameOption.map { username =>
       val postVals = request.body.asFormUrlEncoded
@@ -116,8 +119,7 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
       }.getOrElse(Future.successful(Redirect(routes.tweet.showProfile)))
     }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
   }
-  import scala.concurrent.Future
-  import play.api.mvc.Results._
+
 
   def searchProfile = Action.async { implicit request =>
     val userOption = request.session.get("username")
@@ -157,7 +159,7 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
             }(ec)
           }(ec).recover {
             case ex: Throwable =>
-              InternalServerError("An error occurred")
+              Ok(views.html.searchProfile(Seq.empty, Seq.empty, searchUser, false, false))
           }(ec)
         }
       }
@@ -169,19 +171,19 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
     println("Start Here")
     println(searchUser)
     println(user)
-    val one = model.followValidate(user,searchUser)
+    val one = model.followValidate(user, searchUser)
     val two = model.validate(user)(ec)
-    println(one,two)
+    println(one, two)
     //result.flatMap(final2 => println(final2))
-    one.flatMap{
-      hello => println(hello)
+    one.flatMap {
+      hello =>
+        println(hello)
         Future.successful(true)
     }(ec)
     model.follow(user, searchUser).map { _ =>
       Redirect(routes.tweet.home).flashing("followSuccess" -> "Follow successful")
     }(ec)
   }
-
 
 
 
