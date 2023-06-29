@@ -147,7 +147,6 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
               Future.successful((Seq.empty[MessagesRow], exists))
             }
           }(ec)
-
           existAndTweetsFuture.flatMap { case (tweets, exists) =>
             val userExists = exists
             followingFuture.flatMap { following =>
@@ -170,20 +169,14 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
 
 
   def follow = Action.async { implicit request =>
-    println("Start Here")
-    println(searchUser)
-    println(user)
-    val one = model.followValidate(user, searchUser)
-    val two = model.validate(user)(ec)
-    println(one, two)
-    //result.flatMap(final2 => println(final2))
-    one.flatMap {
-      hello =>
-        println(hello)
-        Future.successful(true)
-    }(ec)
     model.follow(user, searchUser).map { _ =>
       Redirect(routes.tweet.home).flashing("followSuccess" -> "Follow successful")
+    }(ec)
+  }
+
+  def unfollow = Action.async {implicit request =>
+    model.unfollow(user,searchUser).map{ _ =>
+      Redirect(routes.tweet.home).flashing("UnfollowSuccess" -> "UnFollow successful")
     }(ec)
   }
 
