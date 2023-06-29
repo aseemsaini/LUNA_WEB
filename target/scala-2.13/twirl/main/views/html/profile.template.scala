@@ -40,12 +40,12 @@ Seq[Any](format.raw/*2.1*/("""
 """),format.raw/*16.1*/("""<ul>
     """),_display_(/*17.6*/for(message <- tweets) yield /*17.28*/ {_display_(Seq[Any](format.raw/*17.30*/("""
     """),format.raw/*18.5*/("""<li>
-        <p>Message: """),_display_(/*19.22*/message/*19.29*/.text),format.raw/*19.34*/("""</p>
+        <p>Message: <span id="message-"""),_display_(/*19.40*/message/*19.47*/.messageId),format.raw/*19.57*/("""">"""),_display_(/*19.60*/message/*19.67*/.text),format.raw/*19.72*/("""</span></p>
         <form method="post" action=""""),_display_(/*20.38*/routes/*20.44*/.tweet.editTweet),format.raw/*20.60*/("""">
             """),_display_(/*21.14*/helper/*21.20*/.CSRF.formField),format.raw/*21.35*/("""
             """),format.raw/*22.13*/("""<input type="hidden" name="editTweetId" value=""""),_display_(/*22.61*/message/*22.68*/.messageId),format.raw/*22.78*/("""">
-            <input type="text" name="editTweetText" value="" style="display:none;">
-            <button type="button" onclick="toggleEditField(this)">Edit</button>
+            <input type="text" name="editTweetText" value=""""),_display_(/*23.61*/message/*23.68*/.text),format.raw/*23.73*/("""" style="display:none;">
+            <button type="button" onclick="toggleEditField("""),_display_(/*24.61*/message/*24.68*/.messageId),format.raw/*24.78*/(""")">Edit</button>
             <button type="submit" style="display:none;">Save</button>
         </form>
         <form method="post" action=""""),_display_(/*27.38*/routes/*27.44*/.tweet.deleteTweet),format.raw/*27.62*/("""">
@@ -53,34 +53,40 @@ Seq[Any](format.raw/*2.1*/("""
             """),format.raw/*29.13*/("""<input type="hidden" name="deleteTweet" value=""""),_display_(/*29.61*/message/*29.68*/.text),format.raw/*29.73*/("""">
             <button type="submit">Delete</button>
         </form>
-        <script>
-          function toggleEditField(button) """),format.raw/*33.44*/("""{"""),format.raw/*33.45*/("""
-            """),format.raw/*34.13*/("""var inputField = button.parentNode.querySelector('input[name="editTweetText"]');
-            var saveButton = button.parentNode.querySelector('button[type="submit"]');
-            if (inputField.style.display === "none") """),format.raw/*36.54*/("""{"""),format.raw/*36.55*/("""
-              """),format.raw/*37.15*/("""inputField.value = """"),_display_(/*37.36*/message/*37.43*/.text),format.raw/*37.48*/("""";
-              inputField.style.display = "inline-block";
-              saveButton.style.display = "inline-block";
-              button.textContent = "Cancel";
-            """),format.raw/*41.13*/("""}"""),format.raw/*41.14*/(""" """),format.raw/*41.15*/("""else """),format.raw/*41.20*/("""{"""),format.raw/*41.21*/("""
-              """),format.raw/*42.15*/("""inputField.style.display = "none";
-              saveButton.style.display = "none";
-              button.textContent = "Edit";
-            """),format.raw/*45.13*/("""}"""),format.raw/*45.14*/("""
-          """),format.raw/*46.11*/("""}"""),format.raw/*46.12*/("""
-        """),format.raw/*47.9*/("""</script>
-
     </li>
-    """)))}),format.raw/*50.6*/("""
-"""),format.raw/*51.1*/("""</ul>
+    """)))}),format.raw/*33.6*/("""
+
+    """),format.raw/*35.5*/("""<script>
+        function toggleEditField(messageId) """),format.raw/*36.45*/("""{"""),format.raw/*36.46*/("""
+            """),format.raw/*37.13*/("""var messageTextElement = document.getElementById('message-' + messageId);
+            var inputField = document.querySelector('input[name="editTweetText"]');
+            var saveButton = document.querySelector('button[type="submit"]');
+            var cancelButton = document.querySelector('button[type="button"]');
+            var currentMessageText = messageTextElement.textContent;
+
+            if (inputField.style.display === "none") """),format.raw/*43.54*/("""{"""),format.raw/*43.55*/("""
+                """),format.raw/*44.17*/("""inputField.value = currentMessageText;
+                inputField.style.display = "inline-block";
+                saveButton.style.display = "inline-block";
+                cancelButton.textContent = "Cancel";
+                messageTextElement.style.display = "none";
+            """),format.raw/*49.13*/("""}"""),format.raw/*49.14*/(""" """),format.raw/*49.15*/("""else """),format.raw/*49.20*/("""{"""),format.raw/*49.21*/("""
+                """),format.raw/*50.17*/("""inputField.style.display = "none";
+                saveButton.style.display = "none";
+                cancelButton.textContent = "Edit";
+                messageTextElement.style.display = "inline";
+            """),format.raw/*54.13*/("""}"""),format.raw/*54.14*/("""
+        """),format.raw/*55.9*/("""}"""),format.raw/*55.10*/("""
+    """),format.raw/*56.5*/("""</script>
+</ul>
 
 
 <div>
-    <a href=""""),_display_(/*55.15*/routes/*55.21*/.tweet.logout),format.raw/*55.34*/("""" id="logout">Logout</a>
+    <a href=""""),_display_(/*61.15*/routes/*61.21*/.tweet.logout),format.raw/*61.34*/("""" id="logout">Logout</a>
 </div>
 
 <div>
-    <a href=""""),_display_(/*59.15*/routes/*59.21*/.tweet.home),format.raw/*59.32*/("""" id="home">Home</a>
+    <a href=""""),_display_(/*65.15*/routes/*65.21*/.tweet.home),format.raw/*65.32*/("""" id="home">Home</a>
 </div>
 </body>
 </html>
@@ -101,9 +107,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/profile.scala.html
-                  HASH: 5dcf7962198b7be361cdab933d1de72e7be71d25
-                  MATRIX: 807->1|1043->144|1070->145|1169->219|1208->243|1246->244|1273->245|1302->249|1328->255|1363->261|1392->263|1438->283|1478->307|1517->308|1545->309|1575->313|1602->319|1638->325|1667->327|1703->337|1741->359|1781->361|1813->366|1866->392|1882->399|1908->404|1977->446|1992->452|2029->468|2072->484|2087->490|2123->505|2164->518|2239->566|2255->573|2286->583|2603->873|2618->879|2657->897|2700->913|2715->919|2751->934|2792->947|2867->995|2883->1002|2909->1007|3066->1136|3095->1137|3136->1150|3385->1371|3414->1372|3457->1387|3505->1408|3521->1415|3547->1420|3749->1594|3778->1595|3807->1596|3840->1601|3869->1602|3912->1617|4079->1756|4108->1757|4147->1768|4176->1769|4212->1778|4268->1804|4296->1805|4351->1833|4366->1839|4400->1852|4480->1905|4495->1911|4527->1922
-                  LINES: 21->1|26->2|27->3|31->7|31->7|31->7|32->8|32->8|32->8|33->9|35->11|36->12|36->12|36->12|37->13|37->13|37->13|38->14|40->16|41->17|41->17|41->17|42->18|43->19|43->19|43->19|44->20|44->20|44->20|45->21|45->21|45->21|46->22|46->22|46->22|46->22|51->27|51->27|51->27|52->28|52->28|52->28|53->29|53->29|53->29|53->29|57->33|57->33|58->34|60->36|60->36|61->37|61->37|61->37|61->37|65->41|65->41|65->41|65->41|65->41|66->42|69->45|69->45|70->46|70->46|71->47|74->50|75->51|79->55|79->55|79->55|83->59|83->59|83->59
+                  HASH: c292852d388c74d60f908073103056b82102b64f
+                  MATRIX: 807->1|1043->144|1070->145|1169->219|1208->243|1246->244|1273->245|1302->249|1328->255|1363->261|1392->263|1438->283|1478->307|1517->308|1545->309|1575->313|1602->319|1638->325|1667->327|1703->337|1741->359|1781->361|1813->366|1884->410|1900->417|1931->427|1961->430|1977->437|2003->442|2079->491|2094->497|2131->513|2174->529|2189->535|2225->550|2266->563|2341->611|2357->618|2388->628|2478->691|2494->698|2520->703|2632->788|2648->795|2679->805|2846->945|2861->951|2900->969|2943->985|2958->991|2994->1006|3035->1019|3110->1067|3126->1074|3152->1079|3266->1163|3299->1169|3380->1222|3409->1223|3450->1236|3917->1675|3946->1676|3991->1693|4300->1974|4329->1975|4358->1976|4391->1981|4420->1982|4465->1999|4703->2209|4732->2210|4768->2219|4797->2220|4829->2225|4894->2263|4909->2269|4943->2282|5023->2335|5038->2341|5070->2352
+                  LINES: 21->1|26->2|27->3|31->7|31->7|31->7|32->8|32->8|32->8|33->9|35->11|36->12|36->12|36->12|37->13|37->13|37->13|38->14|40->16|41->17|41->17|41->17|42->18|43->19|43->19|43->19|43->19|43->19|43->19|44->20|44->20|44->20|45->21|45->21|45->21|46->22|46->22|46->22|46->22|47->23|47->23|47->23|48->24|48->24|48->24|51->27|51->27|51->27|52->28|52->28|52->28|53->29|53->29|53->29|53->29|57->33|59->35|60->36|60->36|61->37|67->43|67->43|68->44|73->49|73->49|73->49|73->49|73->49|74->50|78->54|78->54|79->55|79->55|80->56|85->61|85->61|85->61|89->65|89->65|89->65
                   -- GENERATED --
               */
           
