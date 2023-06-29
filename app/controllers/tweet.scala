@@ -180,5 +180,9 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
     }(ec)
   }
 
+  def searchMessage = Action {implicit request =>
+    ???
+  }
+
 
 }

@@ -76,6 +76,12 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "logout")
     }
   
+    // @LINE:30
+    def unfollow: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "unfollow")
+    }
+  
     // @LINE:21
     def home: Call = {
       

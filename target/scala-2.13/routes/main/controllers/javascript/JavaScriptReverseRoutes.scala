@@ -107,6 +107,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:30
+    def unfollow: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.unfollow",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "unfollow"})
+        }
+      """
+    )
+  
     // @LINE:21
     def home: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.home",

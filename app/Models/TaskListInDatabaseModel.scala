@@ -99,12 +99,12 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   def unfollow(user:String, searchUser:String):Future[Unit] = {
     val userIDquery = Users.filter(_.username === user).map(_.id).result.head
     val searchIDquery = Users.filter(_.username === searchUser).map(_.id).result.head
-    val unfollowAction = userIDquery.flatMap { userID =>
-      searchIDquery.flatMap { searchID =>
-        Followers.filter(op => op.followerId === userID.asColumnOf[Int] && op.followedId === searchID.asColumnOf[Int]).delete
-        db.run(unfollowAction).map(_ => ())
-      }
-    }
+    val deleteAction = for {
+      userID <- userIDquery
+      searchID <- searchIDquery
+      _ <- Followers.filter(f => f.followerId === userID.asColumnOf[Int] && f.followedId === searchID.asColumnOf[Int]).delete
+    }yield ()
+    db.run(deleteAction)
   }
 
   def followValidate(user: String, searchUser: String): Future[Boolean] = {

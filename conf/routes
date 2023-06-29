@@ -24,6 +24,7 @@ GET     /logout                    controllers.tweet.logout
 GET     /profile                    controllers.tweet.showProfile
 POST    /tweet                      controllers.tweet.addTweet
 POST    /dtweet                     controllers.tweet.deleteTweet
-GET   /search                     controllers.tweet.searchProfile
+GET     /search                     controllers.tweet.searchProfile
 
 GET    /follow                     controllers.tweet.follow
+GET    /unfollow                   controllers.tweet.unfollow
