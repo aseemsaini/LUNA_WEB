@@ -30,8 +30,7 @@
     }
 </ul>
 
-<form method="post" action="@routes.tweet.searchProfile">
-    @helper.CSRF.formField
+<form method="get" action="@routes.tweet.searchProfile">
     <div>
         <label>
             <input type="text" name="search">

@@ -67,7 +67,7 @@ package controllers {
     // @LINE:27
     def searchProfile: Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "search")
+      Call("GET", _prefix + { _defaultPrefix } + "search")
     }
   
     // @LINE:23

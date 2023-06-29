@@ -56,7 +56,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """profile""", """controllers.tweet.showProfile"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """tweet""", """controllers.tweet.addTweet"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """dtweet""", """controllers.tweet.deleteTweet"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search""", """controllers.tweet.searchProfile"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """search""", """controllers.tweet.searchProfile"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """follow""", """controllers.tweet.follow"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -247,7 +247,7 @@ class Routes(
   )
 
   // @LINE:27
-  private[this] lazy val controllers_tweet_searchProfile10_route = Route("POST",
+  private[this] lazy val controllers_tweet_searchProfile10_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("search")))
   )
   private[this] lazy val controllers_tweet_searchProfile10_invoker = createInvoker(
@@ -257,7 +257,7 @@ class Routes(
       "controllers.tweet",
       "searchProfile",
       Nil,
-      "POST",
+      "GET",
       this.prefix + """search""",
       """""",
       Seq()

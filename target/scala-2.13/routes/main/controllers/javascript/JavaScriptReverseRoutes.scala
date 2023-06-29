@@ -92,7 +92,7 @@ package controllers.javascript {
       "controllers.tweet.searchProfile",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "search"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "search"})
         }
       """
     )

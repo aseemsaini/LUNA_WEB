@@ -71,5 +71,23 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
 //
 //    }yield followedUsernames
   }
+
+  def follow(user:String, searchUser:String):Future[Unit] = {
+    val userIDquery = Users.filter(_.username === user).map(_.id).result.head
+    val searchIDquery = Users.filter(_.username === searchUser).map(_.id).result.head
+    val followAction = userIDquery.flatMap{ userID => searchIDquery.flatMap{
+      searchID =>
+        val follow = FollowersRow(userID.toInt,searchID.toInt)
+        Followers += follow
+    }}
+    db.run(followAction).map(_ => ())
+    }
+
+  def followValidate(user:String, searchUser:String):Future[Boolean] = {
+    val userIDquery = Users.filter(_.username === user).map(_.id).result.head
+    val searchIDquery = Users.filter(_.username === searchUser).map(_.id).result.head
+    
+    ???
+  }
 }
 
