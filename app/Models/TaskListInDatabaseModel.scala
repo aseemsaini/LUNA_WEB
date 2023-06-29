@@ -124,5 +124,14 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     println(result)
     result
   }
+
+  def searchMessageUser(message:String):(Future[String]) = {
+    val messageQuery = Messages.filter(m => m.text.like(s"%$message%")).result.headOption
+    val messageFuture = db.run(messageQuery).map {
+      case Some(matchingMessage) => matchingMessage.text
+      case None => "No matching message found"
+    }
+    messageFuture
+  }
 }
 

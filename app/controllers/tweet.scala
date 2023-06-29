@@ -180,8 +180,12 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
     }(ec)
   }
 
-  def searchMessage = Action {implicit request =>
-    ???
+  def searchMessage = Action.async {implicit request =>
+    val searchMessageOption = request.queryString.get("messageSearch").flatMap(_.headOption).getOrElse("")
+    val message = model.searchMessageUser(searchMessageOption)
+    message.map {
+      extractedMessage => Ok(extractedMessage).as(HTML)
+    }(ec)
   }
 
 

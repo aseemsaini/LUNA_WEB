@@ -46,6 +46,12 @@ package controllers {
     }
 
   
+    // @LINE:31
+    def searchMessage: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "searchMessage")
+    }
+  
     // @LINE:15
     def createUserForm: Call = {
       

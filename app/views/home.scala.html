@@ -31,13 +31,23 @@
 </ul>
 
 <form method="get" action="@routes.tweet.searchProfile">
-    <div>
+    <div id ="uSearch">
         <label>
             <input type="text" name="search">
-            <button type="submit">Search</button>
+            <button type="submit">Search for User</button>
         </label>
     </div>
 </form>
+
+<form method="get" action="@routes.tweet.searchMessage">
+    <div id ="mSearch">
+        <label>
+            <input type="text" name="messageSearch">
+            <button type="submit">Search for Message</button>
+        </label>
+    </div>
+</form>
+
 
 
 <div>

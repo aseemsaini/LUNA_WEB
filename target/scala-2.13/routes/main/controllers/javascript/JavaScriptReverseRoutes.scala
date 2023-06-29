@@ -57,6 +57,16 @@ package controllers.javascript {
     }
 
   
+    // @LINE:31
+    def searchMessage: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.searchMessage",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "searchMessage"})
+        }
+      """
+    )
+  
     // @LINE:15
     def createUserForm: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.createUserForm",
