@@ -825,3 +825,371 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2
     filters.ExampleFilter
 
 2023-06-29 14:08:22,482 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-143 - Application started (Dev) (no global state)
+2023-06-29 14:32:06,074 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-120 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 14:32:06,083 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-120 - Application started (Dev) (no global state)
+2023-06-29 14:44:11,162 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-153 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 14:44:11,176 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-153 - Application started (Dev) (no global state)
+2023-06-29 14:44:22,292 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-8 - 
+
+! @824apcjc0 - Internal server error, for (GET) [/follow] ->
+ 
+play.api.PlayException: Execution exception[[RuntimeException: scala.NotImplementedError: an implementation is missing]]
+	at play.api.http.HttpErrorHandlerExceptions$.$anonfun$convertToPlayException$3(HttpErrorHandler.scala:388)
+	at scala.Option.getOrElse(Option.scala:201)
+	at play.api.http.HttpErrorHandlerExceptions$.convertToPlayException(HttpErrorHandler.scala:388)
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:373)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:264)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:441)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:433)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:490)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:63)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:100)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:94)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:100)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:49)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:48)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+Caused by: java.lang.RuntimeException: scala.NotImplementedError: an implementation is missing
+	at play.api.mvc.ActionBuilder$$anon$9.apply(Action.scala:382)
+	at play.api.mvc.Action.$anonfun$apply$4(Action.scala:82)
+	at play.api.libs.streams.StrictAccumulator.$anonfun$mapFuture$4(Accumulator.scala:168)
+	at scala.util.Try$.apply(Try.scala:210)
+	at play.api.libs.streams.StrictAccumulator.$anonfun$mapFuture$3(Accumulator.scala:168)
+	at scala.Function1.$anonfun$andThen$1(Function1.scala:87)
+	at scala.Function1.$anonfun$andThen$1(Function1.scala:87)
+	at scala.Function1.$anonfun$andThen$1(Function1.scala:87)
+	at play.api.libs.streams.StrictAccumulator.run(Accumulator.scala:199)
+	at play.core.server.AkkaHttpServer.$anonfun$runAction$4(AkkaHttpServer.scala:428)
+	at akka.http.scaladsl.util.FastFuture$.strictTransform$1(FastFuture.scala:41)
+	at akka.http.scaladsl.util.FastFuture$.$anonfun$transformWith$3(FastFuture.scala:51)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:484)
+	... 12 common frames omitted
+Caused by: scala.NotImplementedError: an implementation is missing
+	at scala.Predef$.$qmark$qmark$qmark(Predef.scala:344)
+	at Models.TaskListInDatabaseModel.followValidate(TaskListInDatabaseModel.scala:101)
+	at controllers.tweet.$anonfun$follow$1(tweet.scala:168)
+	at play.api.mvc.MessagesActionBuilderImpl.invokeBlock(MessagesRequest.scala:78)
+	at play.api.mvc.MessagesActionBuilderImpl.invokeBlock(MessagesRequest.scala:74)
+	at play.api.mvc.ActionBuilder$$anon$10.$anonfun$invokeBlock$2(Action.scala:408)
+	at play.api.mvc.ActionBuilderImpl.invokeBlock(Action.scala:441)
+	at play.api.mvc.ActionBuilderImpl.invokeBlock(Action.scala:439)
+	at play.api.mvc.ActionBuilder$$anon$10.invokeBlock(Action.scala:408)
+	at play.api.mvc.ActionBuilder$$anon$10.invokeBlock(Action.scala:404)
+	at play.api.mvc.ActionBuilder$$anon$9.apply(Action.scala:379)
+	... 24 common frames omitted
+2023-06-29 14:45:18,985 [ERROR] from play.api.http.DevHttpErrorHandler in play-dev-mode-akka.actor.default-dispatcher-163 - 
+
+! @824apfp61 - Internal server error, for (GET) [/home] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[type mismatch;
+ found   : Unit
+ required: scala.concurrent.Future[Boolean]]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:34)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.$anonfun$taskFailureHandler$8(PlayReload.scala:127)
+	at scala.Option.map(Option.scala:230)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:100)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:38)
+	at play.sbt.run.PlayReload$.$anonfun$compile$3(PlayReload.scala:152)
+	at scala.util.Either$LeftProjection.map(Either.scala:573)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:152)
+	at play.sbt.run.PlayRun$.$anonfun$playRunTask$4(PlayRun.scala:80)
+	at play.runsupport.Reloader.$anonfun$reload$1(Reloader.scala:496)
+	at play.runsupport.Reloader$$anon$1.run(Reloader.scala:57)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:63)
+	at play.runsupport.Reloader.reload(Reloader.scala:496)
+	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:147)
+	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:310)
+	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:227)
+	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1309)
+	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:542)
+	at akka.stream.impl.fusing.GraphInterpreter.processEvent(GraphInterpreter.scala:496)
+	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:390)
+	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:650)
+	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:521)
+	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:625)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:800)
+	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:818)
+	at akka.actor.Actor.aroundReceive(Actor.scala:537)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
+	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:716)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:579)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:547)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+2023-06-29 14:46:06,903 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-153 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 14:46:06,934 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-153 - Application started (Dev) (no global state)
+2023-06-29 14:49:07,917 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-169 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 14:49:07,941 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-169 - Application started (Dev) (no global state)
+2023-06-29 14:50:45,276 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-169 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 14:50:45,282 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-169 - Application started (Dev) (no global state)
+2023-06-29 14:52:41,884 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-169 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 14:52:41,958 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-169 - Application started (Dev) (no global state)
+2023-06-29 14:55:28,458 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-177 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 14:55:28,463 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-177 - Application started (Dev) (no global state)
+2023-06-29 15:05:50,800 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-160 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 15:05:50,806 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-160 - Application started (Dev) (no global state)
+2023-06-29 15:07:47,602 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-160 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 15:07:47,617 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-160 - Application started (Dev) (no global state)
+2023-06-29 15:10:16,334 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-198 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 15:10:16,340 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-198 - Application started (Dev) (no global state)
+2023-06-29 15:26:11,583 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-193 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 15:26:11,587 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-193 - Application started (Dev) (no global state)
+2023-06-29 15:41:38,577 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=9m56s842ms).
+2023-06-29 15:48:56,235 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-205 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 15:48:56,240 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-205 - Application started (Dev) (no global state)
+2023-06-29 15:51:39,389 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-217 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 15:51:39,392 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-217 - Application started (Dev) (no global state)
+2023-06-29 15:54:22,180 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-8 - 
+
+! @824b8hi84 - Internal server error, for (GET) [/follow] ->
+ 
+play.api.PlayException: Execution exception[[SQLIntegrityConstraintViolationException: Duplicate entry '2-3' for key 'followers.PRIMARY']]
+	at play.api.http.HttpErrorHandlerExceptions$.$anonfun$convertToPlayException$3(HttpErrorHandler.scala:388)
+	at scala.Option.getOrElse(Option.scala:201)
+	at play.api.http.HttpErrorHandlerExceptions$.convertToPlayException(HttpErrorHandler.scala:388)
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:373)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:264)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:441)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:433)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:490)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:63)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:100)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:94)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:100)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:49)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:48)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2-3' for key 'followers.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1092)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1040)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1350)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1025)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$SingleInsertAction.$anonfun$run$15(JdbcActionComponent.scala:520)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement(JdbcBackend.scala:425)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement$(JdbcBackend.scala:420)
+	at slick.jdbc.JdbcBackend$BaseSession.withPreparedStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl.preparedInsert(JdbcActionComponent.scala:511)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$SingleInsertAction.run(JdbcActionComponent.scala:517)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:28)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:25)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.liftedTree1$1(BasicBackend.scala:276)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.run(BasicBackend.scala:276)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023-06-29 16:01:41,947 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=4m2s376ms).
+2023-06-29 16:07:15,977 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=5m3s532ms).
+2023-06-29 16:07:49,996 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-216 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 16:07:50,001 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-216 - Application started (Dev) (no global state)
+2023-06-29 16:08:00,899 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-6 - 
+
+! @824bac7b9 - Internal server error, for (GET) [/follow] ->
+ 
+play.api.PlayException: Execution exception[[SQLIntegrityConstraintViolationException: Duplicate entry '2-3' for key 'followers.PRIMARY']]
+	at play.api.http.HttpErrorHandlerExceptions$.$anonfun$convertToPlayException$3(HttpErrorHandler.scala:388)
+	at scala.Option.getOrElse(Option.scala:201)
+	at play.api.http.HttpErrorHandlerExceptions$.convertToPlayException(HttpErrorHandler.scala:388)
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:373)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:264)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:441)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:433)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:490)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:63)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:100)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:94)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:100)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:49)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:48)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2-3' for key 'followers.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1092)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1040)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1350)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1025)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$SingleInsertAction.$anonfun$run$15(JdbcActionComponent.scala:520)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement(JdbcBackend.scala:425)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement$(JdbcBackend.scala:420)
+	at slick.jdbc.JdbcBackend$BaseSession.withPreparedStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl.preparedInsert(JdbcActionComponent.scala:511)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$SingleInsertAction.run(JdbcActionComponent.scala:517)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:28)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:25)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.liftedTree1$1(BasicBackend.scala:276)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.run(BasicBackend.scala:276)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023-06-29 16:13:34,515 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-215 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-06-29 16:13:34,519 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-215 - Application started (Dev) (no global state)
+2023-06-29 16:13:47,007 [ERROR] from play.api.http.DefaultHttpErrorHandler in application-akka.actor.default-dispatcher-5 - 
+
+! @824bb5pb6 - Internal server error, for (GET) [/follow] ->
+ 
+play.api.PlayException: Execution exception[[SQLIntegrityConstraintViolationException: Duplicate entry '2-3' for key 'followers.PRIMARY']]
+	at play.api.http.HttpErrorHandlerExceptions$.$anonfun$convertToPlayException$3(HttpErrorHandler.scala:388)
+	at scala.Option.getOrElse(Option.scala:201)
+	at play.api.http.HttpErrorHandlerExceptions$.convertToPlayException(HttpErrorHandler.scala:388)
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:373)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:264)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:441)
+	at play.core.server.AkkaHttpServer$$anonfun$2.applyOrElse(AkkaHttpServer.scala:433)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:490)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:63)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:100)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:94)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:100)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:49)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:48)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '2-3' for key 'followers.PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1092)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1040)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1350)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1025)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$SingleInsertAction.$anonfun$run$15(JdbcActionComponent.scala:520)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement(JdbcBackend.scala:425)
+	at slick.jdbc.JdbcBackend$SessionDef.withPreparedStatement$(JdbcBackend.scala:420)
+	at slick.jdbc.JdbcBackend$BaseSession.withPreparedStatement(JdbcBackend.scala:489)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl.preparedInsert(JdbcActionComponent.scala:511)
+	at slick.jdbc.JdbcActionComponent$InsertActionComposerImpl$SingleInsertAction.run(JdbcActionComponent.scala:517)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:28)
+	at slick.jdbc.JdbcActionComponent$SimpleJdbcProfileAction.run(JdbcActionComponent.scala:25)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.liftedTree1$1(BasicBackend.scala:276)
+	at slick.basic.BasicBackend$DatabaseDef$$anon$3.run(BasicBackend.scala:276)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)

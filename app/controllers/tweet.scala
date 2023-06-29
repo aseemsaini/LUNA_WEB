@@ -7,14 +7,14 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
+
 import scala.concurrent.duration._
-
-
 import scala.concurrent.{Await, ExecutionContext, Future}
 import Models.Tables.{FollowersRow, MessagesRow, UsersRow}
 import slick.jdbc.MySQLProfile.api._
 
 import javax.inject._
+import scala.concurrent
 case class LoginData2(username: String, password: String)
 
 @Singleton
@@ -163,8 +163,17 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
   }
 
   def follow = Action.async { implicit request =>
+    println("Start Here")
     println(searchUser)
     println(user)
+    val one = model.followValidate(user,searchUser)
+    val two = model.validate(user)(ec)
+    println(one,two)
+    //result.flatMap(final2 => println(final2))
+    one.flatMap{
+      hello => println(hello)
+        Future.successful(true)
+    }(ec)
     model.follow(user, searchUser).map { _ =>
       Redirect(routes.tweet.home).flashing("followSuccess" -> "Follow successful")
     }(ec)

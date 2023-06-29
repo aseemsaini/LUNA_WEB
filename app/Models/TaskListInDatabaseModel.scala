@@ -1,4 +1,5 @@
 package Models
+
 import slick.jdbc.MySQLProfile.api._
 
 import scala.concurrent.ExecutionContext
@@ -10,7 +11,7 @@ import slick.jdbc.MySQLProfile.api._
 import java.sql.Timestamp
 
 
-class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
+class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   def validate(username: String)(implicit ec: ExecutionContext): Future[Boolean] = {
     db.run(Users.filter(_.username === username).exists.result)
   }
@@ -55,7 +56,7 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     db.run(deleteAction).map(count => count > 0)
   }
 
-  def getFollowers(username: String):Future[Seq[String]] = {
+  def getFollowers(username: String): Future[Seq[String]] = {
     val query = for {
       userId <- Users.filter(_.username === username).map(_.id)
       followers <- Followers.filter(_.followerId === userId.asColumnOf[Int])
@@ -64,30 +65,44 @@ class TaskListInDatabaseModel (db: Database) (implicit ec: ExecutionContext) {
     db.run(query.result)
   }
 
-  def followedBy(username:String):Future[Seq[String]] = {???
-//    val query = for{
-//      userID <- Users.filter(_.username === username).map(_.id)
-//      followed <- Followers.filter()
-//
-//    }yield followedUsernames
+  def followedBy(username: String): Future[Seq[String]] = {
+    ???
+    //    val query = for{
+    //      userID <- Users.filter(_.username === username).map(_.id)
+    //      followed <- Followers.filter()
+    //
+    //    }yield followedUsernames
   }
 
-  def follow(user:String, searchUser:String):Future[Unit] = {
+  def follow(user: String, searchUser: String): Future[Unit] = {
     val userIDquery = Users.filter(_.username === user).map(_.id).result.head
     val searchIDquery = Users.filter(_.username === searchUser).map(_.id).result.head
-    val followAction = userIDquery.flatMap{ userID => searchIDquery.flatMap{
-      searchID =>
-        val follow = FollowersRow(userID.toInt,searchID.toInt)
-        Followers += follow
-    }}
-    db.run(followAction).map(_ => ())
+    val followAction = userIDquery.flatMap { userID =>
+      searchIDquery.flatMap {
+        searchID =>
+          val follow = FollowersRow(userID.toInt, searchID.toInt)
+          Followers += follow
+      }
     }
+    db.run(followAction).map(_ => ())
+  }
 
-  def followValidate(user:String, searchUser:String):Future[Boolean] = {
+  def followValidate(user: String, searchUser: String): Future[Boolean] = {
     val userIDquery = Users.filter(_.username === user).map(_.id).result.head
     val searchIDquery = Users.filter(_.username === searchUser).map(_.id).result.head
-    
-    ???
+        val query = for {
+          userID <- userIDquery
+          searchID <- searchIDquery
+          exist <- Followers.filter(f => f.followerId === userID.asColumnOf[Int] && f.followedId === searchID.asColumnOf[Int]).exists.result
+        } yield exist
+    db.run(query)
+  }
+
+  def getUserID(username:String):Future[Long] = {
+    val userIDquery = Users.filter(_.username === username).map(_.id).result.head
+    val result = db.run(userIDquery).map(id => id)
+    println(result)
+    result
   }
 }
 
