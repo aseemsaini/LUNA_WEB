@@ -7,14 +7,12 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
-
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
 import Models.Tables.{FollowersRow, MessagesRow, UsersRow}
 import slick.jdbc.MySQLProfile.api._
-
 import javax.inject._
-import scala.concurrent
+
 case class LoginData2(username: String, password: String)
 
 @Singleton
@@ -79,12 +77,10 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
 
   def showProfile = Action.async { implicit request =>
     val usernameOption = request.session.get("username")
-
     usernameOption match {
       case Some(username) =>
         val tweetsFuture: Future[Seq[MessagesRow]] = model.getTweets(username)
-        val followersFuture: Future[Seq[String]] = model.getFollowers(username)
-
+        val followersFuture: Future[Seq[String]] = model.getFollowing(username)
         tweetsFuture.flatMap { tweets =>
           followersFuture.map { followers =>
             Ok(views.html.profile(tweets, followers))
@@ -120,47 +116,54 @@ class tweet @Inject()(protected val dbConfigProvider:DatabaseConfigProvider, cc:
       }.getOrElse(Future.successful(Redirect(routes.tweet.showProfile)))
     }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
   }
+  import scala.concurrent.Future
+  import play.api.mvc.Results._
 
   def searchProfile = Action.async { implicit request =>
     val userOption = request.session.get("username")
-    userOption.map { username =>
+
+    userOption.fold(Future.successful(Ok("User not logged in"): Result)) { username =>
       user = username
+
       val searchUserOption = request.queryString.get("search").flatMap(_.headOption)
-      searchUserOption match {
-        case Some(search) =>
-          searchUser = search
-          println(search)
-          println(user)
-          if (user == search) {
-            println("Working")
-            Future.successful(Redirect(routes.tweet.showProfile))
-          } else {
-            val follower: Future[Seq[String]] = model.getFollowers(search)
-            val exist: Future[Boolean] = model.validate(search)(ec).flatMap(result => Future.successful(result))(ec)
-            //println(searchUser)
-            val existFuture = exist.flatMap { yes =>
-              if (yes) {
-                model.getTweets(search)
-              } else {
-                Future.successful(Seq.empty[MessagesRow])
-              }
+
+      searchUserOption.fold(Future.successful(Ok("No search query provided"): Result)) { search =>
+        searchUser = search
+        println(search)
+        println(user)
+
+        if (user == search) {
+          println("Working")
+          Future.successful(Redirect(routes.tweet.showProfile))
+        } else {
+          val followingFuture: Future[Seq[String]] = model.getFollowing(search)
+          val existFuture: Future[Boolean] = model.validate(search)(ec)
+
+          val existAndTweetsFuture = existFuture.flatMap { exists =>
+            if (exists) {
+              model.getTweets(search).map(tweets => (tweets, exists))(ec)
+            } else {
+              Future.successful((Seq.empty[MessagesRow], exists))
+            }
+          }(ec)
+
+          existAndTweetsFuture.flatMap { case (tweets, exists) =>
+            val userExists = exists
+            followingFuture.flatMap { following =>
+              val followExistFuture = model.followValidate(user, searchUser)
+              followExistFuture.map { followExist =>
+                Ok(views.html.searchProfile(tweets, following, searchUser, userExists, followExist))
+              }(ec)
             }(ec)
-            existFuture.flatMap { tweets =>
-              val userExists = Await.result(exist, Duration.Inf)
-              //println(tweets.nonEmpty)
-              follower.map(followers => (tweets, followers, userExists))(ec)
-            }(ec).map { case (tweets, followers, userExists) =>
-              //println(userExists)
-              Ok(views.html.searchProfile(tweets, followers, searchUser, userExists))
-            }(ec)
-          }
-        case None =>
-          Future.successful(Ok("No search query provided"))
+          }(ec).recover {
+            case ex: Throwable =>
+              InternalServerError("An error occurred")
+          }(ec)
+        }
       }
-    }.getOrElse {
-      Future.successful(Ok("User not logged in"))
     }
   }
+
 
   def follow = Action.async { implicit request =>
     println("Start Here")

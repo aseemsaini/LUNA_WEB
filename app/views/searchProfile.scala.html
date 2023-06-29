@@ -1,4 +1,4 @@
-@(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String], user:String, exists:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String], user:String, exists:Boolean, followExist:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
 
 <html>
 <body>
@@ -9,9 +9,12 @@
 <div id="user_name">
     <h2>@user</h2>
 </div>
+
+@if(followExist == false) {
 <div id ="follow">
     <a href="@routes.tweet.follow">Follow</a>
 </div>
+}
 
 <div id="followers">
     <h3>Following</h3>

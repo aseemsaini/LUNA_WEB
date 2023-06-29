@@ -56,7 +56,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     db.run(deleteAction).map(count => count > 0)
   }
 
-  def getFollowers(username: String): Future[Seq[String]] = {
+  def getFollowing(username: String): Future[Seq[String]] = {
     val query = for {
       userId <- Users.filter(_.username === username).map(_.id)
       followers <- Followers.filter(_.followerId === userId.asColumnOf[Int])
