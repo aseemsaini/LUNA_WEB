@@ -1,4 +1,4 @@
-@(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String], exists:Any)(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String], user:String, exists:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
 
 <html>
 <body>
@@ -6,6 +6,9 @@
 @if(exists == false) {
     <p>User not found</p>
 } else {
+<div id="user_name">
+    <h2>@user</h2>
+</div>
 <div id ="follow">
     <a href="@routes.tweet.follow">Follow</a>
 </div>

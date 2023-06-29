@@ -1,4 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:6:5: value unary_! is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m@if(!exists) {[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/controllers/tweet.scala:154:34: not enough arguments for method apply: (tweets: Seq[Models.Tables.MessagesRow], followers: Seq[String], user: String, exists: Boolean)(implicit request: play.api.mvc.MessagesRequestHeader, flash: play.api.mvc.Flash): play.twirl.api.HtmlFormat.Appendable in object searchProfile.[0m
+[0m[[0m[31merror[0m] [0m[0mUnspecified value parameter exists.[0m
+[0m[[0m[31merror[0m] [0m[0m      Ok(views.html.searchProfile(tweets,followers,userExists))[0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
