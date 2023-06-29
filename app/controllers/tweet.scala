@@ -123,7 +123,6 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
 
   def searchProfile = Action.async { implicit request =>
     val userOption = request.session.get("username")
-
     userOption.fold(Future.successful(Ok("User not logged in"): Result)) { username =>
       user = username
 
@@ -152,14 +151,17 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
           existAndTweetsFuture.flatMap { case (tweets, exists) =>
             val userExists = exists
             followingFuture.flatMap { following =>
-              val followExistFuture = model.followValidate(user, searchUser)
-              followExistFuture.map { followExist =>
-                Ok(views.html.searchProfile(tweets, following, searchUser, userExists, followExist))
+              val followerFuture = model.getFollowers(search)
+              followerFuture.flatMap{ follower =>
+                val followExistFuture = model.followValidate(user, searchUser)
+                followExistFuture.map { followExist =>
+                  Ok(views.html.searchProfile(tweets, following, follower, searchUser, userExists, followExist))
+                }(ec)
               }(ec)
             }(ec)
           }(ec).recover {
             case ex: Throwable =>
-              Ok(views.html.searchProfile(Seq.empty, Seq.empty, searchUser, false, false))
+              Ok(views.html.searchProfile(Seq.empty, Seq.empty, Seq.empty, searchUser, false, false))
           }(ec)
         }
       }
@@ -184,7 +186,6 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
       Redirect(routes.tweet.home).flashing("followSuccess" -> "Follow successful")
     }(ec)
   }
-
 
 
 }

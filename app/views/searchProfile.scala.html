@@ -1,17 +1,17 @@
-@(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], user:String, exists:Boolean, followExist:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], followers: Seq[String], user:String, exists:Boolean, followExist:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
 
 <html>
 <body>
 <h1>Profile Search</h1>
 @if(exists == false) {
-    <p>User not found</p>
+<p>User not found</p>
 } else {
 <div id="user_name">
     <h2>@user</h2>
 </div>
 
 @if(followExist == false) {
-<div id ="follow">
+<div id="follow">
     <a href="@routes.tweet.follow">Follow</a>
 </div>
 }
@@ -20,6 +20,13 @@
     <h3>Following</h3>
     @for(people <- following){
     <p>@people</p>
+    }
+</div>
+
+<div id="followers">
+    <h3>Followers</h3>
+    @for(people <- followers){
+        <p>@people</p>
     }
 </div>
 

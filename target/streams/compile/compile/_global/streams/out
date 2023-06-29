@@ -1,6 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/controllers/tweet.scala:86:30: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : scala.concurrent.Future[scala.concurrent.Future[play.api.mvc.Result]][0m
-[0m[[0m[31merror[0m] [0m[0m required: scala.concurrent.Future[play.api.mvc.Result][0m
-[0m[[0m[31merror[0m] [0m[0m        tweetsFuture.flatMap { tweets =>[0m
-[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:27:20: not found: value followers[0m
+[0m[[0m[31merror[0m] [0m[0m    @for(people <- followers){[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
