@@ -1,4 +1,4 @@
-@(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], followers: Seq[String], user:String, exists:Boolean, followExist:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], user:String, exists:Boolean, followExist:Boolean)(implicit request: MessagesRequestHeader, flash: Flash)
 
 <html>
 <head>
@@ -13,10 +13,7 @@
 </div>
 <h1>Profile Search</h1>
 @if(exists == false) {
-<div class="user-not-found">
-    <h2>Error</h2>
-    <h3>User not found</h3>
-</div>
+<p class="user-not-found">User not found</p>
 } else {
 <div id="user_name">
     <h2 class="user">@user</h2>

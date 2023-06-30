@@ -1,10 +1,19 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/home.scala.html:25:30: Cannot find any HTTP Request Header here[0m
-[0m[[0m[31merror[0m] [0m[0m                @helper.CSRF.formField[0m
-[0m[[0m[31merror[0m] [0m[0m                             ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/home.scala.html:36:33: not found: value messages[0m
-[0m[[0m[31merror[0m] [0m[0m                @for(message <- messages) {[0m
-[0m[[0m[31merror[0m] [0m[0m                                ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/home.scala.html:40:49: not found: value users[0m
-[0m[[0m[31merror[0m] [0m[0m                            <span class="user">@users.find(_.id == message.userId).map(_.username).getOrElse("")</span>[0m
-[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:9:5: not found: value exists[0m
+[0m[[0m[31merror[0m] [0m[0m@if(exists == false) {[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:13:23: not found: value user[0m
+[0m[[0m[31merror[0m] [0m[0m    <h2 class="user">@user</h2>[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:15:5: not found: value followExist[0m
+[0m[[0m[31merror[0m] [0m[0m@if(followExist == false) {[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:24:20: not found: value following[0m
+[0m[[0m[31merror[0m] [0m[0m    @for(people <- following){[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:30:20: not found: value followers[0m
+[0m[[0m[31merror[0m] [0m[0m    @for(people <- followers){[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:35:21: not found: value tweets[0m
+[0m[[0m[31merror[0m] [0m[0m    @for(message <- tweets) {[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m6 errors found[0m

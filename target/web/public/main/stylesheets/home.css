@@ -19,6 +19,7 @@ h1 {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
 }
 
 .tweet-form {
@@ -91,8 +92,8 @@ h1 {
 
 .user {
     color: #6a5cd0;
-        font-style: italic;
-        margin-right: 10px;
+    font-style: italic;
+    margin-right: 10px;
 }
 
 .search-section {
@@ -130,8 +131,8 @@ h1 {
 .profile-visit {
     position: absolute;
     top: 20px;
-    right: 40px;
-    font-size:20px;
+    right: 20px;
+    font-size: 20px;
     color: #ffffff;
     text-decoration: none;
 }
@@ -139,8 +140,8 @@ h1 {
 .logout {
     position: absolute;
     top: 20px;
-    right: 120px;
-    font-size:20px;
+    right: 100px;
+    font-size: 20px;
     color: #ffffff;
     text-decoration: none;
 }
@@ -157,5 +158,5 @@ h1 {
 
 .logo img {
     width: 100px;
-    border-radius:5px;
+    border-radius: 5px;
 }

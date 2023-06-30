@@ -24,70 +24,98 @@ object profile extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Ht
 
 
 Seq[Any](format.raw/*2.1*/("""
-"""),format.raw/*3.1*/("""<html>
+"""),format.raw/*3.1*/("""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Luna | Profile</title>
+    <link rel="stylesheet" href="/assets/stylesheets/profile.css">
+</head>
 <body>
-<h1>Hello, Welcome to your profile</h1>
-<h3>Following</h3>
-"""),_display_(/*7.2*/for(people <- following) yield /*7.26*/{_display_(Seq[Any](format.raw/*7.27*/("""
-"""),format.raw/*8.1*/("""<p>"""),_display_(/*8.5*/people),format.raw/*8.11*/("""</p>
-""")))}),format.raw/*9.2*/("""
+<header class="header-style">
+    <h1>Hello, Welcome to your profile</h1>
+</header>
 
-"""),format.raw/*11.1*/("""<h3>Followers</h3>
-"""),_display_(/*12.2*/for(people <- followers) yield /*12.26*/{_display_(Seq[Any](format.raw/*12.27*/("""
-"""),format.raw/*13.1*/("""<p>"""),_display_(/*13.5*/people),format.raw/*13.11*/("""</p>
-""")))}),format.raw/*14.2*/("""
-
-"""),format.raw/*16.1*/("""<ul>
-    """),_display_(/*17.6*/for(message <- tweets) yield /*17.28*/ {_display_(Seq[Any](format.raw/*17.30*/("""
-    """),format.raw/*18.5*/("""<li>
-        <p>Message: <span id="message-"""),_display_(/*19.40*/message/*19.47*/.messageId),format.raw/*19.57*/("""">"""),_display_(/*19.60*/message/*19.67*/.text),format.raw/*19.72*/("""</span></p>
-        <form method="post" action=""""),_display_(/*20.38*/routes/*20.44*/.tweet.editTweet),format.raw/*20.60*/("""">
-            """),_display_(/*21.14*/helper/*21.20*/.CSRF.formField),format.raw/*21.35*/("""
-            """),format.raw/*22.13*/("""<input type="hidden" name="editTweetId" value=""""),_display_(/*22.61*/message/*22.68*/.messageId),format.raw/*22.78*/("""">
-            <input type="text" name="editTweetText" value=""""),_display_(/*23.61*/message/*23.68*/.text),format.raw/*23.73*/("""" style="display:none;">
-            <button type="button" onclick="toggleEditField("""),_display_(/*24.61*/message/*24.68*/.messageId),format.raw/*24.78*/(""")">Edit</button>
-            <button type="submit" style="display:none;">Save</button>
-        </form>
-        <form method="post" action=""""),_display_(/*27.38*/routes/*27.44*/.tweet.deleteTweet),format.raw/*27.62*/("""">
-            """),_display_(/*28.14*/helper/*28.20*/.CSRF.formField),format.raw/*28.35*/("""
-            """),format.raw/*29.13*/("""<input type="hidden" name="deleteTweet" value=""""),_display_(/*29.61*/message/*29.68*/.text),format.raw/*29.73*/("""">
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-    """)))}),format.raw/*33.6*/("""
-
-    """),format.raw/*35.5*/("""<script>
-        function toggleEditField(messageId) """),format.raw/*36.45*/("""{"""),format.raw/*36.46*/("""
-            """),format.raw/*37.13*/("""var messageTextElement = document.getElementById('message-' + messageId);
-            var inputField = document.querySelector('input[name="editTweetText"]');
-            var saveButton = document.querySelector('button[type="submit"]');
-            var cancelButton = document.querySelector('button[type="button"]');
-            var currentMessageText = messageTextElement.textContent;
-
-            if (inputField.style.display === "none") """),format.raw/*43.54*/("""{"""),format.raw/*43.55*/("""
-                """),format.raw/*44.17*/("""inputField.value = currentMessageText;
-                inputField.style.display = "inline-block";
-                saveButton.style.display = "inline-block";
-                cancelButton.textContent = "Cancel";
-                messageTextElement.style.display = "none";
-            """),format.raw/*49.13*/("""}"""),format.raw/*49.14*/(""" """),format.raw/*49.15*/("""else """),format.raw/*49.20*/("""{"""),format.raw/*49.21*/("""
-                """),format.raw/*50.17*/("""inputField.style.display = "none";
-                saveButton.style.display = "none";
-                cancelButton.textContent = "Edit";
-                messageTextElement.style.display = "inline";
-            """),format.raw/*54.13*/("""}"""),format.raw/*54.14*/("""
-        """),format.raw/*55.9*/("""}"""),format.raw/*55.10*/("""
-    """),format.raw/*56.5*/("""</script>
-</ul>
-
-
-<div>
-    <a href=""""),_display_(/*61.15*/routes/*61.21*/.tweet.logout),format.raw/*61.34*/("""" id="logout">Logout</a>
+<div class="logo">
+    <img src="/assets/images/luna_logo.png">
 </div>
 
-<div>
-    <a href=""""),_display_(/*65.15*/routes/*65.21*/.tweet.home),format.raw/*65.32*/("""" id="home">Home</a>
+<div class="followers-section">
+    <h3 class="followers-header">Followers</h3>
+    """),_display_(/*21.6*/for(people <- followers) yield /*21.30*/{_display_(Seq[Any](format.raw/*21.31*/("""
+    """),format.raw/*22.5*/("""<div class="followers-item">
+        <p>"""),_display_(/*23.13*/people),format.raw/*23.19*/("""</p>
+    </div>
+    """)))}),format.raw/*25.6*/("""
+"""),format.raw/*26.1*/("""</div>
+
+<div class="following-section">
+    <h3 class="following-header">Following</h3>
+    """),_display_(/*30.6*/for(people <- following) yield /*30.30*/{_display_(Seq[Any](format.raw/*30.31*/("""
+    """),format.raw/*31.5*/("""<div class="following-item">
+        <p>"""),_display_(/*32.13*/people),format.raw/*32.19*/("""</p>
+    </div>
+    """)))}),format.raw/*34.6*/("""
+"""),format.raw/*35.1*/("""</div>
+
+<div class="tweets-container">
+    <div class="container">
+        <ul class="tweet-list">
+            """),_display_(/*40.14*/for(message <- tweets) yield /*40.36*/ {_display_(Seq[Any](format.raw/*40.38*/("""
+            """),format.raw/*41.13*/("""<li class="tweet-item">
+                <div class="message-container">
+                    <p class="message-text">Message: <span id="message-"""),_display_(/*43.73*/message/*43.80*/.messageId),format.raw/*43.90*/("""">"""),_display_(/*43.93*/message/*43.100*/.text),format.raw/*43.105*/("""</span></p>
+                </div>
+                <form class="tweet-form" method="post" action=""""),_display_(/*45.65*/routes/*45.71*/.tweet.editTweet),format.raw/*45.87*/("""">
+                    """),_display_(/*46.22*/helper/*46.28*/.CSRF.formField),format.raw/*46.43*/("""
+                    """),format.raw/*47.21*/("""<input type="hidden" name="editTweetId" value=""""),_display_(/*47.69*/message/*47.76*/.messageId),format.raw/*47.86*/("""">
+                    <input class="edit-tweet-input" type="text" name="editTweetText" value=""""),_display_(/*48.94*/message/*48.101*/.text),format.raw/*48.106*/("""" style="display:none;">
+                    <div class="button-container">
+                        <button class="edit-button" type="button" onclick="toggleEditField("""),_display_(/*50.93*/message/*50.100*/.messageId),format.raw/*50.110*/(""")">Edit</button>
+                        <button class="save-button" type="submit" style="display:none;">Save</button>
+                    </div>
+                </form>
+                <form class="delete-tweet-form" method="post" action=""""),_display_(/*54.72*/routes/*54.78*/.tweet.deleteTweet),format.raw/*54.96*/("""">
+                    """),_display_(/*55.22*/helper/*55.28*/.CSRF.formField),format.raw/*55.43*/("""
+                    """),format.raw/*56.21*/("""<input type="hidden" name="deleteTweet" value=""""),_display_(/*56.69*/message/*56.76*/.text),format.raw/*56.81*/("""">
+                    <button class="delete-button" type="submit">Delete</button>
+                </form>
+
+            </li>
+            """)))}),format.raw/*61.14*/("""
+        """),format.raw/*62.9*/("""</ul>
+    </div>
 </div>
+
+<a class="logout" href=""""),_display_(/*66.26*/routes/*66.32*/.tweet.logout),format.raw/*66.45*/("""">Logout</a>
+<a class="home" href=""""),_display_(/*67.24*/routes/*67.30*/.tweet.home),format.raw/*67.41*/("""">Home</a>
+
+<script>
+      function toggleEditField(messageId) """),format.raw/*70.43*/("""{"""),format.raw/*70.44*/("""
+      """),format.raw/*71.7*/("""var messageTextElement = document.getElementById('message-' + messageId);
+      var inputField = document.querySelector('input[name="editTweetText"][value="' + messageTextElement.textContent + '"]');
+      var saveButton = document.querySelector('input[name="editTweetId"][value="' + messageId + '"]').parentNode.querySelector('.save-button');
+      var cancelButton = document.querySelector('input[name="editTweetId"][value="' + messageId + '"]').parentNode.querySelector('.edit-button');
+
+      if (inputField.style.display === "none") """),format.raw/*76.48*/("""{"""),format.raw/*76.49*/("""
+        """),format.raw/*77.9*/("""inputField.style.display = "inline-block";
+        saveButton.style.display = "inline-block";
+        cancelButton.textContent = "Cancel";
+        messageTextElement.style.display = "none";
+      """),format.raw/*81.7*/("""}"""),format.raw/*81.8*/(""" """),format.raw/*81.9*/("""else """),format.raw/*81.14*/("""{"""),format.raw/*81.15*/("""
+        """),format.raw/*82.9*/("""inputField.style.display = "none";
+        saveButton.style.display = "none";
+        cancelButton.textContent = "Edit";
+        messageTextElement.style.display = "inline";
+      """),format.raw/*86.7*/("""}"""),format.raw/*86.8*/("""
+    """),format.raw/*87.5*/("""}"""),format.raw/*87.6*/("""
+
+"""),format.raw/*89.1*/("""</script>
+
+<footer class="footer">
+    <p>&copy; 2023 Luna. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
 """))
@@ -107,9 +135,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/profile.scala.html
-                  HASH: c292852d388c74d60f908073103056b82102b64f
-                  MATRIX: 807->1|1043->144|1070->145|1169->219|1208->243|1246->244|1273->245|1302->249|1328->255|1363->261|1392->263|1438->283|1478->307|1517->308|1545->309|1575->313|1602->319|1638->325|1667->327|1703->337|1741->359|1781->361|1813->366|1884->410|1900->417|1931->427|1961->430|1977->437|2003->442|2079->491|2094->497|2131->513|2174->529|2189->535|2225->550|2266->563|2341->611|2357->618|2388->628|2478->691|2494->698|2520->703|2632->788|2648->795|2679->805|2846->945|2861->951|2900->969|2943->985|2958->991|2994->1006|3035->1019|3110->1067|3126->1074|3152->1079|3266->1163|3299->1169|3380->1222|3409->1223|3450->1236|3917->1675|3946->1676|3991->1693|4300->1974|4329->1975|4358->1976|4391->1981|4420->1982|4465->1999|4703->2209|4732->2210|4768->2219|4797->2220|4829->2225|4894->2263|4909->2269|4943->2282|5023->2335|5038->2341|5070->2352
-                  LINES: 21->1|26->2|27->3|31->7|31->7|31->7|32->8|32->8|32->8|33->9|35->11|36->12|36->12|36->12|37->13|37->13|37->13|38->14|40->16|41->17|41->17|41->17|42->18|43->19|43->19|43->19|43->19|43->19|43->19|44->20|44->20|44->20|45->21|45->21|45->21|46->22|46->22|46->22|46->22|47->23|47->23|47->23|48->24|48->24|48->24|51->27|51->27|51->27|52->28|52->28|52->28|53->29|53->29|53->29|53->29|57->33|59->35|60->36|60->36|61->37|67->43|67->43|68->44|73->49|73->49|73->49|73->49|73->49|74->50|78->54|78->54|79->55|79->55|80->56|85->61|85->61|85->61|89->65|89->65|89->65
+                  HASH: 1f80499afa1deb1e5c89dc205ac1eda97bad70f5
+                  MATRIX: 807->1|1043->144|1070->145|1521->570|1561->594|1600->595|1632->600|1700->641|1727->647|1778->668|1806->669|1925->762|1965->786|2004->787|2036->792|2104->833|2131->839|2182->860|2210->861|2349->973|2387->995|2427->997|2468->1010|2639->1154|2655->1161|2686->1171|2716->1174|2733->1181|2760->1186|2886->1285|2901->1291|2938->1307|2989->1331|3004->1337|3040->1352|3089->1373|3164->1421|3180->1428|3211->1438|3334->1534|3351->1541|3378->1546|3573->1714|3590->1721|3622->1731|3890->1972|3905->1978|3944->1996|3995->2020|4010->2026|4046->2041|4095->2062|4170->2110|4186->2117|4212->2122|4382->2261|4418->2270|4495->2320|4510->2326|4544->2339|4607->2375|4622->2381|4654->2392|4745->2455|4774->2456|4808->2463|5374->3001|5403->3002|5439->3011|5662->3207|5690->3208|5718->3209|5751->3214|5780->3215|5816->3224|6023->3404|6051->3405|6083->3410|6111->3411|6140->3413
+                  LINES: 21->1|26->2|27->3|45->21|45->21|45->21|46->22|47->23|47->23|49->25|50->26|54->30|54->30|54->30|55->31|56->32|56->32|58->34|59->35|64->40|64->40|64->40|65->41|67->43|67->43|67->43|67->43|67->43|67->43|69->45|69->45|69->45|70->46|70->46|70->46|71->47|71->47|71->47|71->47|72->48|72->48|72->48|74->50|74->50|74->50|78->54|78->54|78->54|79->55|79->55|79->55|80->56|80->56|80->56|80->56|85->61|86->62|90->66|90->66|90->66|91->67|91->67|91->67|94->70|94->70|95->71|100->76|100->76|101->77|105->81|105->81|105->81|105->81|105->81|106->82|110->86|110->86|111->87|111->87|113->89
                   -- GENERATED --
               */
           

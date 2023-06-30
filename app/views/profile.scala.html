@@ -1,68 +1,96 @@
 @(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], followers:Seq[String])(implicit request: MessagesRequestHeader, flash: Flash)
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Luna | Profile</title>
+    <link rel="stylesheet" href="/assets/stylesheets/profile.css">
+</head>
 <body>
-<h1>Hello, Welcome to your profile</h1>
-<h3>Following</h3>
-@for(people <- following){
-<p>@people</p>
-}
+<header class="header-style">
+    <h1>Hello, Welcome to your profile</h1>
+</header>
 
-<h3>Followers</h3>
-@for(people <- followers){
-<p>@people</p>
-}
+<div class="logo">
+    <img src="/assets/images/luna_logo.png">
+</div>
 
-<ul>
-    @for(message <- tweets) {
-    <li>
-        <p>Message: <span id="message-@message.messageId">@message.text</span></p>
-        <form method="post" action="@routes.tweet.editTweet">
-            @helper.CSRF.formField
-            <input type="hidden" name="editTweetId" value="@message.messageId">
-            <input type="text" name="editTweetText" value="@message.text" style="display:none;">
-            <button type="button" onclick="toggleEditField(@message.messageId)">Edit</button>
-            <button type="submit" style="display:none;">Save</button>
-        </form>
-        <form method="post" action="@routes.tweet.deleteTweet">
-            @helper.CSRF.formField
-            <input type="hidden" name="deleteTweet" value="@message.text">
-            <button type="submit">Delete</button>
-        </form>
-    </li>
+<div class="followers-section">
+    <h3 class="followers-header">Followers</h3>
+    @for(people <- followers){
+    <div class="followers-item">
+        <p>@people</p>
+    </div>
+    }
+</div>
+
+<div class="following-section">
+    <h3 class="following-header">Following</h3>
+    @for(people <- following){
+    <div class="following-item">
+        <p>@people</p>
+    </div>
+    }
+</div>
+
+<div class="tweets-container">
+    <div class="container">
+        <ul class="tweet-list">
+            @for(message <- tweets) {
+            <li class="tweet-item">
+                <div class="message-container">
+                    <p class="message-text">Message: <span id="message-@message.messageId">@message.text</span></p>
+                </div>
+                <form class="tweet-form" method="post" action="@routes.tweet.editTweet">
+                    @helper.CSRF.formField
+                    <input type="hidden" name="editTweetId" value="@message.messageId">
+                    <input class="edit-tweet-input" type="text" name="editTweetText" value="@message.text" style="display:none;">
+                    <div class="button-container">
+                        <button class="edit-button" type="button" onclick="toggleEditField(@message.messageId)">Edit</button>
+                        <button class="save-button" type="submit" style="display:none;">Save</button>
+                    </div>
+                </form>
+                <form class="delete-tweet-form" method="post" action="@routes.tweet.deleteTweet">
+                    @helper.CSRF.formField
+                    <input type="hidden" name="deleteTweet" value="@message.text">
+                    <button class="delete-button" type="submit">Delete</button>
+                </form>
+
+            </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<a class="logout" href="@routes.tweet.logout">Logout</a>
+<a class="home" href="@routes.tweet.home">Home</a>
+
+<script>
+      function toggleEditField(messageId) {
+      var messageTextElement = document.getElementById('message-' + messageId);
+      var inputField = document.querySelector('input[name="editTweetText"][value="' + messageTextElement.textContent + '"]');
+      var saveButton = document.querySelector('input[name="editTweetId"][value="' + messageId + '"]').parentNode.querySelector('.save-button');
+      var cancelButton = document.querySelector('input[name="editTweetId"][value="' + messageId + '"]').parentNode.querySelector('.edit-button');
+
+      if (inputField.style.display === "none") {
+        inputField.style.display = "inline-block";
+        saveButton.style.display = "inline-block";
+        cancelButton.textContent = "Cancel";
+        messageTextElement.style.display = "none";
+      } else {
+        inputField.style.display = "none";
+        saveButton.style.display = "none";
+        cancelButton.textContent = "Edit";
+        messageTextElement.style.display = "inline";
+      }
     }
 
-    <script>
-        function toggleEditField(messageId) {
-            var messageTextElement = document.getElementById('message-' + messageId);
-            var inputField = document.querySelector('input[name="editTweetText"]');
-            var saveButton = document.querySelector('button[type="submit"]');
-            var cancelButton = document.querySelector('button[type="button"]');
-            var currentMessageText = messageTextElement.textContent;
+</script>
 
-            if (inputField.style.display === "none") {
-                inputField.value = currentMessageText;
-                inputField.style.display = "inline-block";
-                saveButton.style.display = "inline-block";
-                cancelButton.textContent = "Cancel";
-                messageTextElement.style.display = "none";
-            } else {
-                inputField.style.display = "none";
-                saveButton.style.display = "none";
-                cancelButton.textContent = "Edit";
-                messageTextElement.style.display = "inline";
-            }
-        }
-    </script>
-</ul>
+<footer class="footer">
+    <p>&copy; 2023 Luna. All rights reserved.</p>
+</footer>
 
-
-<div>
-    <a href="@routes.tweet.logout" id="logout">Logout</a>
-</div>
-
-<div>
-    <a href="@routes.tweet.home" id="home">Home</a>
-</div>
 </body>
 </html>
