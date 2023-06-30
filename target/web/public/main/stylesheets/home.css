@@ -1,0 +1,161 @@
+body {
+    background-color: #1f0036;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tweet-form {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tweet-form input[type="text"] {
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #6a5cd0;
+    border-radius: 5px;
+}
+
+.tweet-form button {
+    background-color: #6a5cd0;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tweet-form button:hover {
+    background-color: #4a40a0;
+}
+
+.tweets {
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.tweets h2 {
+    color: #1f0036;
+}
+
+.tweets ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tweets li {
+    margin-bottom: 20px;
+}
+
+.tweet-container {
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.message-text {
+    color: #1f0036;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: Helvetica;
+}
+
+.message {
+    color: #1f0036;
+}
+
+.user-message {
+    display: inline-block;
+}
+
+.user {
+    color: #6a5cd0;
+        font-style: italic;
+        margin-right: 10px;
+}
+
+.search-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-section input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #6a5cd0;
+    border-radius: 5px;
+}
+
+.search-section button {
+    background-color: #6a5cd0;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-section button:hover {
+    background-color: #4a40a0;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+.profile-visit {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size:20px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.logout {
+    position: absolute;
+    top: 20px;
+    right: 120px;
+    font-size:20px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.profile-visit:hover, .logout:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logo img {
+    width: 100px;
+    border-radius:5px;
+}

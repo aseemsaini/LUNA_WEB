@@ -33,6 +33,7 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
   private var searchUser = ""
 
   def home = Action.async { implicit request =>
+    request.session.get("username").map { username =>
     val limit = 10
     val messagesWithUsers: Future[Seq[(MessagesRow, UsersRow)]] = model.getMessagesWithUsers(limit)
 
@@ -41,6 +42,9 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
       val users: Seq[UsersRow] = messagesAndUsers.map { case (_, user) => user }
       //val likes: Seq[MessagesRow] = messagesAndUsers.map (_,likes) => likes}
       Ok(views.html.home(messages, users))
+    }
+    }.getOrElse {
+      Future.successful(Redirect(routes.tweet.login))
     }
   }
 

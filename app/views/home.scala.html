@@ -4,60 +4,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="/assets/stylesheets/index.css">
+    <title>Luna | Home</title>
+    <link rel="stylesheet" href="/assets/stylesheets/home.css">
 </head>
 <body>
-<h2>Welcome To Luna</h2>
+<header>
+    <h1>Welcome To Luna</h1>
+</header>
 
-
-<form method="post" action="@routes.tweet.addTweet">
-    @helper.CSRF.formField
-    <div>
-        <input type="text" name="newTweet">
-        <button type="submit">Post Tweet</button>
-    </div>
-</form>
-
-
-<h3>Last 10 Messages:</h3>
-<ul>
-    @for(message <- messages) {
-    <li>
-        <p>Message: @message.text</p>
-        <p>User: @users.find(_.id == message.userId).map(_.username).getOrElse("")</p>
-    </li>
-    }
-</ul>
-
-<form method="get" action="@routes.tweet.searchProfile">
-    <div id ="uSearch">
-        <label>
-            <input type="text" name="search">
-            <button type="submit">Search for User</button>
-        </label>
-    </div>
-</form>
-
-<form method="get" action="@routes.tweet.searchMessage">
-    <div id ="mSearch">
-        <label>
-            <input type="text" name="messageSearch">
-            <button type="submit">Search for Message</button>
-        </label>
-    </div>
-</form>
-
-
-
-<div>
-    <a href="@routes.tweet.logout" id="logout">Logout</a>
+<div class="logo">
+    <img src="/assets/images/luna_logo.png">
 </div>
 
-<div>
-    <a href="@routes.tweet.showProfile" id="profile">Profile</a>
+<div class="container">
+    <div class="tweet-form">
+        <form method="post" action="@routes.tweet.addTweet">
+            @helper.CSRF.formField
+            <div>
+                <input type="text" name="newTweet" placeholder="What's on your mind?">
+                <button type="submit">Post Tweet</button>
+            </div>
+        </form>
+    </div>
+
+    <section class="tweets">
+        <h2>See what the world is Tweeting</h2>
+        <ul>
+            @for(message <- messages) {
+            <li>
+                <div class="tweet-container">
+                    <p class="user-message">
+                        <span class="user">@users.find(_.id == message.userId).map(_.username).getOrElse("")</span>
+                        <span class="message">@message.text</span>
+                    </p>
+                </div>
+            </li>
+            }
+        </ul>
+    </section>
+
+    <section class="search-section">
+        <form method="get" action="@routes.tweet.searchProfile">
+            <div class="search-profile">
+                <input type="text" name="search" placeholder="Search for User">
+                <button type="submit">Search</button>
+            </div>
+        </form>
+
+        <form method="get" action="@routes.tweet.searchMessage">
+            <div class="search-message">
+                <input type="text" name="messageSearch" placeholder="Search for Message">
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="company-section">
+        <!-- Display company images/messages or other content here -->
+    </section>
 </div>
 
+<footer class="footer">
+    <p>&copy; 2023 Luna. All rights reserved.</p>
+</footer>
+
+<a class="profile-visit" href="@routes.tweet.showProfile">Profile</a>
+<a class="logout" href="@routes.tweet.logout">Logout</a>
 
 </body>
 </html>

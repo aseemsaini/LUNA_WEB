@@ -1,4 +1,10 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/profile.scala.html:39:36: not found: value message[0m
-[0m[[0m[31merror[0m] [0m[0m              inputField.value = "@message.text";[0m
-[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/home.scala.html:25:30: Cannot find any HTTP Request Header here[0m
+[0m[[0m[31merror[0m] [0m[0m                @helper.CSRF.formField[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/home.scala.html:36:33: not found: value messages[0m
+[0m[[0m[31merror[0m] [0m[0m                @for(message <- messages) {[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/home.scala.html:40:49: not found: value users[0m
+[0m[[0m[31merror[0m] [0m[0m                            <span class="user">@users.find(_.id == message.userId).map(_.username).getOrElse("")</span>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m

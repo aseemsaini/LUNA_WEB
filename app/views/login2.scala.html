@@ -7,38 +7,37 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="/assets/stylesheets/index.css">
-
 </head>
 <body>
 <div class="container">
     @helper.form(action = routes.tweet.createUserForm) {
     @helper.CSRF.formField
     <div class="login-form">
-        <form action="routes.tweet.createUserForm">
-            <h3>Create User with LUNA</h3>
-            <div class="form-group">
-
-                @helper.inputText(loginForm("Username"))
-            </div>
-            <div class="form-group">
-
-                @helper.inputPassword(loginForm("Password"))
-            </div>
-            <div class="form-actions">
-                <button type="submit">Login</button>
-            </div>
-        </form>
-        @flash.get("error").map { error =>
-        <div class="flash-error">
-            @error
+        <div class="image-container">
+            <img src="/assets/images/luna.png">
         </div>
-        }
-        @flash.get("Done").map { message =>
-        <div class="flash-success">
-            @message
+        <h3>LUNA</h3>
+        <div class="form-group">
+            @helper.inputText(loginForm("Username"), Symbol("maxlength") -> None, Symbol("minlength") -> None, Symbol("class") -> "hidden-input")
         </div>
-        }
-    </div> }
+        <div class="form-group">
+            @helper.inputPassword(loginForm("Password"), Symbol("maxlength") -> None, Symbol("minlength") -> None, Symbol("class") -> "hidden-input")
+        </div>
+        <div class="form-actions">
+            <button type="submit">Login</button>
+        </div>
+    </div>
+    }
+    @flash.get("error").map { error =>
+    <div class="flash-error">
+        @error
+    </div>
+    }
+    @flash.get("Done").map { message =>
+    <div class="flash-success">
+        @message
+    </div>
+    }
 </div>
 </body>
 </html>
