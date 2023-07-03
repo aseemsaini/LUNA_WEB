@@ -106,6 +106,12 @@ package controllers {
       Call("POST", _prefix + { _defaultPrefix } + "tweet")
     }
   
+    // @LINE:34
+    def likeTweet: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "like")
+    }
+  
     // @LINE:24
     def showProfile: Call = {
       

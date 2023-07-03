@@ -48,23 +48,19 @@ h1 {
 
 }
 
-.tweet-form button:hover {
-    background-color: #4a40a0;
+
+.delete-button {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.tweet-form .delete-button {
-  background-color: #ff0000;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+.delete-button:hover {
+    background-color: #cc0000;
 }
-
-.tweet-form .delete-button:hover {
-  background-color: #cc0000;
-}
-
 
 
 .tweets {
@@ -194,7 +190,6 @@ margin-left: 125x;
   display: inline-block;
 
 }
-
 
 .followers-item,
 .following-item {

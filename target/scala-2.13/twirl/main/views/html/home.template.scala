@@ -15,10 +15,10 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object home extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template4[Seq[Models.Tables.MessagesRow],Seq[Models.Tables.UsersRow],MessagesRequestHeader,Flash,play.twirl.api.HtmlFormat.Appendable] {
+object home extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template5[Seq[Models.Tables.MessagesRow],Seq[Models.Tables.UsersRow],Seq[Int],MessagesRequestHeader,Flash,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(messages: Seq[Models.Tables.MessagesRow], users: Seq[Models.Tables.UsersRow])(implicit request: MessagesRequestHeader, flash: Flash):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(messages: Seq[Models.Tables.MessagesRow], users: Seq[Models.Tables.UsersRow], likes:Seq[Int])(implicit request: MessagesRequestHeader, flash: Flash):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
@@ -52,30 +52,36 @@ Seq[Any](format.raw/*2.1*/("""
     </div>
 
     <section class="tweets">
-        <h2>See what the world is Tweeting</h2>
+        <h2 class = "topic">See what the world is Tweeting</h2>
         <ul>
-            """),_display_(/*33.14*/for(message <- messages) yield /*33.38*/ {_display_(Seq[Any](format.raw/*33.40*/("""
+            """),_display_(/*33.14*/for((message, index) <- messages.zipWithIndex) yield /*33.60*/ {_display_(Seq[Any](format.raw/*33.62*/("""
             """),format.raw/*34.13*/("""<li>
                 <div class="tweet-container">
                     <p class="user-message">
                         <span class="user">"""),_display_(/*37.45*/users/*37.50*/.find(_.id == message.userId).map(_.username).getOrElse("")),format.raw/*37.109*/("""</span>
                         <span class="message">"""),_display_(/*38.48*/message/*38.55*/.text),format.raw/*38.60*/("""</span>
+                        <span class="likes">"""),_display_(/*39.46*/likes(index)),format.raw/*39.58*/("""</span>
+                    <form class="like-form" method="get" action=""""),_display_(/*40.67*/routes/*40.73*/.tweet.likeTweet),format.raw/*40.89*/("""">
+                        """),_display_(/*41.26*/helper/*41.32*/.CSRF.formField),format.raw/*41.47*/("""
+                        """),format.raw/*42.25*/("""<input type="hidden" name="tweetId" value=""""),_display_(/*42.69*/message/*42.76*/.messageId),format.raw/*42.86*/("""">
+                        <button class="like-button" type="like">Like</button>
+                    </form>
                     </p>
                 </div>
             </li>
-            """)))}),format.raw/*42.14*/("""
-        """),format.raw/*43.9*/("""</ul>
+            """)))}),format.raw/*48.14*/("""
+        """),format.raw/*49.9*/("""</ul>
     </section>
 
     <section class="search-section">
-        <form method="get" action=""""),_display_(/*47.37*/routes/*47.43*/.tweet.searchProfile),format.raw/*47.63*/("""">
+        <form method="get" action=""""),_display_(/*53.37*/routes/*53.43*/.tweet.searchProfile),format.raw/*53.63*/("""">
             <div class="search-profile">
                 <input type="text" name="search" placeholder="Search for User">
                 <button type="submit">Search</button>
             </div>
         </form>
 
-        <form method="get" action=""""),_display_(/*54.37*/routes/*54.43*/.tweet.searchMessage),format.raw/*54.63*/("""">
+        <form method="get" action=""""),_display_(/*60.37*/routes/*60.43*/.tweet.searchMessage),format.raw/*60.63*/("""">
             <div class="search-message">
                 <input type="text" name="messageSearch" placeholder="Search for Message">
                 <button type="submit">Search</button>
@@ -89,8 +95,8 @@ Seq[Any](format.raw/*2.1*/("""
     <p>&copy; 2023 Luna. All rights reserved.</p>
 </footer>
 
-<a class="profile-visit" href=""""),_display_(/*68.33*/routes/*68.39*/.tweet.showProfile),format.raw/*68.57*/("""">Profile</a>
-<a class="logout" href=""""),_display_(/*69.26*/routes/*69.32*/.tweet.logout),format.raw/*69.45*/("""">Logout</a>
+<a class="profile-visit" href=""""),_display_(/*74.33*/routes/*74.39*/.tweet.showProfile),format.raw/*74.57*/("""">Profile</a>
+<a class="logout" href=""""),_display_(/*75.26*/routes/*75.32*/.tweet.logout),format.raw/*75.45*/("""">Logout</a>
 
 </body>
 </html>
@@ -99,9 +105,9 @@ Seq[Any](format.raw/*2.1*/("""
     }
   }
 
-  def render(messages:Seq[Models.Tables.MessagesRow],users:Seq[Models.Tables.UsersRow],request:MessagesRequestHeader,flash:Flash): play.twirl.api.HtmlFormat.Appendable = apply(messages,users)(request,flash)
+  def render(messages:Seq[Models.Tables.MessagesRow],users:Seq[Models.Tables.UsersRow],likes:Seq[Int],request:MessagesRequestHeader,flash:Flash): play.twirl.api.HtmlFormat.Appendable = apply(messages,users,likes)(request,flash)
 
-  def f:((Seq[Models.Tables.MessagesRow],Seq[Models.Tables.UsersRow]) => (MessagesRequestHeader,Flash) => play.twirl.api.HtmlFormat.Appendable) = (messages,users) => (request,flash) => apply(messages,users)(request,flash)
+  def f:((Seq[Models.Tables.MessagesRow],Seq[Models.Tables.UsersRow],Seq[Int]) => (MessagesRequestHeader,Flash) => play.twirl.api.HtmlFormat.Appendable) = (messages,users,likes) => (request,flash) => apply(messages,users,likes)(request,flash)
 
   def ref: this.type = this
 
@@ -111,9 +117,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/home.scala.html
-                  HASH: eeffad6ede3d4eff26aef564ff4ff1469a8a40dd
-                  MATRIX: 808->1|1035->135|1062->136|1477->524|1492->530|1528->545|1571->561|1586->567|1622->582|1663->595|1991->896|2031->920|2071->922|2112->935|2279->1075|2293->1080|2374->1139|2456->1194|2472->1201|2498->1206|2616->1293|2652->1302|2774->1397|2789->1403|2830->1423|3107->1673|3122->1679|3163->1699|3554->2063|3569->2069|3608->2087|3674->2126|3689->2132|3723->2145
-                  LINES: 21->1|26->2|27->3|45->21|45->21|45->21|46->22|46->22|46->22|47->23|57->33|57->33|57->33|58->34|61->37|61->37|61->37|62->38|62->38|62->38|66->42|67->43|71->47|71->47|71->47|78->54|78->54|78->54|92->68|92->68|92->68|93->69|93->69|93->69
+                  HASH: 05213e93166b8edfd96e014a7a4340ab37558716
+                  MATRIX: 817->1|1060->151|1087->152|1502->540|1517->546|1553->561|1596->577|1611->583|1647->598|1688->611|2032->928|2094->974|2134->976|2175->989|2342->1129|2356->1134|2437->1193|2519->1248|2535->1255|2561->1260|2641->1313|2674->1325|2775->1399|2790->1405|2827->1421|2882->1449|2897->1455|2933->1470|2986->1495|3057->1539|3073->1546|3104->1556|3323->1744|3359->1753|3481->1848|3496->1854|3537->1874|3814->2124|3829->2130|3870->2150|4261->2514|4276->2520|4315->2538|4381->2577|4396->2583|4430->2596
+                  LINES: 21->1|26->2|27->3|45->21|45->21|45->21|46->22|46->22|46->22|47->23|57->33|57->33|57->33|58->34|61->37|61->37|61->37|62->38|62->38|62->38|63->39|63->39|64->40|64->40|64->40|65->41|65->41|65->41|66->42|66->42|66->42|66->42|72->48|73->49|77->53|77->53|77->53|84->60|84->60|84->60|98->74|98->74|98->74|99->75|99->75|99->75
                   -- GENERATED --
               */
           

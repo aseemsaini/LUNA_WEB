@@ -61,6 +61,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """unfollow""", """controllers.tweet.unfollow"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """searchMessage""", """controllers.tweet.searchMessage"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """editmessage""", """controllers.tweet.editTweet"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """like""", """controllers.tweet.likeTweet"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -339,6 +340,24 @@ class Routes(
     )
   )
 
+  // @LINE:34
+  private[this] lazy val controllers_tweet_likeTweet15_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("like")))
+  )
+  private[this] lazy val controllers_tweet_likeTweet15_invoker = createInvoker(
+    tweet_2.likeTweet,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
+      "likeTweet",
+      Nil,
+      "GET",
+      this.prefix + """like""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -430,6 +449,12 @@ class Routes(
     case controllers_tweet_editTweet14_route(params@_) =>
       call { 
         controllers_tweet_editTweet14_invoker.call(tweet_2.editTweet)
+      }
+  
+    // @LINE:34
+    case controllers_tweet_likeTweet15_route(params@_) =>
+      call { 
+        controllers_tweet_likeTweet15_invoker.call(tweet_2.likeTweet)
       }
   }
 }

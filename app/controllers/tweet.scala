@@ -35,13 +35,13 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
   def home = Action.async { implicit request =>
     request.session.get("username").map { username =>
     val limit = 10
-    val messagesWithUsers: Future[Seq[(MessagesRow, UsersRow)]] = model.getMessagesWithUsers(limit)
-
+    val messagesWithUsers: Future[Seq[(MessagesRow, UsersRow, Int)]] = model.getMessagesWithUsers(limit)
     messagesWithUsers.map { messagesAndUsers =>
-      val messages: Seq[MessagesRow] = messagesAndUsers.map { case (message, _) => message }
-      val users: Seq[UsersRow] = messagesAndUsers.map { case (_, user) => user }
+      val messages: Seq[MessagesRow] = messagesAndUsers.map { case (message, _, _) => message }
+      val users: Seq[UsersRow] = messagesAndUsers.map { case (_, user, _) => user }
+      val likes: Seq[Int] = messagesAndUsers.map { case(_, _,like) => like }
       //val likes: Seq[MessagesRow] = messagesAndUsers.map (_,likes) => likes}
-      Ok(views.html.home(messages, users))
+      Ok(views.html.home(messages, users, likes))
     }
     }.getOrElse {
       Future.successful(Redirect(routes.tweet.login))
@@ -206,6 +206,23 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         Ok(s"<h1>Matching Message: $extractedMessage</h1>\n<h2>User: $extractedUser</h2>").as(HTML)
     }(ec)
   }
+
+  def likeTweet: Action[AnyContent] = Action.async { implicit request =>
+    val likeOption = request.queryString.get("tweetId").flatMap(_.headOption).map(_.toLong)
+    likeOption match {
+      case Some(tweetId) =>
+        val likesFuture = model.getLikes(tweetId)
+        likesFuture.flatMap { likes =>
+          val incrementLikesFuture: Future[Unit] = model.likeInc(tweetId, likes)
+          incrementLikesFuture.map { _ =>
+            Redirect(routes.tweet.home)
+          }(ec)
+        }(ec)
+      case None =>
+        Future.successful(BadRequest("Invalid tweetId"))
+    }
+  }
+
 
 
 }

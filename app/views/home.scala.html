@@ -1,4 +1,4 @@
-@(messages: Seq[Models.Tables.MessagesRow], users: Seq[Models.Tables.UsersRow])(implicit request: MessagesRequestHeader, flash: Flash)
+@(messages: Seq[Models.Tables.MessagesRow], users: Seq[Models.Tables.UsersRow], likes:Seq[Int])(implicit request: MessagesRequestHeader, flash: Flash)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,14 +28,20 @@
     </div>
 
     <section class="tweets">
-        <h2>See what the world is Tweeting</h2>
+        <h2 class = "topic">See what the world is Tweeting</h2>
         <ul>
-            @for(message <- messages) {
+            @for((message, index) <- messages.zipWithIndex) {
             <li>
                 <div class="tweet-container">
                     <p class="user-message">
                         <span class="user">@users.find(_.id == message.userId).map(_.username).getOrElse("")</span>
                         <span class="message">@message.text</span>
+                        <span class="likes">@likes(index)</span>
+                    <form class="like-form" method="get" action="@routes.tweet.likeTweet">
+                        @helper.CSRF.formField
+                        <input type="hidden" name="tweetId" value="@message.messageId">
+                        <button class="like-button" type="like">Like</button>
+                    </form>
                     </p>
                 </div>
             </li>

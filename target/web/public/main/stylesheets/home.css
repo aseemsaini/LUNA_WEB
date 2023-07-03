@@ -85,6 +85,13 @@ h1 {
 .message {
     color: #1f0036;
 }
+.likes {
+    color: #ffffff;
+    position: absolute;
+    right: 0;
+}
+
+
 
 .user-message {
     display: inline-block;
@@ -126,6 +133,10 @@ h1 {
     text-align: center;
     margin-top: 20px;
     font-size: 12px;
+}
+
+.topic {
+    text-align:center;
 }
 
 .profile-visit {

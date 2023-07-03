@@ -157,6 +157,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:34
+    def likeTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.likeTweet",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "like"})
+        }
+      """
+    )
+  
     // @LINE:24
     def showProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.showProfile",

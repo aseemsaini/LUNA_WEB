@@ -21,12 +21,24 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     db.run(Users += UsersRow(-1, username, hashedPassword)).map(_ => ())
   }
 
-  def getMessagesWithUsers(limit: Int): Future[Seq[(MessagesRow, UsersRow)]] = {
+
+  def getMessagesWithUsers(limit: Int): Future[Seq[(MessagesRow, UsersRow, Int)]] = {
     val query = for {
-      (message, user) <- Messages.sortBy(_.createdAt.desc.nullsLast).take(limit) join Users on (_.userId === _.id.asColumnOf[Int])
-    } yield (message, user)
+      ((message, user), likeCount) <- Messages
+        .sortBy(_.createdAt.desc.nullsLast)
+        .take(limit)
+        .join(Users)
+        .on(_.userId === _.id.asColumnOf[Int])
+        .joinLeft(Messages
+          .groupBy(_.messageId)
+          .map { case (messageId, group) => (messageId, group.map(_.likes).sum) }
+        )
+        .on(_._1.messageId === _._1)
+    } yield (message, user, likeCount.flatMap(_._2).getOrElse(0))
+
     db.run(query.result)
   }
+
 
   def getTweets(username: String): Future[Seq[MessagesRow]] = {
     val query = for {
@@ -35,6 +47,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     } yield messages
     db.run(query.sortBy(_.createdAt.desc.nullsLast).result)
   }
+
 
   def addTweet(username: String, message: String): Future[Unit] = {
     val userID = Users.filter(_.username === username).map(_.id).result.head
@@ -142,5 +155,19 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     val query = Messages.filter(_.messageId === messageID).map(_.text).update(message)
     db.run(query).map(_ => ())
   }
+
+  def likeInc(message_id:Long, like:Int):Future[Unit] = {
+    val likeAdder = like + 1
+    val query = Messages.filter(_.messageId === message_id)
+      .map(_.likes).update(likeAdder)
+    db.run(query).map(_ => ())
+  }
+
+  def getLikes(message_id:Long):Future[Int] = {
+    val query = Messages.filter(_.messageId === message_id).map(_.likes).result.headOption
+    db.run(query).map(_.getOrElse(0))
+  }
+
+
 }
 
