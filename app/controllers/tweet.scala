@@ -7,10 +7,14 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
+
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
 import Models.Tables.{FollowersRow, MessagesRow, UsersRow}
+
 import slick.jdbc.MySQLProfile.api._
+import java.sql.Timestamp
+
 import javax.inject._
 import scala.concurrent.Future
 
@@ -35,13 +39,14 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
   def home = Action.async { implicit request =>
     request.session.get("username").map { username =>
     val limit = 10
-    val messagesWithUsers: Future[Seq[(MessagesRow, UsersRow, Int)]] = model.getMessagesWithUsers(limit)
+    val messagesWithUsers: Future[Seq[(MessagesRow, UsersRow, Int, Timestamp)]] = model.getMessagesWithUsers(limit)
     messagesWithUsers.map { messagesAndUsers =>
-      val messages: Seq[MessagesRow] = messagesAndUsers.map { case (message, _, _) => message }
-      val users: Seq[UsersRow] = messagesAndUsers.map { case (_, user, _) => user }
-      val likes: Seq[Int] = messagesAndUsers.map { case(_, _,like) => like }
+      val messages: Seq[MessagesRow] = messagesAndUsers.map { case (message, _, _, _) => message }
+      val users: Seq[UsersRow] = messagesAndUsers.map { case (_, user, _, _) => user }
+      val likes: Seq[Int] = messagesAndUsers.map { case(_, _,like, _) => like }
+      val time: Seq[Timestamp] = messagesAndUsers.map {case (_,_,_,time) => time }
       //val likes: Seq[MessagesRow] = messagesAndUsers.map (_,likes) => likes}
-      Ok(views.html.home(messages, users, likes))
+      Ok(views.html.home(messages, users, likes, time))
     }
     }.getOrElse {
       Future.successful(Redirect(routes.tweet.login))
@@ -87,10 +92,14 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         val tweetsFuture: Future[Seq[MessagesRow]] = model.getTweets(username)
         val followingFuture: Future[Seq[String]] = model.getFollowing(username)
         val followerFuture: Future[Seq[String]] = model.getFollowers(username)
+        val likeFuture: Future[Seq[Int]] = model.getLikesByUsername(username)
+        likeFuture.map(hello => println(hello))(ec)
         tweetsFuture.flatMap { tweets =>
           followingFuture.flatMap { following =>
-            followerFuture.map { followers =>
-              Ok(views.html.profile(tweets, following, followers))
+            followerFuture.flatMap { followers =>
+              likeFuture.map { likes =>
+                Ok(views.html.profile(tweets, following, followers, likes))
+              }(ec)
             }(ec)
           }(ec)
         }(ec)

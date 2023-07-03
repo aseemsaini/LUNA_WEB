@@ -22,7 +22,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   }
 
 
-  def getMessagesWithUsers(limit: Int): Future[Seq[(MessagesRow, UsersRow, Int)]] = {
+  def getMessagesWithUsers(limit: Int): Future[Seq[(MessagesRow, UsersRow, Int, Timestamp)]] = {
     val query = for {
       ((message, user), likeCount) <- Messages
         .sortBy(_.createdAt.desc.nullsLast)
@@ -36,7 +36,12 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
         .on(_._1.messageId === _._1)
     } yield (message, user, likeCount.flatMap(_._2).getOrElse(0))
 
-    db.run(query.result)
+    val queryTime = query.joinLeft(Messages)
+      .on(_._1.messageId === _.messageId)
+      .map { case ((message, user, likeCount), messageWithTimestamp) =>
+        (message, user, likeCount, messageWithTimestamp.flatMap(_.createdAt).getOrElse(new Timestamp(0)))
+      }
+    db.run(queryTime.result)
   }
 
 
@@ -45,7 +50,9 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
       userId <- Users.filter(_.username === username).map(_.id)
       messages <- Messages.filter(_.userId === userId.asColumnOf[Int])
     } yield messages
-    db.run(query.sortBy(_.createdAt.desc.nullsLast).result)
+    val query2 = query.sortBy(_.createdAt.asc.nullsLast).result
+    db.run(query2)
+
   }
 
 
@@ -166,6 +173,21 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   def getLikes(message_id:Long):Future[Int] = {
     val query = Messages.filter(_.messageId === message_id).map(_.likes).result.headOption
     db.run(query).map(_.getOrElse(0))
+  }
+
+  def getLikesByUsername(username: String): Future[Seq[Int]] = {
+    val query = for {
+      userId <- Users.filter(_.username === username).map(_.id).result.headOption
+      likes <- userId match {
+        case Some(id) => Messages.filter(_.userId === id.asColumnOf[Int]).map(_.likes).result
+        case None => DBIO.successful(Seq.empty[Int])
+      }
+    } yield likes
+    db.run(query)
+  }
+
+  def getTime(username:String):Future[Seq[Timestamp]] = {
+    ???
   }
 
 

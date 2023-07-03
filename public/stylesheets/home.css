@@ -86,11 +86,25 @@ h1 {
     color: #1f0036;
 }
 .likes {
-    color: #ffffff;
-    position: absolute;
-    right: 0;
+    color: #1f0036;
 }
 
+.like-button {
+  width: 30px;
+  height: 30px;
+  background-image: url("/assets/images/like2.jpg");
+  background-size: cover;
+  background-size:28px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.time {
+  color: #1f0036;
+  margin-left: auto;
+  display: inline-block;
+  float: right;
+}
 
 
 .user-message {

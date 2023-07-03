@@ -1,4 +1,4 @@
-@(messages: Seq[Models.Tables.MessagesRow], users: Seq[Models.Tables.UsersRow], likes:Seq[Int])(implicit request: MessagesRequestHeader, flash: Flash)
+@(messages: Seq[Models.Tables.MessagesRow], users: Seq[Models.Tables.UsersRow], likes:Seq[Int], time: Seq[java.sql.Timestamp])(implicit request: MessagesRequestHeader, flash: Flash)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,12 +36,28 @@
                     <p class="user-message">
                         <span class="user">@users.find(_.id == message.userId).map(_.username).getOrElse("")</span>
                         <span class="message">@message.text</span>
-                        <span class="likes">@likes(index)</span>
+
                     <form class="like-form" method="get" action="@routes.tweet.likeTweet">
                         @helper.CSRF.formField
                         <input type="hidden" name="tweetId" value="@message.messageId">
-                        <button class="like-button" type="like">Like</button>
-                    </form>
+                        <button class="like-button" type="like"></button>
+                        <span class="likes">@likes(index)</span>
+                    <span class="time">
+                      <script>
+                        var timestamp = new Date("@time(index)");
+                        var options = {
+                          day: "2-digit",
+                          month: "long",
+                          year: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        };
+                        var formattedTime = timestamp.toLocaleString("en-US", options);
+                        document.write(formattedTime);
+                      </script>
+                    </span>
+
+                </form>
                     </p>
                 </div>
             </li>

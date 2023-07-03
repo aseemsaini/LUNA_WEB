@@ -1,4 +1,4 @@
-@(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], followers:Seq[String])(implicit request: MessagesRequestHeader, flash: Flash)
+@(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], followers:Seq[String], likes:Seq[Int])(implicit request: MessagesRequestHeader, flash: Flash)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +37,12 @@
 <div class="tweets-container">
     <div class="container">
         <ul class="tweet-list">
-            @for(message <- tweets) {
+            @for(((message, like), index) <- tweets.zip(likes).zipWithIndex) {
             <li class="tweet-item">
                 <div class="message-container">
                     <p class="message-text">Message: <span id="message-@message.messageId">@message.text</span></p>
+                    <p class="likes"><span class="heart"></span> @like</p>
+
                 </div>
                 <form class="tweet-form" method="post" action="@routes.tweet.editTweet">
                     @helper.CSRF.formField
