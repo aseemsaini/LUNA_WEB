@@ -42,6 +42,7 @@
                         <input type="hidden" name="tweetId" value="@message.messageId">
                         <button class="like-button" type="like"></button>
                         <span class="likes">@likes(index)</span>
+
                     <span class="time">
                       <script>
                         var timestamp = new Date("@time(index)");
@@ -56,8 +57,13 @@
                         document.write(formattedTime);
                       </script>
                     </span>
-
                 </form>
+
+                    <form class="retweet-form" method="post" action="@routes.tweet.reTweet">
+                        @helper.CSRF.formField
+                        <input type="hidden" name="reTweetId" value="@message.messageId">
+                        <button class="retweet-button" type="submit">Retweet</button>
+                    </form>
                     </p>
                 </div>
             </li>

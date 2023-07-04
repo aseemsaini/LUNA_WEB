@@ -185,3 +185,23 @@ h1 {
     width: 100px;
     border-radius: 5px;
 }
+
+.retweet-form {
+  margin-right: 10px;
+  margin-top:10px;
+  margin-left:5px;
+}
+
+.retweet-button {
+  background-color: #734F96;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  align:center;
+}
+
+.retweet-button:hover {
+  background-color: #38006d;
+}

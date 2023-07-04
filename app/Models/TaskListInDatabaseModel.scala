@@ -8,7 +8,7 @@ import org.mindrot.jbcrypt.BCrypt
 import Models.Tables._
 import slick.jdbc.MySQLProfile.api._
 
-import java.sql.Timestamp
+import java.sql.{Date, Timestamp}
 
 
 class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
@@ -137,12 +137,12 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     db.run(query)
   }
 
-  def getUserID(username:String):Future[Long] = {
+  def getUserID(username: String): Future[Long] = {
     val userIDquery = Users.filter(_.username === username).map(_.id).result.head
     val result = db.run(userIDquery).map(id => id)
-    println(result)
     result
   }
+
 
   def searchMessageUser(message: String): Future[List[(String, String, Int, Timestamp)]] = {
     val messageQuery = Messages
@@ -199,6 +199,16 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     }yield time.getOrElse(new Timestamp(0))
     db.run(query.result)
   }
+
+  def reTweet(messageId: Long, userId: Long): Future[Unit] = {
+    val query = Messages.filter(_.messageId === messageId).map(_.text).result.head
+    val newMessage = query.flatMap { message =>
+      val messageText = s"Re-Tweet: $message"
+        val messageRow = MessagesRow(-1, userId.toInt, messageText, 0, Some(new Timestamp(System.currentTimeMillis())))
+        Messages += messageRow
+        }
+    db.run(newMessage).map(_ => ())
+    }
 
 
 }

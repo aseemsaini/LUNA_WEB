@@ -38,6 +38,7 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
 
   def home = Action.async { implicit request =>
     request.session.get("username").map { username =>
+      user = username
     val limit = 10
     val messagesWithUsers: Future[Seq[(MessagesRow, UsersRow, Int, Timestamp)]] = model.getMessagesWithUsers(limit)
     messagesWithUsers.map { messagesAndUsers =>
@@ -264,6 +265,21 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         Future.successful(BadRequest("Invalid tweetId"))
     }
   }
+
+  def reTweet = Action.async { implicit request =>
+    val reTweetIdOption = request.body.asFormUrlEncoded.flatMap(_.get("reTweetId").flatMap(_.headOption))
+    reTweetIdOption match {
+      case Some(reTweetId) =>
+        val futureUserId = model.getUserID(user)
+        futureUserId.flatMap { user =>
+          model.reTweet(reTweetId.toLong, user).map { _ =>
+            Redirect(routes.tweet.home)
+          }
+        }
+      case None => Future.successful(BadRequest("Missing reTweetId parameter"))
+    }
+  }
+
 
 
 

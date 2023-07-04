@@ -66,38 +66,44 @@ Seq[Any](format.raw/*2.1*/("""
                         """),format.raw/*42.25*/("""<input type="hidden" name="tweetId" value=""""),_display_(/*42.69*/message/*42.76*/.messageId),format.raw/*42.86*/("""">
                         <button class="like-button" type="like"></button>
                         <span class="likes">"""),_display_(/*44.46*/likes(index)),format.raw/*44.58*/("""</span>
+
                     <span class="time">
                       <script>
-                        var timestamp = new Date(""""),_display_(/*47.52*/time(index)),format.raw/*47.63*/("""");
-                        var options = """),format.raw/*48.39*/("""{"""),format.raw/*48.40*/("""
-                          """),format.raw/*49.27*/("""day: "2-digit",
+                        var timestamp = new Date(""""),_display_(/*48.52*/time(index)),format.raw/*48.63*/("""");
+                        var options = """),format.raw/*49.39*/("""{"""),format.raw/*49.40*/("""
+                          """),format.raw/*50.27*/("""day: "2-digit",
                           month: "long",
                           year: "2-digit",
                           hour: "2-digit",
                           minute: "2-digit",
-                        """),format.raw/*54.25*/("""}"""),format.raw/*54.26*/(""";
+                        """),format.raw/*55.25*/("""}"""),format.raw/*55.26*/(""";
                         var formattedTime = timestamp.toLocaleString("en-UK", options);
                         document.write(formattedTime);
                       </script>
                     </span>
-
                 </form>
+
+                    <form class="retweet-form" method="post" action=""""),_display_(/*62.71*/routes/*62.77*/.tweet.reTweet),format.raw/*62.91*/("""">
+                        """),_display_(/*63.26*/helper/*63.32*/.CSRF.formField),format.raw/*63.47*/("""
+                        """),format.raw/*64.25*/("""<input type="hidden" name="reTweetId" value=""""),_display_(/*64.71*/message/*64.78*/.messageId),format.raw/*64.88*/("""">
+                        <button class="retweet-button" type="submit">Retweet</button>
+                    </form>
                     </p>
                 </div>
             </li>
-            """)))}),format.raw/*64.14*/("""
-        """),format.raw/*65.9*/("""</ul>
+            """)))}),format.raw/*70.14*/("""
+        """),format.raw/*71.9*/("""</ul>
     </section>
 
     <section class="search-section">
-        <form method="get" action=""""),_display_(/*69.37*/routes/*69.43*/.tweet.searchProfile),format.raw/*69.63*/("""">
+        <form method="get" action=""""),_display_(/*75.37*/routes/*75.43*/.tweet.searchProfile),format.raw/*75.63*/("""">
             <div class="search-profile">
                 <input type="text" name="search" placeholder="Search for User">
                 <button type="submit">Search</button>
             </div>
         </form>
 
-        <form method="get" action=""""),_display_(/*76.37*/routes/*76.43*/.tweet.searchMessage),format.raw/*76.63*/("""">
+        <form method="get" action=""""),_display_(/*82.37*/routes/*82.43*/.tweet.searchMessage),format.raw/*82.63*/("""">
             <div class="search-message">
                 <input type="text" name="messageSearch" placeholder="Search for Message">
                 <button type="submit">Search</button>
@@ -111,8 +117,8 @@ Seq[Any](format.raw/*2.1*/("""
     <p>&copy; 2023 Luna. All rights reserved.</p>
 </footer>
 
-<a class="profile-visit" href=""""),_display_(/*90.33*/routes/*90.39*/.tweet.showProfile),format.raw/*90.57*/("""">Profile</a>
-<a class="logout" href=""""),_display_(/*91.26*/routes/*91.32*/.tweet.logout),format.raw/*91.45*/("""">Logout</a>
+<a class="profile-visit" href=""""),_display_(/*96.33*/routes/*96.39*/.tweet.showProfile),format.raw/*96.57*/("""">Profile</a>
+<a class="logout" href=""""),_display_(/*97.26*/routes/*97.32*/.tweet.logout),format.raw/*97.45*/("""">Logout</a>
 
 </body>
 </html>
@@ -133,9 +139,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/home.scala.html
-                  HASH: c08a2e129772f19aeff9d06cdac63558a9c49f92
-                  MATRIX: 841->1|1115->182|1142->183|1557->571|1572->577|1608->592|1651->608|1666->614|1702->629|1743->642|2087->959|2149->1005|2189->1007|2230->1020|2397->1160|2411->1165|2492->1224|2574->1279|2590->1286|2616->1291|2718->1366|2733->1372|2770->1388|2825->1416|2840->1422|2876->1437|2929->1462|3000->1506|3016->1513|3047->1523|3196->1645|3229->1657|3386->1787|3418->1798|3488->1840|3517->1841|3572->1868|3812->2080|3841->2081|4181->2390|4217->2399|4339->2494|4354->2500|4395->2520|4672->2770|4687->2776|4728->2796|5119->3160|5134->3166|5173->3184|5239->3223|5254->3229|5288->3242
-                  LINES: 21->1|26->2|27->3|45->21|45->21|45->21|46->22|46->22|46->22|47->23|57->33|57->33|57->33|58->34|61->37|61->37|61->37|62->38|62->38|62->38|64->40|64->40|64->40|65->41|65->41|65->41|66->42|66->42|66->42|66->42|68->44|68->44|71->47|71->47|72->48|72->48|73->49|78->54|78->54|88->64|89->65|93->69|93->69|93->69|100->76|100->76|100->76|114->90|114->90|114->90|115->91|115->91|115->91
+                  HASH: b83a21aa6ae14282ab027ef7f34d5e58936a3cf6
+                  MATRIX: 841->1|1115->182|1142->183|1557->571|1572->577|1608->592|1651->608|1666->614|1702->629|1743->642|2087->959|2149->1005|2189->1007|2230->1020|2397->1160|2411->1165|2492->1224|2574->1279|2590->1286|2616->1291|2718->1366|2733->1372|2770->1388|2825->1416|2840->1422|2876->1437|2929->1462|3000->1506|3016->1513|3047->1523|3196->1645|3229->1657|3387->1788|3419->1799|3489->1841|3518->1842|3573->1869|3813->2081|3842->2082|4169->2382|4184->2388|4219->2402|4274->2430|4289->2436|4325->2451|4378->2476|4451->2522|4467->2529|4498->2539|4725->2735|4761->2744|4883->2839|4898->2845|4939->2865|5216->3115|5231->3121|5272->3141|5663->3505|5678->3511|5717->3529|5783->3568|5798->3574|5832->3587
+                  LINES: 21->1|26->2|27->3|45->21|45->21|45->21|46->22|46->22|46->22|47->23|57->33|57->33|57->33|58->34|61->37|61->37|61->37|62->38|62->38|62->38|64->40|64->40|64->40|65->41|65->41|65->41|66->42|66->42|66->42|66->42|68->44|68->44|72->48|72->48|73->49|73->49|74->50|79->55|79->55|86->62|86->62|86->62|87->63|87->63|87->63|88->64|88->64|88->64|88->64|94->70|95->71|99->75|99->75|99->75|106->82|106->82|106->82|120->96|120->96|120->96|121->97|121->97|121->97
                   -- GENERATED --
               */
           

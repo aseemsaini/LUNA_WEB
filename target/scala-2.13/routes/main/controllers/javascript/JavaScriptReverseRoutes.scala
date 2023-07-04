@@ -67,6 +67,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:38
+    def reTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.reTweet",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "retweet"})
+        }
+      """
+    )
+  
     // @LINE:36
     def editTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.editTweet",

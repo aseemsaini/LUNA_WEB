@@ -52,6 +52,12 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "searchMessage")
     }
   
+    // @LINE:38
+    def reTweet: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "retweet")
+    }
+  
     // @LINE:36
     def editTweet: Call = {
       

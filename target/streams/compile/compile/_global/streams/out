@@ -1,4 +1,11 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchMessage.scala.html:27:93: value messageId is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                    <p class="message-text">@matchingUsers(index)<span id="message-@message.messageId">@message</span></p>[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                            ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/Models/TaskListInDatabaseModel.scala:217:18: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : slick.sql.FixedSqlAction[Int,slick.dbio.NoStream,slick.dbio.Effect.Write][0m
+[0m[[0m[31merror[0m] [0m[0m required: scala.concurrent.Future[?][0m
+[0m[[0m[31merror[0m] [0m[0m        Messages += messageRow[0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/Models/TaskListInDatabaseModel.scala:212:36: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : scala.concurrent.Future[Nothing][0m
+[0m[[0m[31merror[0m] [0m[0m required: slick.dbio.DBIOAction[?,?,?][0m
+[0m[[0m[31merror[0m] [0m[0m      db.run(userIdFuture).flatMap { userId =>[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
