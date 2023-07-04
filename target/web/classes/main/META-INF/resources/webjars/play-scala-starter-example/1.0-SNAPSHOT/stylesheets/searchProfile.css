@@ -192,7 +192,26 @@ margin-top:20px;
    font-size: 36px;
    color: #ffffff;
     }
+.time {
+  color: #1f0036;
+  margin-left: auto;
+  display: inline-block;
+  float: right;
+}
 
+.likes {
+  position: relative;
+  color: #1f0036;
+}
+
+.heart {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: url("/assets/images/like.png") no-repeat center center;
+  background-size: cover;
+  margin-right: 5px;
+}
 
 .followers-item,
 .following-item {

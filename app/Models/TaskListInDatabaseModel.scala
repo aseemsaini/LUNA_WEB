@@ -187,7 +187,11 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   }
 
   def getTime(username:String):Future[Seq[Timestamp]] = {
-    ???
+    val query = for {
+      user <- Users.filter(_.username === username)
+      time <- Messages.filter(_.userId === user.id.asColumnOf[Int]).map(_.createdAt)
+    }yield time.getOrElse(new Timestamp(0))
+    db.run(query.result)
   }
 
 

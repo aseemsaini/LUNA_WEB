@@ -93,12 +93,15 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         val followingFuture: Future[Seq[String]] = model.getFollowing(username)
         val followerFuture: Future[Seq[String]] = model.getFollowers(username)
         val likeFuture: Future[Seq[Int]] = model.getLikesByUsername(username)
+        val timeFuture: Future[Seq[Timestamp]] = model.getTime(username)
         likeFuture.map(hello => println(hello))(ec)
         tweetsFuture.flatMap { tweets =>
           followingFuture.flatMap { following =>
             followerFuture.flatMap { followers =>
-              likeFuture.map { likes =>
-                Ok(views.html.profile(tweets, following, followers, likes))
+              likeFuture.flatMap { likes =>
+                timeFuture.map { time =>
+                  Ok(views.html.profile(username, tweets, following, followers, likes, time))
+                }(ec)
               }(ec)
             }(ec)
           }(ec)
@@ -180,14 +183,20 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
               val followerFuture = model.getFollowers(search)
               followerFuture.flatMap{ follower =>
                 val followExistFuture = model.followValidate(user, searchUser)
-                followExistFuture.map { followExist =>
-                  Ok(views.html.searchProfile(tweets, following, follower, searchUser, userExists, followExist))
+                followExistFuture.flatMap { followExist =>
+                  val timeFuture = model.getTime(searchUser)
+                  timeFuture.flatMap { time =>
+                    val likesFuture = model.getLikesByUsername(searchUser)
+                    likesFuture.map { likes =>
+                      Ok(views.html.searchProfile(tweets, following, follower, searchUser, userExists, followExist, likes, time))
+                    }(ec)
+                  }(ec)
                 }(ec)
               }(ec)
             }(ec)
           }(ec).recover {
             case ex: Throwable =>
-              Ok(views.html.searchProfile(Seq.empty, Seq.empty, Seq.empty, searchUser, false, false))
+              Ok(views.html.searchProfile(Seq.empty, Seq.empty, Seq.empty, searchUser, false, false, Seq.empty[Int], Seq(new Timestamp(0))))
           }(ec)
         }
       }

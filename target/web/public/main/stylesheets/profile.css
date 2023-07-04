@@ -77,6 +77,12 @@ h1 {
     background-color: #cc0000;
 }
 
+.time {
+  color: #1f0036;
+  margin-left: auto;
+  display: inline-block;
+  float: right;
+}
 
 .tweets {
     background-color: #ffffff;

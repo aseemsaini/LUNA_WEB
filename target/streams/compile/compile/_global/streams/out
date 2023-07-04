@@ -1,6 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/home.scala.html:81:37: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : views.html.index.type[0m
-[0m[[0m[31merror[0m] [0m[0m required: Int[0m
-[0m[[0m[31merror[0m] [0m[0m    var timestamp = new Date("@time(index)");[0m
-[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:53:67: not found: value like[0m
+[0m[[0m[31merror[0m] [0m[0m                    <p class="likes"><span class="heart"></span> @like[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                  ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

@@ -1,4 +1,4 @@
-@(tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], followers:Seq[String], likes:Seq[Int])(implicit request: MessagesRequestHeader, flash: Flash)
+@(username: String, tweets: Seq[Models.Tables.MessagesRow], following: Seq[String], followers:Seq[String], likes:Seq[Int], time: Seq[java.sql.Timestamp])(implicit request: MessagesRequestHeader, flash: Flash)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,7 @@
 <body>
 <header class="header-style">
     <h1>Hello, Welcome to your profile</h1>
+    <h2>@username</h2>
 </header>
 
 <div class="logo">
@@ -41,7 +42,23 @@
             <li class="tweet-item">
                 <div class="message-container">
                     <p class="message-text">Message: <span id="message-@message.messageId">@message.text</span></p>
-                    <p class="likes"><span class="heart"></span> @like</p>
+                    <p class="likes"><span class="heart"></span> @like
+                        <span class="time">
+                      <script>
+                        var timestamp = new Date("@time(index)");
+                        var options = {
+                          day: "2-digit",
+                          month: "long",
+                          year: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        };
+                        var formattedTime = timestamp.toLocaleString("en-UK", options);
+                        document.write(formattedTime);
+                      </script>
+                    </span>
+                    </p>
+
 
                 </div>
                 <form class="tweet-form" method="post" action="@routes.tweet.editTweet">
@@ -64,8 +81,9 @@
     </div>
 </div>
 
-<a class="logout" href="@routes.tweet.logout">Logout</a>
 <a class="home" href="@routes.tweet.home">Home</a>
+<a class="logout" href="@routes.tweet.logout">Logout</a>
+
 
 <script>
       function toggleEditField(messageId) {
