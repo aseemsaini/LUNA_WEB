@@ -1,0 +1,58 @@
+@(matchingMessages: Seq[String], matchingUsers: Seq[String], likes:Seq[Int], time: Seq[java.sql.Timestamp])
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/assets/stylesheets/searchProfile.css">
+</head>
+<body>
+<div class="logo">
+    <img src="/assets/images/luna_logo.png">
+</div>
+<h1>Search Results</h1>
+@if(matchingMessages.isEmpty) {
+<div class="user-not-found">
+    <h2>Error</h2>
+    <h3>No matching messages found</h3>
+</div>
+} else {
+<div class="tweets-container">
+    <div class="container">
+        <ul class="tweet-list">
+            @for((message, index) <- matchingMessages.zipWithIndex) {
+            <li class="tweet-item">
+                <div class="message-container">
+
+                    <p class="message-text"><em style="color: #6a5cd0; font-size: 0.9em; margin-right: 15px;">@matchingUsers(index):</em><span id="message-@message">@message</span></p>
+                    <p class="likes"><span class="heart"></span> @likes(index)
+                        <span class="time">
+                      <script>
+                        var timestamp = new Date("@time(index)");
+                        var options = {
+                          day: "2-digit",
+                          month: "long",
+                          year: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        };
+                        var formattedTime = timestamp.toLocaleString("en-UK", options);
+                        document.write(formattedTime);
+                      </script>
+                    </span>
+                    </p>
+                </div>
+            </li>
+            }
+        </ul>
+    </div>
+</div>
+}
+<a class="logout" href="@routes.tweet.logout">Logout</a>
+<a class="home" href="@routes.tweet.home">Home</a>
+<footer class="footer">
+    <p>&copy; 2023 Luna. All rights reserved.</p>
+</footer>
+</body>
+</html>

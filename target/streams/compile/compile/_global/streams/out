@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login2.scala.html:13:47: value loginValidate is not a member of controllers.Reversetweet[0m
-[0m[[0m[31merror[0m] [0m[0m    <form method="post" action="@routes.tweet.loginValidate" class="login-form">[0m
-[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchMessage.scala.html:27:93: value messageId is not a member of String[0m
+[0m[[0m[31merror[0m] [0m[0m                    <p class="message-text">@matchingUsers(index)<span id="message-@message.messageId">@message</span></p>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                            ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

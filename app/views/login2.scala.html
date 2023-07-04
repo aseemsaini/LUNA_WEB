@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="/assets/stylesheets/index.css">
 </head>
 <body>
+
+@flash.get("error").map { error =>
+<div class="flash-error">
+    @error
+</div>
+}
+@flash.get("Done").map { message =>
+<div class="flash-success">
+    @message
+</div>
+}
 <div class="container">
     <form method="post" action="@routes.tweet.loginValidate" class="login-form">
         @helper.CSRF.formField
@@ -29,19 +40,14 @@
         <div class="form-actions">
             <button type="submit">Login</button>
         </div>
+        <hr class="division-line">
+        <p>
+            <button type="button" onclick="window.location.href='@routes.tweet.createUser'" class="create-account-btn">Create New Account</button>
+        </p>
+
     </form>
 
 
-    @flash.get("error").map { error =>
-    <div class="flash-error">
-        @error
-    </div>
-    }
-    @flash.get("Done").map { message =>
-    <div class="flash-success">
-        @message
-    </div>
-    }
 </div>
 </body>
 </html>

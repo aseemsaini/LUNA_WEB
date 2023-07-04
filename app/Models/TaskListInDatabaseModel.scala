@@ -102,15 +102,6 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     db.run(query.result)
   }
 
-  def followedBy(username: String): Future[Seq[String]] = {
-    ???
-    //    val query = for{
-    //      userID <- Users.filter(_.username === username).map(_.id)
-    //      followed <- Followers.filter()
-    //
-    //    }yield followedUsernames
-  }
-
   def follow(user: String, searchUser: String): Future[Unit] = {
     val userIDquery = Users.filter(_.username === user).map(_.id).result.head
     val searchIDquery = Users.filter(_.username === searchUser).map(_.id).result.head
@@ -153,18 +144,25 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     result
   }
 
-  def searchMessageUser(message:String):Future[(String,String)] = {
+  def searchMessageUser(message: String): Future[List[(String, String, Int, Timestamp)]] = {
     val messageQuery = Messages
       .filter(m => m.text.like(s"%$message%"))
       .join(Users)
       .on(_.userId === _.id.asColumnOf[Int])
-      .result.headOption
-    val messageFuture = db.run(messageQuery).map {
-      case Some((matchingMessage, matchingUser)) => (matchingMessage.text, matchingUser.username)
-      case None => ("No matching message found","")
+      .result
+    val messageFuture = db.run(messageQuery).map { results =>
+      results.map { case (matchingMessage, matchingUser) =>
+        (
+          matchingMessage.text,
+          matchingUser.username,
+          matchingMessage.likes,
+          matchingMessage.createdAt.getOrElse(new Timestamp(0))
+        )
+      }.toList
     }
     messageFuture
   }
+
 
   def editMessage(message:String, messageID:Long): Future[Unit] = {
     val query = Messages.filter(_.messageId === messageID).map(_.text).update(message)

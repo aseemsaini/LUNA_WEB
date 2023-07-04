@@ -65,14 +65,14 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         model.validate(username)(executionContext).flatMap { exists =>
           if (exists) {
             // Username already exists, return a flashing error
-            Future.successful(Redirect(routes.tweet.login).flashing("error" -> "User already exists.").withNewSession)
+            Future.successful(Redirect(routes.tweet.login).flashing("error" -> "USER ALREADY EXIST").withNewSession)
           } else {
             // Username doesn't exist, create a new user
             model.createUser(username, password)(executionContext).map { _ =>
-              Redirect(routes.tweet.login).flashing("Done" -> "User creation Done.")
+              Redirect(routes.tweet.login).flashing("Done" -> "USER CREATION DONE")
             }(executionContext).recover {
               case _ =>
-                Redirect(routes.tweet.createUser).flashing("error" -> "User creation failed.")
+                Redirect(routes.tweet.createUser).flashing("error" -> "USER CREATION FAILED")
             }(executionContext)
           }
         }(executionContext)
@@ -239,10 +239,13 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
 
   def searchMessage = Action.async {implicit request =>
     val searchMessageOption = request.queryString.get("messageSearch").flatMap(_.headOption).getOrElse("")
-    val message = model.searchMessageUser(searchMessageOption)
-    message.map {
-      case (extractedMessage,extractedUser) =>
-        Ok(s"<h1>Matching Message: $extractedMessage</h1>\n<h2>User: $extractedUser</h2>").as(HTML)
+    val messagesFuture = model.searchMessageUser(searchMessageOption)
+    messagesFuture.map { messages =>
+      val matchingMessages = messages.map(_._1)
+      val matchingUsers = messages.map(_._2)
+      val likes = messages.map(_._3)
+      val time = messages.map(_._4)
+      Ok(views.html.searchMessage(matchingMessages, matchingUsers,likes, time))
     }(ec)
   }
 
