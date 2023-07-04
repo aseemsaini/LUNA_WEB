@@ -57,7 +57,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:31
+    // @LINE:34
     def searchMessage: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.searchMessage",
       """
@@ -67,7 +67,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:33
+    // @LINE:36
     def editTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.editTweet",
       """
@@ -77,7 +77,17 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:15
+    // @LINE:14
+    def createUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.createUser",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "create"})
+        }
+      """
+    )
+  
+    // @LINE:18
     def createUserForm: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.createUserForm",
       """
@@ -87,7 +97,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:26
+    // @LINE:29
     def deleteTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.deleteTweet",
       """
@@ -97,7 +107,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:29
+    // @LINE:32
     def follow: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.follow",
       """
@@ -107,7 +117,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:27
+    // @LINE:30
     def searchProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.searchProfile",
       """
@@ -117,7 +127,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:23
+    // @LINE:26
     def logout: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.logout",
       """
@@ -127,7 +137,17 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:30
+    // @LINE:15
+    def loginValidate: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.tweet.loginValidate",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "validate"})
+        }
+      """
+    )
+  
+    // @LINE:33
     def unfollow: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.unfollow",
       """
@@ -137,7 +157,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:21
+    // @LINE:24
     def home: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.home",
       """
@@ -147,7 +167,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:25
+    // @LINE:28
     def addTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.addTweet",
       """
@@ -157,7 +177,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:34
+    // @LINE:37
     def likeTweet: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.likeTweet",
       """
@@ -167,7 +187,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:24
+    // @LINE:27
     def showProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.tweet.showProfile",
       """
@@ -189,7 +209,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:18
+  // @LINE:21
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -197,7 +217,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:18
+    // @LINE:21
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

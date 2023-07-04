@@ -11,6 +11,9 @@ GET     /message                    controllers.AsyncController.message
 #Login Route
 
 GET     /login                      controllers.tweet.login
+GET     /create                     controllers.tweet.createUser
+POST    /validate                   controllers.tweet.loginValidate
+
 
 POST   /createUserForm2             controllers.tweet.createUserForm
 

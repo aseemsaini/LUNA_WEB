@@ -18,7 +18,7 @@ class Routes(
   AsyncController_1: controllers.AsyncController,
   // @LINE:13
   tweet_2: controllers.tweet,
-  // @LINE:18
+  // @LINE:21
   Assets_3: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
@@ -31,7 +31,7 @@ class Routes(
     AsyncController_1: controllers.AsyncController,
     // @LINE:13
     tweet_2: controllers.tweet,
-    // @LINE:18
+    // @LINE:21
     Assets_3: controllers.Assets
   ) = this(errorHandler, HomeController_0, AsyncController_1, tweet_2, Assets_3, "/")
 
@@ -49,6 +49,8 @@ class Routes(
     ("""GET""", this.prefix, """controllers.HomeController.index"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """message""", """controllers.AsyncController.message"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """login""", """controllers.tweet.login"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """create""", """controllers.tweet.createUser"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """validate""", """controllers.tweet.loginValidate"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """createUserForm2""", """controllers.tweet.createUserForm"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(file:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """home""", """controllers.tweet.home"""),
@@ -124,11 +126,47 @@ class Routes(
     )
   )
 
+  // @LINE:14
+  private[this] lazy val controllers_tweet_createUser3_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("create")))
+  )
+  private[this] lazy val controllers_tweet_createUser3_invoker = createInvoker(
+    tweet_2.createUser,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
+      "createUser",
+      Nil,
+      "GET",
+      this.prefix + """create""",
+      """""",
+      Seq()
+    )
+  )
+
   // @LINE:15
-  private[this] lazy val controllers_tweet_createUserForm3_route = Route("POST",
+  private[this] lazy val controllers_tweet_loginValidate4_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("validate")))
+  )
+  private[this] lazy val controllers_tweet_loginValidate4_invoker = createInvoker(
+    tweet_2.loginValidate,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.tweet",
+      "loginValidate",
+      Nil,
+      "POST",
+      this.prefix + """validate""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:18
+  private[this] lazy val controllers_tweet_createUserForm5_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("createUserForm2")))
   )
-  private[this] lazy val controllers_tweet_createUserForm3_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_createUserForm5_invoker = createInvoker(
     tweet_2.createUserForm,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -142,11 +180,11 @@ class Routes(
     )
   )
 
-  // @LINE:18
-  private[this] lazy val controllers_Assets_versioned4_route = Route("GET",
+  // @LINE:21
+  private[this] lazy val controllers_Assets_versioned6_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned4_invoker = createInvoker(
+  private[this] lazy val controllers_Assets_versioned6_invoker = createInvoker(
     Assets_3.versioned(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -160,11 +198,11 @@ class Routes(
     )
   )
 
-  // @LINE:21
-  private[this] lazy val controllers_tweet_home5_route = Route("GET",
+  // @LINE:24
+  private[this] lazy val controllers_tweet_home7_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("home")))
   )
-  private[this] lazy val controllers_tweet_home5_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_home7_invoker = createInvoker(
     tweet_2.home,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -178,11 +216,11 @@ class Routes(
     )
   )
 
-  // @LINE:23
-  private[this] lazy val controllers_tweet_logout6_route = Route("GET",
+  // @LINE:26
+  private[this] lazy val controllers_tweet_logout8_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("logout")))
   )
-  private[this] lazy val controllers_tweet_logout6_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_logout8_invoker = createInvoker(
     tweet_2.logout,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -196,11 +234,11 @@ class Routes(
     )
   )
 
-  // @LINE:24
-  private[this] lazy val controllers_tweet_showProfile7_route = Route("GET",
+  // @LINE:27
+  private[this] lazy val controllers_tweet_showProfile9_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("profile")))
   )
-  private[this] lazy val controllers_tweet_showProfile7_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_showProfile9_invoker = createInvoker(
     tweet_2.showProfile,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -214,11 +252,11 @@ class Routes(
     )
   )
 
-  // @LINE:25
-  private[this] lazy val controllers_tweet_addTweet8_route = Route("POST",
+  // @LINE:28
+  private[this] lazy val controllers_tweet_addTweet10_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("tweet")))
   )
-  private[this] lazy val controllers_tweet_addTweet8_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_addTweet10_invoker = createInvoker(
     tweet_2.addTweet,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -232,11 +270,11 @@ class Routes(
     )
   )
 
-  // @LINE:26
-  private[this] lazy val controllers_tweet_deleteTweet9_route = Route("POST",
+  // @LINE:29
+  private[this] lazy val controllers_tweet_deleteTweet11_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("dtweet")))
   )
-  private[this] lazy val controllers_tweet_deleteTweet9_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_deleteTweet11_invoker = createInvoker(
     tweet_2.deleteTweet,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -250,11 +288,11 @@ class Routes(
     )
   )
 
-  // @LINE:27
-  private[this] lazy val controllers_tweet_searchProfile10_route = Route("GET",
+  // @LINE:30
+  private[this] lazy val controllers_tweet_searchProfile12_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("search")))
   )
-  private[this] lazy val controllers_tweet_searchProfile10_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_searchProfile12_invoker = createInvoker(
     tweet_2.searchProfile,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -268,11 +306,11 @@ class Routes(
     )
   )
 
-  // @LINE:29
-  private[this] lazy val controllers_tweet_follow11_route = Route("GET",
+  // @LINE:32
+  private[this] lazy val controllers_tweet_follow13_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("follow")))
   )
-  private[this] lazy val controllers_tweet_follow11_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_follow13_invoker = createInvoker(
     tweet_2.follow,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -286,11 +324,11 @@ class Routes(
     )
   )
 
-  // @LINE:30
-  private[this] lazy val controllers_tweet_unfollow12_route = Route("GET",
+  // @LINE:33
+  private[this] lazy val controllers_tweet_unfollow14_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("unfollow")))
   )
-  private[this] lazy val controllers_tweet_unfollow12_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_unfollow14_invoker = createInvoker(
     tweet_2.unfollow,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -304,11 +342,11 @@ class Routes(
     )
   )
 
-  // @LINE:31
-  private[this] lazy val controllers_tweet_searchMessage13_route = Route("GET",
+  // @LINE:34
+  private[this] lazy val controllers_tweet_searchMessage15_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("searchMessage")))
   )
-  private[this] lazy val controllers_tweet_searchMessage13_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_searchMessage15_invoker = createInvoker(
     tweet_2.searchMessage,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -322,11 +360,11 @@ class Routes(
     )
   )
 
-  // @LINE:33
-  private[this] lazy val controllers_tweet_editTweet14_route = Route("POST",
+  // @LINE:36
+  private[this] lazy val controllers_tweet_editTweet16_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("editmessage")))
   )
-  private[this] lazy val controllers_tweet_editTweet14_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_editTweet16_invoker = createInvoker(
     tweet_2.editTweet,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -340,11 +378,11 @@ class Routes(
     )
   )
 
-  // @LINE:34
-  private[this] lazy val controllers_tweet_likeTweet15_route = Route("GET",
+  // @LINE:37
+  private[this] lazy val controllers_tweet_likeTweet17_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("like")))
   )
-  private[this] lazy val controllers_tweet_likeTweet15_invoker = createInvoker(
+  private[this] lazy val controllers_tweet_likeTweet17_invoker = createInvoker(
     tweet_2.likeTweet,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -379,82 +417,94 @@ class Routes(
         controllers_tweet_login2_invoker.call(tweet_2.login)
       }
   
-    // @LINE:15
-    case controllers_tweet_createUserForm3_route(params@_) =>
+    // @LINE:14
+    case controllers_tweet_createUser3_route(params@_) =>
       call { 
-        controllers_tweet_createUserForm3_invoker.call(tweet_2.createUserForm)
+        controllers_tweet_createUser3_invoker.call(tweet_2.createUser)
+      }
+  
+    // @LINE:15
+    case controllers_tweet_loginValidate4_route(params@_) =>
+      call { 
+        controllers_tweet_loginValidate4_invoker.call(tweet_2.loginValidate)
       }
   
     // @LINE:18
-    case controllers_Assets_versioned4_route(params@_) =>
-      call(params.fromPath[String]("file", None)) { (file) =>
-        controllers_Assets_versioned4_invoker.call(Assets_3.versioned(file))
+    case controllers_tweet_createUserForm5_route(params@_) =>
+      call { 
+        controllers_tweet_createUserForm5_invoker.call(tweet_2.createUserForm)
       }
   
     // @LINE:21
-    case controllers_tweet_home5_route(params@_) =>
-      call { 
-        controllers_tweet_home5_invoker.call(tweet_2.home)
-      }
-  
-    // @LINE:23
-    case controllers_tweet_logout6_route(params@_) =>
-      call { 
-        controllers_tweet_logout6_invoker.call(tweet_2.logout)
+    case controllers_Assets_versioned6_route(params@_) =>
+      call(params.fromPath[String]("file", None)) { (file) =>
+        controllers_Assets_versioned6_invoker.call(Assets_3.versioned(file))
       }
   
     // @LINE:24
-    case controllers_tweet_showProfile7_route(params@_) =>
+    case controllers_tweet_home7_route(params@_) =>
       call { 
-        controllers_tweet_showProfile7_invoker.call(tweet_2.showProfile)
-      }
-  
-    // @LINE:25
-    case controllers_tweet_addTweet8_route(params@_) =>
-      call { 
-        controllers_tweet_addTweet8_invoker.call(tweet_2.addTweet)
+        controllers_tweet_home7_invoker.call(tweet_2.home)
       }
   
     // @LINE:26
-    case controllers_tweet_deleteTweet9_route(params@_) =>
+    case controllers_tweet_logout8_route(params@_) =>
       call { 
-        controllers_tweet_deleteTweet9_invoker.call(tweet_2.deleteTweet)
+        controllers_tweet_logout8_invoker.call(tweet_2.logout)
       }
   
     // @LINE:27
-    case controllers_tweet_searchProfile10_route(params@_) =>
+    case controllers_tweet_showProfile9_route(params@_) =>
       call { 
-        controllers_tweet_searchProfile10_invoker.call(tweet_2.searchProfile)
+        controllers_tweet_showProfile9_invoker.call(tweet_2.showProfile)
+      }
+  
+    // @LINE:28
+    case controllers_tweet_addTweet10_route(params@_) =>
+      call { 
+        controllers_tweet_addTweet10_invoker.call(tweet_2.addTweet)
       }
   
     // @LINE:29
-    case controllers_tweet_follow11_route(params@_) =>
+    case controllers_tweet_deleteTweet11_route(params@_) =>
       call { 
-        controllers_tweet_follow11_invoker.call(tweet_2.follow)
+        controllers_tweet_deleteTweet11_invoker.call(tweet_2.deleteTweet)
       }
   
     // @LINE:30
-    case controllers_tweet_unfollow12_route(params@_) =>
+    case controllers_tweet_searchProfile12_route(params@_) =>
       call { 
-        controllers_tweet_unfollow12_invoker.call(tweet_2.unfollow)
+        controllers_tweet_searchProfile12_invoker.call(tweet_2.searchProfile)
       }
   
-    // @LINE:31
-    case controllers_tweet_searchMessage13_route(params@_) =>
+    // @LINE:32
+    case controllers_tweet_follow13_route(params@_) =>
       call { 
-        controllers_tweet_searchMessage13_invoker.call(tweet_2.searchMessage)
+        controllers_tweet_follow13_invoker.call(tweet_2.follow)
       }
   
     // @LINE:33
-    case controllers_tweet_editTweet14_route(params@_) =>
+    case controllers_tweet_unfollow14_route(params@_) =>
       call { 
-        controllers_tweet_editTweet14_invoker.call(tweet_2.editTweet)
+        controllers_tweet_unfollow14_invoker.call(tweet_2.unfollow)
       }
   
     // @LINE:34
-    case controllers_tweet_likeTweet15_route(params@_) =>
+    case controllers_tweet_searchMessage15_route(params@_) =>
       call { 
-        controllers_tweet_likeTweet15_invoker.call(tweet_2.likeTweet)
+        controllers_tweet_searchMessage15_invoker.call(tweet_2.searchMessage)
+      }
+  
+    // @LINE:36
+    case controllers_tweet_editTweet16_route(params@_) =>
+      call { 
+        controllers_tweet_editTweet16_invoker.call(tweet_2.editTweet)
+      }
+  
+    // @LINE:37
+    case controllers_tweet_likeTweet17_route(params@_) =>
+      call { 
+        controllers_tweet_likeTweet17_invoker.call(tweet_2.likeTweet)
       }
   }
 }

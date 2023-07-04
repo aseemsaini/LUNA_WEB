@@ -1,5 +1,5 @@
 @* Login Template File *@
-@()(implicit request: MessagesRequestHeader, flash: Flash)
+@(loginForm: Form[LoginData2])(implicit request: MessagesRequestHeader, flash: Flash)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,28 +10,24 @@
 </head>
 <body>
 <div class="container">
-    <form method="post" action="@routes.tweet.loginValidate" class="login-form">
-        @helper.CSRF.formField
-
+    @helper.form(action = routes.tweet.createUserForm) {
+    @helper.CSRF.formField
+    <div class="login-form">
         <div class="image-container">
-            <img src="/assets/images/luna.png" alt="Luna Logo">
+            <img src="/assets/images/luna.png">
         </div>
         <h3>LUNA</h3>
-
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="Username" class="hidden-input" placeholder="Enter your username" required>
+            @helper.inputText(loginForm("Username"), Symbol("maxlength") -> None, Symbol("minlength") -> None, Symbol("class") -> "hidden-input")
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="Password" class="hidden-input" placeholder="Enter your password" required>
+            @helper.inputPassword(loginForm("Password"), Symbol("maxlength") -> None, Symbol("minlength") -> None, Symbol("class") -> "hidden-input")
         </div>
         <div class="form-actions">
-            <button type="submit">Login</button>
+            <button type="submit">Create Account</button>
         </div>
-    </form>
-
-
+    </div>
+    }
     @flash.get("error").map { error =>
     <div class="flash-error">
         @error

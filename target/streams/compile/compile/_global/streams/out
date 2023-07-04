@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/searchProfile.scala.html:53:67: not found: value like[0m
-[0m[[0m[31merror[0m] [0m[0m                    <p class="likes"><span class="heart"></span> @like[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/aseemsaini/Desktop/ACM/acm_app/app/views/login2.scala.html:13:47: value loginValidate is not a member of controllers.Reversetweet[0m
+[0m[[0m[31merror[0m] [0m[0m    <form method="post" action="@routes.tweet.loginValidate" class="login-form">[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

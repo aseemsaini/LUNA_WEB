@@ -16,6 +16,14 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     db.run(Users.filter(_.username === username).exists.result)
   }
 
+  def validatePass(username:String, password:String):Future[Boolean] = {
+    db.run(Users.filter(_.username === username).map(_.password).result.headOption).map{
+      case Some(hashedPassword) => BCrypt.checkpw(password,hashedPassword)
+      case None => false
+    }
+  }
+
+
   def createUser(username: String, password: String)(implicit ec: ExecutionContext): Future[Unit] = {
     val hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt())
     db.run(Users += UsersRow(-1, username, hashedPassword)).map(_ => ())

@@ -46,73 +46,85 @@ package controllers {
     }
 
   
-    // @LINE:31
+    // @LINE:34
     def searchMessage: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "searchMessage")
     }
   
-    // @LINE:33
+    // @LINE:36
     def editTweet: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "editmessage")
     }
   
-    // @LINE:15
+    // @LINE:14
+    def createUser: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "create")
+    }
+  
+    // @LINE:18
     def createUserForm: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "createUserForm2")
     }
   
-    // @LINE:26
+    // @LINE:29
     def deleteTweet: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "dtweet")
     }
   
-    // @LINE:29
+    // @LINE:32
     def follow: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "follow")
     }
   
-    // @LINE:27
+    // @LINE:30
     def searchProfile: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "search")
     }
   
-    // @LINE:23
+    // @LINE:26
     def logout: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "logout")
     }
   
-    // @LINE:30
+    // @LINE:15
+    def loginValidate: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "validate")
+    }
+  
+    // @LINE:33
     def unfollow: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "unfollow")
     }
   
-    // @LINE:21
+    // @LINE:24
     def home: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "home")
     }
   
-    // @LINE:25
+    // @LINE:28
     def addTweet: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "tweet")
     }
   
-    // @LINE:34
+    // @LINE:37
     def likeTweet: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "like")
     }
   
-    // @LINE:24
+    // @LINE:27
     def showProfile: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "profile")
@@ -126,14 +138,14 @@ package controllers {
   
   }
 
-  // @LINE:18
+  // @LINE:21
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:18
+    // @LINE:21
     def versioned(file:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[String]].unbind("file", file))

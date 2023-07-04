@@ -30,7 +30,7 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
     "Password" -> text(8))(LoginData2.apply)(LoginData2.unapply))
 
   def login = Action { implicit request =>
-    Ok(views.html.login2(loginForm))
+    Ok(views.html.login2())
   }
 
   private var user = ""
@@ -53,12 +53,11 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
     }
   }
 
-  import scala.concurrent.ExecutionContext.Implicits.global
 
   def createUserForm = Action.async { implicit request =>
     val executionContext = scala.concurrent.ExecutionContext.global
     loginForm.bindFromRequest().fold(
-      formWithErrors => Future.successful(BadRequest(views.html.login2(formWithErrors))),
+      formWithErrors => Future.successful(BadRequest(views.html.createUser(formWithErrors))),
       ld => {
         val username = ld.username
         val password = ld.password
@@ -66,20 +65,42 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         model.validate(username)(executionContext).flatMap { exists =>
           if (exists) {
             // Username already exists, return a flashing error
-            Future.successful(Redirect(routes.tweet.home).flashing("error" -> "User already exists.").withSession("username" -> ld.username))
+            Future.successful(Redirect(routes.tweet.login).flashing("error" -> "User already exists.").withNewSession)
           } else {
             // Username doesn't exist, create a new user
             model.createUser(username, password)(executionContext).map { _ =>
               Redirect(routes.tweet.login).flashing("Done" -> "User creation Done.")
             }(executionContext).recover {
               case _ =>
-                Redirect(routes.tweet.login).flashing("error" -> "User creation failed.")
+                Redirect(routes.tweet.createUser).flashing("error" -> "User creation failed.")
             }(executionContext)
           }
         }(executionContext)
       })
   }
 
+  def createUser = Action { implicit request =>
+    Ok(views.html.createUser(loginForm))
+  }
+
+  def loginValidate: Action[AnyContent] = Action.async { implicit request =>
+    val formData = request.body.asFormUrlEncoded.get
+    val username = formData("Username").head
+    val password = formData("Password").head
+    println(username, password)
+    val resultFuture = model.validatePass(username, password)
+    resultFuture.flatMap { result =>
+      println(result)
+      if (result) {
+        val sessionData = Map("username" -> username)
+        val redirectResult = Redirect(routes.tweet.home).withSession(sessionData.toSeq: _*)
+        Future.successful(redirectResult)
+      } else {
+        val badRequestResult = BadRequest("Invalid credentials")
+        Future.successful(badRequestResult)
+      }
+    }
+  }
 
   def logout = Action { implicit request =>
     Redirect(routes.tweet.login).withNewSession
