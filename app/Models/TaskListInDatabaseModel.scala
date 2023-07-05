@@ -74,13 +74,10 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   }
 
 
-  def deleteTweet(username: String, message: String): Future[Boolean] = {
+  def deleteTweet(username: String, message: String, messageId:Long): Future[Boolean] = {
     val deleteAction = Messages
-      .filter(msg => msg.text === message && msg.userId.in(Users.filter(_.username === username).map(_.id.asColumnOf[Int])))
+      .filter(msg => msg.text === message && msg.userId.in(Users.filter(_.username === username).map(_.id.asColumnOf[Int])) && msg.messageId === messageId)
       .delete
-    println(deleteAction)
-    println(username)
-    println(message)
     db.run(deleteAction).map(count => count > 0)
   }
 
@@ -176,6 +173,13 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     db.run(query).map(_ => ())
   }
 
+  def likeDec(message_id: Long, like: Int): Future[Unit] = {
+    val likeDecrement = like - 1
+    val query = Messages.filter(_.messageId === message_id)
+      .map(_.likes).update(likeDecrement)
+    db.run(query).map(_ => ())
+  }
+
   def getLikes(message_id:Long):Future[Int] = {
     val query = Messages.filter(_.messageId === message_id).map(_.likes).result.headOption
     db.run(query).map(_.getOrElse(0))
@@ -202,9 +206,24 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
 
   def reTweet(messageId: Long, userId: Long): Future[Unit] = {
     val query = Messages.filter(_.messageId === messageId).map(_.text).result.head
+    var original = ""
+    val originalUser = Messages.filter(_.messageId === messageId)
+      .join(Users)
+      .on(_.userId === _.id.asColumnOf[Int])
+      .map {
+      case (_, user) => user.username
+      }
+      .result.head
+    db.run(originalUser).map {user =>
+      original = user
+    }
     val newMessage = query.flatMap { message =>
-      val messageText = s"Re-Tweet: $message"
-        val messageRow = MessagesRow(-1, userId.toInt, messageText, 0, Some(new Timestamp(System.currentTimeMillis())))
+      val messageText = if (message.toLowerCase.contains("retweet")) {
+        s"$message"
+      } else {
+        s"Retweet:$original  $message"
+      }
+      val messageRow = MessagesRow(-1, userId.toInt, messageText, 0, Some(new Timestamp(System.currentTimeMillis())))
         Messages += messageRow
         }
     db.run(newMessage).map(_ => ())

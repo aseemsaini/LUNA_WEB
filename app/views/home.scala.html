@@ -28,7 +28,7 @@
     </div>
 
     <section class="tweets">
-        <h2 class = "topic">See what the world is Tweeting</h2>
+        <h2 class="topic">See what the world is Tweeting</h2>
         <ul>
             @for((message, index) <- messages.zipWithIndex) {
             <li>
@@ -43,21 +43,21 @@
                         <button class="like-button" type="like"></button>
                         <span class="likes">@likes(index)</span>
 
-                    <span class="time">
-                      <script>
-                        var timestamp = new Date("@time(index)");
-                        var options = {
-                          day: "2-digit",
-                          month: "long",
-                          year: "2-digit",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        };
-                        var formattedTime = timestamp.toLocaleString("en-UK", options);
-                        document.write(formattedTime);
-                      </script>
-                    </span>
-                </form>
+                        <span class="time">
+                          <script>
+                            var timestamp = new Date("@time(index)");
+                            var options = {
+                              day: "2-digit",
+                              month: "long",
+                              year: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            };
+                            var formattedTime = timestamp.toLocaleString("en-UK", options);
+                            document.write(formattedTime);
+                          </script>
+                        </span>
+                    </form>
 
                     <form class="retweet-form" method="post" action="@routes.tweet.reTweet">
                         @helper.CSRF.formField

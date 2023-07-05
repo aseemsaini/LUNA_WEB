@@ -73,6 +73,7 @@
                 <form class="delete-tweet-form" method="post" action="@routes.tweet.deleteTweet">
                     @helper.CSRF.formField
                     <input type="hidden" name="deleteTweet" value="@message.text">
+                    <input type="hidden" name="TweetId" value="@message.messageId">
                     <button class="delete-button" type="submit">Delete</button>
                 </form>
             </li>

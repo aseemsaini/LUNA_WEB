@@ -116,7 +116,6 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         val followerFuture: Future[Seq[String]] = model.getFollowers(username)
         val likeFuture: Future[Seq[Int]] = model.getLikesByUsername(username)
         val timeFuture: Future[Seq[Timestamp]] = model.getTime(username)
-        likeFuture.map(hello => println(hello))(ec)
         tweetsFuture.flatMap { tweets =>
           followingFuture.flatMap { following =>
             followerFuture.flatMap { followers =>
@@ -152,7 +151,9 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
       val postVals = request.body.asFormUrlEncoded
       postVals.map { args =>
         val tweet = args("deleteTweet").head
-        val delTweetFuture = model.deleteTweet(username, tweet)
+        val tweetId = args("TweetId").head
+        println(tweetId)
+        val delTweetFuture = model.deleteTweet(username, tweet, tweetId.toLong)
         delTweetFuture.map(_ => Redirect(routes.tweet.showProfile))(ec)
       }.getOrElse(Future.successful(Redirect(routes.tweet.showProfile)))
     }.getOrElse(Future.successful(Redirect(routes.tweet.login)))
@@ -279,8 +280,5 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
       case None => Future.successful(BadRequest("Missing reTweetId parameter"))
     }
   }
-
-
-
 
 }
