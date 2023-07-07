@@ -38,6 +38,7 @@ CREATE TABLE followers (
   followed_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   PRIMARY KEY (follower_id, followed_id)
 );
+```
 
 5. Run the application: `sbt run`
 
