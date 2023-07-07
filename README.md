@@ -40,7 +40,8 @@ CREATE TABLE followers (
 );
 ```
 
-5. Run the application: `sbt run`
+5. Remember to change `db.url = jdbc:mysql://localhost/luna?user=aseem&password=aseem123` in application.conf to your username and password.
+6. Run the application: `sbt run`
 
 ## Usage
 
