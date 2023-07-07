@@ -18,12 +18,13 @@ LUNA is a web application developed using the Scala Play framework, MySQL databa
 2. Install dependencies: `npm install`
 3. Set up the database LUNA: Create a MySQL database and configure the connection details in the application.
 4. Run the following commands to create tables under the Database:
-   
-`CREATE TABLE users (
+```sql
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(20) NOT NULL,
   password VARCHAR(200) NOT NULL
 );
+
 CREATE TABLE messages (
   message_id SERIAL PRIMARY KEY,
   user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -31,11 +32,12 @@ CREATE TABLE messages (
   likes INT NOT NULL DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE followers (
   follower_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   followed_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   PRIMARY KEY (follower_id, followed_id)
-);`
+);
 
 5. Run the application: `sbt run`
 
