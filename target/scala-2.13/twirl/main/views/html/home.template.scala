@@ -54,46 +54,46 @@ Seq[Any](format.raw/*2.1*/("""
     <section class="tweets">
         <h2 class="topic">See what the world is Tweeting</h2>
         <ul>
-            """),_display_(/*33.14*/for((message, index) <- messages.zipWithIndex) yield /*33.60*/ {_display_(Seq[Any](format.raw/*33.62*/("""
+            """),_display_(/*33.14*/for(message <- messages) yield /*33.38*/ {_display_(Seq[Any](format.raw/*33.40*/("""
             """),format.raw/*34.13*/("""<li>
                 <div class="tweet-container">
                     <p class="user-message">
-                        <span class="user">"""),_display_(/*37.45*/users/*37.50*/.find(_.id == message.userId).map(_.username).getOrElse("")),format.raw/*37.109*/("""</span>
+                        <span class="user">"""),_display_(/*37.45*/users/*37.50*/.find(user => user.id == message.userId).map(_.username).getOrElse("")),format.raw/*37.120*/("""</span>
                         <span class="message">"""),_display_(/*38.48*/message/*38.55*/.text),format.raw/*38.60*/("""</span>
-
-                    <form class="like-form" method="get" action=""""),_display_(/*40.67*/routes/*40.73*/.tweet.likeTweet),format.raw/*40.89*/("""">
-                        """),_display_(/*41.26*/helper/*41.32*/.CSRF.formField),format.raw/*41.47*/("""
-                        """),format.raw/*42.25*/("""<input type="hidden" name="tweetId" value=""""),_display_(/*42.69*/message/*42.76*/.messageId),format.raw/*42.86*/("""">
+                    <form class="like-form" method="get" action=""""),_display_(/*39.67*/routes/*39.73*/.tweet.likeTweet),format.raw/*39.89*/("""">
+                        """),_display_(/*40.26*/helper/*40.32*/.CSRF.formField),format.raw/*40.47*/("""
+                        """),format.raw/*41.25*/("""<input type="hidden" name="tweetId" value=""""),_display_(/*41.69*/message/*41.76*/.messageId),format.raw/*41.86*/("""">
                         <button class="like-button" type="like"></button>
-                        <span class="likes">"""),_display_(/*44.46*/likes(index)),format.raw/*44.58*/("""</span>
+                        <span class="likes">"""),_display_(/*43.46*/likes(messages.indexOf(message))),format.raw/*43.78*/("""</span>
 
                         <span class="time">
                           <script>
-                            var timestamp = new Date(""""),_display_(/*48.56*/time(index)),format.raw/*48.67*/("""");
-                            var options = """),format.raw/*49.43*/("""{"""),format.raw/*49.44*/("""
-                              """),format.raw/*50.31*/("""day: "2-digit",
+                            var timestamp = new Date(""""),_display_(/*47.56*/time(messages.indexOf(message))),format.raw/*47.87*/("""");
+                            var options = """),format.raw/*48.43*/("""{"""),format.raw/*48.44*/("""
+                              """),format.raw/*49.31*/("""day: "2-digit",
                               month: "long",
                               year: "2-digit",
                               hour: "2-digit",
                               minute: "2-digit",
-                            """),format.raw/*55.29*/("""}"""),format.raw/*55.30*/(""";
+                            """),format.raw/*54.29*/("""}"""),format.raw/*54.30*/(""";
                             var formattedTime = timestamp.toLocaleString("en-UK", options);
                             document.write(formattedTime);
                           </script>
                         </span>
                     </form>
 
-                    <form class="retweet-form" method="post" action=""""),_display_(/*62.71*/routes/*62.77*/.tweet.reTweet),format.raw/*62.91*/("""">
-                        """),_display_(/*63.26*/helper/*63.32*/.CSRF.formField),format.raw/*63.47*/("""
-                        """),format.raw/*64.25*/("""<input type="hidden" name="reTweetId" value=""""),_display_(/*64.71*/message/*64.78*/.messageId),format.raw/*64.88*/("""">
+                    <form class="retweet-form" method="post" action=""""),_display_(/*61.71*/routes/*61.77*/.tweet.reTweet),format.raw/*61.91*/("""">
+                        """),_display_(/*62.26*/helper/*62.32*/.CSRF.formField),format.raw/*62.47*/("""
+                        """),format.raw/*63.25*/("""<input type="hidden" name="reTweetId" value=""""),_display_(/*63.71*/message/*63.78*/.messageId),format.raw/*63.88*/("""">
                         <button class="retweet-button" type="submit">Retweet</button>
                     </form>
                     </p>
                 </div>
             </li>
-            """)))}),format.raw/*70.14*/("""
-        """),format.raw/*71.9*/("""</ul>
+            """)))}),format.raw/*69.14*/("""
+        """),format.raw/*70.9*/("""</ul>
     </section>
+
 
     <section class="search-section">
         <form method="get" action=""""),_display_(/*75.37*/routes/*75.43*/.tweet.searchProfile),format.raw/*75.63*/("""">
@@ -139,9 +139,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/home.scala.html
-                  HASH: 02ed402bd7cdec2cf934c83ad143aa301edc6c1c
-                  MATRIX: 841->1|1115->182|1142->183|1557->571|1572->577|1608->592|1651->608|1666->614|1702->629|1743->642|2085->957|2147->1003|2187->1005|2228->1018|2395->1158|2409->1163|2490->1222|2572->1277|2588->1284|2614->1289|2716->1364|2731->1370|2768->1386|2823->1414|2838->1420|2874->1435|2927->1460|2998->1504|3014->1511|3045->1521|3194->1643|3227->1655|3397->1798|3429->1809|3503->1855|3532->1856|3591->1887|3851->2119|3880->2120|4227->2440|4242->2446|4277->2460|4332->2488|4347->2494|4383->2509|4436->2534|4509->2580|4525->2587|4556->2597|4783->2793|4819->2802|4941->2897|4956->2903|4997->2923|5274->3173|5289->3179|5330->3199|5721->3563|5736->3569|5775->3587|5841->3626|5856->3632|5890->3645
-                  LINES: 21->1|26->2|27->3|45->21|45->21|45->21|46->22|46->22|46->22|47->23|57->33|57->33|57->33|58->34|61->37|61->37|61->37|62->38|62->38|62->38|64->40|64->40|64->40|65->41|65->41|65->41|66->42|66->42|66->42|66->42|68->44|68->44|72->48|72->48|73->49|73->49|74->50|79->55|79->55|86->62|86->62|86->62|87->63|87->63|87->63|88->64|88->64|88->64|88->64|94->70|95->71|99->75|99->75|99->75|106->82|106->82|106->82|120->96|120->96|120->96|121->97|121->97|121->97
+                  HASH: 09bdb48fc26105d56509045d07f5607e642005c1
+                  MATRIX: 841->1|1115->182|1142->183|1557->571|1572->577|1608->592|1651->608|1666->614|1702->629|1743->642|2085->957|2125->981|2165->983|2206->996|2373->1136|2387->1141|2479->1211|2561->1266|2577->1273|2603->1278|2704->1352|2719->1358|2756->1374|2811->1402|2826->1408|2862->1423|2915->1448|2986->1492|3002->1499|3033->1509|3182->1631|3235->1663|3405->1806|3457->1837|3531->1883|3560->1884|3619->1915|3879->2147|3908->2148|4255->2468|4270->2474|4305->2488|4360->2516|4375->2522|4411->2537|4464->2562|4537->2608|4553->2615|4584->2625|4811->2821|4847->2830|4970->2926|4985->2932|5026->2952|5303->3202|5318->3208|5359->3228|5750->3592|5765->3598|5804->3616|5870->3655|5885->3661|5919->3674
+                  LINES: 21->1|26->2|27->3|45->21|45->21|45->21|46->22|46->22|46->22|47->23|57->33|57->33|57->33|58->34|61->37|61->37|61->37|62->38|62->38|62->38|63->39|63->39|63->39|64->40|64->40|64->40|65->41|65->41|65->41|65->41|67->43|67->43|71->47|71->47|72->48|72->48|73->49|78->54|78->54|85->61|85->61|85->61|86->62|86->62|86->62|87->63|87->63|87->63|87->63|93->69|94->70|99->75|99->75|99->75|106->82|106->82|106->82|120->96|120->96|120->96|121->97|121->97|121->97
                   -- GENERATED --
               */
           

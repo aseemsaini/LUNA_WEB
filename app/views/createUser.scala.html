@@ -12,7 +12,7 @@
 <div class="container">
     @helper.form(action = routes.tweet.createUserForm) {
     @helper.CSRF.formField
-    <div class="login-form">
+    <div class="login-form2">
         <div class="image-container">
             <img src="/assets/images/luna.png">
         </div>
@@ -26,6 +26,14 @@
         <div class="form-actions">
             <button type="submit">Create Account</button>
         </div>
+
+        <hr class="division-line2">
+        <p class = "already">OR</p>
+        <p>
+            <button type="button" onclick="window.location.href='@routes.tweet.login'" class="login-account-btn">Login</button>
+        </p>
+
+
     </div>
     }
     @flash.get("error").map { error =>

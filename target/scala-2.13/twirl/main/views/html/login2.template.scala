@@ -43,11 +43,13 @@ Seq[Any](format.raw/*3.1*/("""
     """),_display_(/*20.6*/message),format.raw/*20.13*/("""
 """),format.raw/*21.1*/("""</div>
 """)))}),format.raw/*22.2*/("""
-"""),format.raw/*23.1*/("""<div class="container">
-    <form method="post" action=""""),_display_(/*24.34*/routes/*24.40*/.tweet.loginValidate),format.raw/*24.60*/("""" class="login-form">
-        """),_display_(/*25.10*/helper/*25.16*/.CSRF.formField),format.raw/*25.31*/("""
 
-        """),format.raw/*27.9*/("""<div class="image-container">
+
+"""),format.raw/*25.1*/("""<div class="container">
+    <form method="post" action=""""),_display_(/*26.34*/routes/*26.40*/.tweet.loginValidate),format.raw/*26.60*/("""" class="login-form">
+        """),_display_(/*27.10*/helper/*27.16*/.CSRF.formField),format.raw/*27.31*/("""
+
+        """),format.raw/*29.9*/("""<div class="image-container">
             <img src="/assets/images/luna.png" alt="Luna Logo">
         </div>
         <h3>LUNA</h3>
@@ -65,7 +67,7 @@ Seq[Any](format.raw/*3.1*/("""
         </div>
         <hr class="division-line">
         <p>
-            <button type="button" onclick="window.location.href='"""),_display_(/*45.67*/routes/*45.73*/.tweet.createUser),format.raw/*45.90*/("""'" class="create-account-btn">Create New Account</button>
+            <button type="button" onclick="window.location.href='"""),_display_(/*47.67*/routes/*47.73*/.tweet.createUser),format.raw/*47.90*/("""'" class="create-account-btn">Create New Account</button>
         </p>
 
     </form>
@@ -91,9 +93,9 @@ Seq[Any](format.raw/*3.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/login2.scala.html
-                  HASH: 6c9194b2f5df7278cc8fc33e4f99feaef1083398
-                  MATRIX: 772->27|923->85|950->86|1150->260|1163->265|1189->282|1238->293|1266->294|1323->325|1349->330|1377->331|1415->339|1443->341|1456->346|1481->362|1532->375|1560->376|1619->409|1647->416|1675->417|1713->425|1741->426|1825->483|1840->489|1881->509|1939->540|1954->546|1990->561|2027->571|2852->1369|2867->1375|2905->1392
-                  LINES: 21->2|26->3|27->4|36->13|36->13|36->13|36->13|37->14|38->15|38->15|39->16|40->17|41->18|41->18|41->18|41->18|42->19|43->20|43->20|44->21|45->22|46->23|47->24|47->24|47->24|48->25|48->25|48->25|50->27|68->45|68->45|68->45
+                  HASH: 96efae2ac59b140d40b69845daeba4e00466624a
+                  MATRIX: 772->27|923->85|950->86|1150->260|1163->265|1189->282|1238->293|1266->294|1323->325|1349->330|1377->331|1415->339|1443->341|1456->346|1481->362|1532->375|1560->376|1619->409|1647->416|1675->417|1713->425|1743->428|1827->485|1842->491|1883->511|1941->542|1956->548|1992->563|2029->573|2854->1371|2869->1377|2907->1394
+                  LINES: 21->2|26->3|27->4|36->13|36->13|36->13|36->13|37->14|38->15|38->15|39->16|40->17|41->18|41->18|41->18|41->18|42->19|43->20|43->20|44->21|45->22|48->25|49->26|49->26|49->26|50->27|50->27|50->27|52->29|70->47|70->47|70->47
                   -- GENERATED --
               */
           

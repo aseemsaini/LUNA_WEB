@@ -1,13 +1,10 @@
 package Models
 
 import slick.jdbc.MySQLProfile.api._
-
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import org.mindrot.jbcrypt.BCrypt
 import Models.Tables._
-import slick.jdbc.MySQLProfile.api._
-
 import java.sql.{Date, Timestamp}
 
 
@@ -33,7 +30,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   def getMessagesWithUsers(limit: Int): Future[Seq[(MessagesRow, UsersRow, Int, Timestamp)]] = {
     val query = for {
       ((message, user), likeCount) <- Messages
-        .sortBy(_.createdAt.desc.nullsLast)
+        .sortBy(_.messageId.desc.nullsLast)
         .take(limit)
         .join(Users)
         .on(_.userId === _.id.asColumnOf[Int])

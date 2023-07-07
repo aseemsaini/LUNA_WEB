@@ -46,7 +46,6 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
       val users: Seq[UsersRow] = messagesAndUsers.map { case (_, user, _, _) => user }
       val likes: Seq[Int] = messagesAndUsers.map { case(_, _,like, _) => like }
       val time: Seq[Timestamp] = messagesAndUsers.map {case (_,_,_,time) => time }
-      //val likes: Seq[MessagesRow] = messagesAndUsers.map (_,likes) => likes}
       Ok(views.html.home(messages, users, likes, time))
     }
     }.getOrElse {
@@ -97,8 +96,8 @@ class tweet @Inject()(protected val dbConfigProvider: DatabaseConfigProvider, cc
         val redirectResult = Redirect(routes.tweet.home).withSession(sessionData.toSeq: _*)
         Future.successful(redirectResult)
       } else {
-        val badRequestResult = BadRequest("Invalid credentials")
-        Future.successful(badRequestResult)
+        val result = Redirect(routes.tweet.login).flashing("error" -> "INVALID CREDENTIALS")
+        Future.successful(result)
       }
     }
   }

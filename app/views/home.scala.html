@@ -30,22 +30,21 @@
     <section class="tweets">
         <h2 class="topic">See what the world is Tweeting</h2>
         <ul>
-            @for((message, index) <- messages.zipWithIndex) {
+            @for(message <- messages) {
             <li>
                 <div class="tweet-container">
                     <p class="user-message">
-                        <span class="user">@users.find(_.id == message.userId).map(_.username).getOrElse("")</span>
+                        <span class="user">@users.find(user => user.id == message.userId).map(_.username).getOrElse("")</span>
                         <span class="message">@message.text</span>
-
                     <form class="like-form" method="get" action="@routes.tweet.likeTweet">
                         @helper.CSRF.formField
                         <input type="hidden" name="tweetId" value="@message.messageId">
                         <button class="like-button" type="like"></button>
-                        <span class="likes">@likes(index)</span>
+                        <span class="likes">@likes(messages.indexOf(message))</span>
 
                         <span class="time">
                           <script>
-                            var timestamp = new Date("@time(index)");
+                            var timestamp = new Date("@time(messages.indexOf(message))");
                             var options = {
                               day: "2-digit",
                               month: "long",
@@ -70,6 +69,7 @@
             }
         </ul>
     </section>
+
 
     <section class="search-section">
         <form method="get" action="@routes.tweet.searchProfile">
