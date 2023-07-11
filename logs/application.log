@@ -1,31 +1,12 @@
-<<<<<<< Updated upstream
-2023-07-07 15:38:26,780 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-7 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-=======
-2023-07-05 17:00:31,514 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-9 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
->>>>>>> Stashed changes
+2023-07-07 15:40:01,451 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-9 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
     filters.ExampleFilter
 
-<<<<<<< Updated upstream
-2023-07-07 15:38:27,006 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-7 - Application started (Dev) (no global state)
-=======
-2023-07-05 17:00:31,830 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-9 - Application started (Dev) (no global state)
-2023-07-05 17:06:00,373 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=4m57s862ms).
-2023-07-05 17:31:37,573 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=25m7s187ms).
-2023-07-05 17:49:24,304 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=17m46s731ms).
-2023-07-05 18:07:45,615 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=17m50s871ms).
-2023-07-05 18:25:15,487 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=15m29s846ms).
-2023-07-05 18:42:22,612 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=16m37s118ms).
-2023-07-05 18:58:27,034 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=16m4s422ms).
-2023-07-05 19:14:22,904 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=15m25s525ms).
-2023-07-05 19:14:51,262 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Retrograde clock change detected (housekeeper delta=28s358ms), soft-evicting connections from pool.
-2023-07-06 08:17:39,850 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=13h2m48s529ms).
-2023-07-06 13:03:10,716 [WARN] from com.zaxxer.hikari.pool.HikariPool in db housekeeper - db - Thread starvation or clock leap detected (housekeeper delta=4h45m30s925ms).
-2023-07-06 13:03:25,432 [INFO] from play.api.internal.libs.concurrent.CoordinatedShutdownSupport in pool-340-thread-4 - Starting synchronous coordinated shutdown with ServerStoppedReason reason and 35000 milliseconds timeout
-2023-07-06 13:03:25,540 [INFO] from play.core.server.AkkaHttpServer in pool-340-thread-4 - Stopping Akka HTTP server...
-2023-07-06 13:03:25,882 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-2 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
-2023-07-06 13:03:26,532 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-18 - Running provided shutdown stop hooks
->>>>>>> Stashed changes
+2023-07-07 15:40:01,681 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-9 - Application started (Dev) (no global state)
+2023-07-07 15:40:55,204 [INFO] from play.api.internal.libs.concurrent.CoordinatedShutdownSupport in pool-10-thread-3 - Starting synchronous coordinated shutdown with ServerStoppedReason reason and 35000 milliseconds timeout
+2023-07-07 15:40:55,208 [INFO] from play.core.server.AkkaHttpServer in pool-10-thread-3 - Stopping Akka HTTP server...
+2023-07-07 15:40:55,215 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-2 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
+2023-07-07 15:40:55,323 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-3 - Running provided shutdown stop hooks
