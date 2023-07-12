@@ -1,6 +1,6 @@
 package Models
 
-import slick.jdbc.MySQLProfile.api._
+import slick.jdbc.PostgresProfile.api._
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import org.mindrot.jbcrypt.BCrypt
@@ -73,7 +73,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
 
   def deleteTweet(username: String, message: String, messageId:Long): Future[Boolean] = {
     val deleteAction = Messages
-      .filter(msg => msg.text === message && msg.userId.in(Users.filter(_.username === username).map(_.id.asColumnOf[Int])) && msg.messageId === messageId)
+      .filter(msg => msg.text === message && msg.userId.in(Users.filter(_.username === username).map(_.id.asColumnOf[Int])) && msg.messageId === messageId.asColumnOf[Int])
       .delete
     db.run(deleteAction).map(count => count > 0)
   }
@@ -82,7 +82,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     val query = for {
       userId <- Users.filter(_.username === username).map(_.id)
       following <- Followers.filter(_.followerId === userId.asColumnOf[Int])
-      followingUsernames <- Users.filter(_.id === following.followedId.asColumnOf[Long]).map(_.username)
+      followingUsernames <- Users.filter(_.id === following.followedId).map(_.username)
     } yield followingUsernames
     db.run(query.result)
   }
@@ -91,7 +91,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     val query = for {
       userId <- Users.filter(_.username === username).map(_.id)
       followerID <- Followers.filter(_.followedId === userId.asColumnOf[Int])
-      followerUsernames <- Users.filter(_.id === followerID.followerId.asColumnOf[Long]).map(_.username)
+      followerUsernames <- Users.filter(_.id === followerID.followerId).map(_.username)
     } yield followerUsernames
     db.run(query.result)
   }
@@ -131,7 +131,7 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
     db.run(query)
   }
 
-  def getUserID(username: String): Future[Long] = {
+  def getUserID(username: String): Future[Int] = {
     val userIDquery = Users.filter(_.username === username).map(_.id).result.head
     val result = db.run(userIDquery).map(id => id)
     result
@@ -159,26 +159,26 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
 
 
   def editMessage(message:String, messageID:Long): Future[Unit] = {
-    val query = Messages.filter(_.messageId === messageID).map(_.text).update(message)
+    val query = Messages.filter(_.messageId === messageID.asColumnOf[Int]).map(_.text).update(message)
     db.run(query).map(_ => ())
   }
 
   def likeInc(message_id:Long, like:Int):Future[Unit] = {
     val likeAdder = like + 1
-    val query = Messages.filter(_.messageId === message_id)
+    val query = Messages.filter(_.messageId === message_id.asColumnOf[Int])
       .map(_.likes).update(likeAdder)
     db.run(query).map(_ => ())
   }
 
   def likeDec(message_id: Long, like: Int): Future[Unit] = {
     val likeDecrement = like - 1
-    val query = Messages.filter(_.messageId === message_id)
+    val query = Messages.filter(_.messageId === message_id.asColumnOf[Int])
       .map(_.likes).update(likeDecrement)
     db.run(query).map(_ => ())
   }
 
   def getLikes(message_id:Long):Future[Int] = {
-    val query = Messages.filter(_.messageId === message_id).map(_.likes).result.headOption
+    val query = Messages.filter(_.messageId === message_id.asColumnOf[Int]).map(_.likes).result.headOption
     db.run(query).map(_.getOrElse(0))
   }
 
@@ -202,9 +202,9 @@ class TaskListInDatabaseModel(db: Database)(implicit ec: ExecutionContext) {
   }
 
   def reTweet(messageId: Long, userId: Long): Future[Unit] = {
-    val query = Messages.filter(_.messageId === messageId).map(_.text).result.head
+    val query = Messages.filter(_.messageId === messageId.asColumnOf[Int]).map(_.text).result.head
     var original = ""
-    val originalUser = Messages.filter(_.messageId === messageId)
+    val originalUser = Messages.filter(_.messageId === messageId.asColumnOf[Int])
       .join(Users)
       .on(_.userId === _.id.asColumnOf[Int])
       .map {

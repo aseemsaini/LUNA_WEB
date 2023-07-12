@@ -12,7 +12,7 @@ import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
 import Models.Tables.{FollowersRow, MessagesRow, UsersRow}
 
-import slick.jdbc.MySQLProfile.api._
+import slick.jdbc.PostgresProfile.api._
 import java.sql.Timestamp
 
 import javax.inject._

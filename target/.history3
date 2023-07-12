@@ -59,3 +59,28 @@
 1688558589895:run
 1688645011143:exit
 1688740781187:run
+1689156125489:runMain Models.CodeGen
+1689156741672:exit
+1689156757032:runMain Models.CodeGen
+1689156819402:exit
+1689156854754:;set _root_.scala.collection.Seq(historyPath := None,shellPrompt := { _ => "" },SettingKey[_root_.scala.Option[_root_.sbt.File]]("sbtStructureOutputFile") in _root_.sbt.Global := _root_.scala.Some(_root_.sbt.file("/private/var/folders/yh/cf9zmgvj4cd8kbv5khn6nlh40000gn/T/sbt-structure.xml")),SettingKey[_root_.java.lang.String]("sbtStructureOptions") in _root_.sbt.Global := "download, resolveClassifiers");apply -cp "/Users/aseemsaini/Library/Application Support/JetBrains/IdeaIC2023.1/plugins/Scala/repo/org/jetbrains/scala/sbt-structure-extractor_2.12_1.0/2023.1.0/sbt-structure-extractor-2023.1.0.jar" org.jetbrains.sbt.CreateTasks;preferScala2;*/*:dumpStructure
+1689156956959:runMain Models.CodeGen
+1689157713810:run
+1689158237310:runMain Models.CodeGen
+1689159795761:exit
+1689159864168:;set _root_.scala.collection.Seq(historyPath := None,shellPrompt := { _ => "" },SettingKey[_root_.scala.Option[_root_.sbt.File]]("sbtStructureOutputFile") in _root_.sbt.Global := _root_.scala.Some(_root_.sbt.file("/private/var/folders/yh/cf9zmgvj4cd8kbv5khn6nlh40000gn/T/sbt-structure.xml")),SettingKey[_root_.java.lang.String]("sbtStructureOptions") in _root_.sbt.Global := "download, resolveClassifiers");apply -cp "/Users/aseemsaini/Library/Application Support/JetBrains/IdeaIC2023.1/plugins/Scala/repo/org/jetbrains/scala/sbt-structure-extractor_2.12_1.0/2023.1.0/sbt-structure-extractor-2023.1.0.jar" org.jetbrains.sbt.CreateTasks;preferScala2;*/*:dumpStructure
+1689159868550:runMain Models.CodeGen
+1689159910749:last Compile / runMain
+1689165125238:runMain Models.CodeGen
+1689169261953:compile
+1689169265602:runMain Models.CodeGen
+1689169572457:exit
+1689169636097:runMain Models.CodeGen
+1689169710254:sbt dependencyTree
+1689169715007:exit
+1689169959387:runMain Models.CodeGen
+1689170427417:run
+1689171249688:exit
+1689171335884:run
+1689171987007:runMain Models.CodeGen
+1689172048464:run

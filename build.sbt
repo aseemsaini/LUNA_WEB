@@ -9,8 +9,9 @@ lazy val root = (project in file("."))
       "com.h2database" % "h2" % "1.4.200",
       "com.typesafe.play" %% "play-slick" % "5.0.0",
       "com.typesafe.slick" %% "slick-codegen" % "3.3.3",
+      "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
       "com.typesafe.slick" %% "slick" % "3.3.3",
-      "mysql" % "mysql-connector-java" % "8.0.26",
+      "org.postgresql" % "postgresql" % "42.6.0",
       "org.mindrot" % "jbcrypt" % "0.4",
       "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
     ),
