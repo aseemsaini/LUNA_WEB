@@ -118,3 +118,25 @@ Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at or near "`"
     filters.ExampleFilter
 
 2023-07-12 15:34:46,666 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-8 - Application started (Dev) (no global state)
+2023-07-12 16:08:55,775 [WARN] from akka.actor.CoordinatedShutdown in application-akka.actor.default-dispatcher-18 - Coordinated shutdown phase [service-stop] timed out after 5000 milliseconds
+2023-07-12 16:08:56,076 [WARN] from play.api.http.HttpConfiguration in play-dev-mode-akka.actor.default-dispatcher-28 - 
+Your secret key is very short, and may be vulnerable to dictionary attacks.  Your application may not be secure.
+The application secret should ideally be 32 bytes of completely random input, encoded in base64. While the application
+will be able to start in production mode, you will also see a warning when it is starting.
+To set the application secret, please read http://playframework.com/documentation/latest/ApplicationSecret
+          
+2023-07-12 16:08:56,083 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-28 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+
+2023-07-12 16:08:56,096 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-28 - Application started (Dev) (no global state)
+2023-07-12 16:08:56,121 [WARN] from play.api.mvc.DefaultJWTCookieDataCodec in application-akka.actor.default-dispatcher-4 - decode: cookie has invalid signature! message = JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2023-07-12 16:08:56,124 [INFO] from play.api.mvc.DefaultJWTCookieDataCodec in application-akka.actor.default-dispatcher-4 - The JWT signature in the cookie does not match the locally computed signature with the server. This usually indicates the browser has a leftover cookie from another Play application, so clearing cookies may resolve this error message.
+2023-07-12 16:25:13,808 [INFO] from play.api.internal.libs.concurrent.CoordinatedShutdownSupport in pool-18-thread-3 - Starting synchronous coordinated shutdown with ServerStoppedReason reason and 35000 milliseconds timeout
+2023-07-12 16:25:13,813 [INFO] from play.core.server.AkkaHttpServer in pool-18-thread-3 - Stopping Akka HTTP server...
+2023-07-12 16:25:13,819 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-38 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
+2023-07-12 16:25:18,896 [WARN] from akka.actor.CoordinatedShutdown in application-akka.actor.default-dispatcher-19 - Coordinated shutdown phase [service-stop] timed out after 5000 milliseconds
+2023-07-12 16:25:18,926 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-38 - Running provided shutdown stop hooks

@@ -4,12 +4,12 @@
 [0m[[0m[0mdebug[0m] [0m[0m| baseDirectory -> /Users/aseemsaini/Desktop/ACM/acm_app [0m
 [0m[[0m[0mdebug[0m] [0m[0m| targetDir     -> /Users/aseemsaini/Desktop/ACM/acm_app/target [0m
 [0m[[0m[0mdebug[0m] [0m[0m| jdkVersion    -> 1.8 [0m
-[0m[[0m[0mdebug[0m] [0m[0m| appName       -> immense-badlands-71790 [0m
+[0m[[0m[0mdebug[0m] [0m[0m| appName       -> luna-webapp [0m
 [0m[[0m[0mdebug[0m] [0m[0m| includePaths  -> [0m
 [0m[[0m[0mdebug[0m] [0m[0m| buildpacks    -> [0m
 [0m[[0m[0mdebug[0m] [0m[0m+--------------------------------------------------------------------[0m
 [0m[[0m[0minfo[0m] [0m[0m-----> Packaging application...[0m
-[0m[[0m[0minfo[0m] [0m[0m       - app: immense-badlands-71790[0m
+[0m[[0m[0minfo[0m] [0m[0m       - app: luna-webapp[0m
 [0m[[0m[0minfo[0m] [0m[0m       - including: target/universal/stage/[0m
 [0m[[0m[0mdebug[0m] [0m[0mProcfile:[0m
 [0m[[0m[0mdebug[0m] [0m[0m===================[0m
@@ -21,7 +21,7 @@
 [0m[[0m[0minfo[0m] [0m[0m-----> Creating build...[0m
 [0m[[0m[0minfo[0m] [0m[0m       - file: target/heroku/build.tgz[0m
 [0m[[0m[0minfo[0m] [0m[0m       - size: 59MB[0m
-[0m[[0m[0mdebug[0m] [0m[0mHeroku Blob URL: https://s3-external-1.amazonaws.com/heroku-sources-production/bbb52/bbb52cba-4bdd-40e8-a456-691f8d2ba451?AWSAccessKeyId=AKIAZSXS6CXK7IPHNFWZ&Signature=a05O%2FCfM07vl78mgPlqSDGX7r1s%3D&Expires=1689177357[0m
+[0m[[0m[0mdebug[0m] [0m[0mHeroku Blob URL: https://s3-external-1.amazonaws.com/heroku-sources-production/5b4b8/5b4b8068-9085-413c-9f09-93669c434141?AWSAccessKeyId=AKIAZSXS6CXK7IPHNFWZ&Signature=nKvar85aDTUEUEqYh2PxbjlPhxg%3D&Expires=1689179542[0m
 [0m[[0m[0minfo[0m] [0m[0m-----> Uploading build...[0m
 [0m[[0m[0minfo[0m] [0m[0m[A[2K[info] -----> Uploading slug... (1%)[0m
 [0m[[0m[0minfo[0m] [0m[0m[A[2K[info] -----> Uploading slug... (2%)[0m
@@ -136,7 +136,7 @@
 [0m[[0m[0minfo[0m] [0m[0mremote: -----> Compressing...[0m
 [0m[[0m[0minfo[0m] [0m[0mremote:        Done: 110.8M[0m
 [0m[[0m[0minfo[0m] [0m[0mremote: -----> Launching...[0m
-[0m[[0m[0minfo[0m] [0m[0mremote:        Released v8[0m
-[0m[[0m[0minfo[0m] [0m[0mremote:        https://immense-badlands-71790-2291f2edd390.herokuapp.com/ deployed to Heroku[0m
+[0m[[0m[0minfo[0m] [0m[0mremote:        Released v13[0m
+[0m[[0m[0minfo[0m] [0m[0mremote:        https://luna-webapp-efddf8658dd2.herokuapp.com/ deployed to Heroku[0m
 [0m[[0m[0minfo[0m] [0m[0mremote: [0m
 [0m[[0m[0minfo[0m] [0m[0m-----> Done[0m

@@ -19,7 +19,10 @@ lazy val root = (project in file("."))
       "-feature",
       "-deprecation",
       "-Xfatal-warnings"
-    )
+    ),
+    Compile / javacOptions ++= Seq(
+      "-source", "1.8",
+      "-target", "1.8"
+    ),
+    Compile / herokuAppName := "luna-webapp"
   )
-
-Compile / herokuAppName := "immense-badlands-71790"
