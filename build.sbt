@@ -21,3 +21,5 @@ lazy val root = (project in file("."))
       "-Xfatal-warnings"
     )
   )
+
+Compile / herokuAppName := "immense-badlands-71790"

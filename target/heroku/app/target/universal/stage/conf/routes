@@ -1,0 +1,39 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+
+#TaskList Route
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+#Login Route
+
+GET     /login                      controllers.tweet.login
+GET     /create                     controllers.tweet.createUser
+POST    /validate                   controllers.tweet.loginValidate
+
+
+POST   /createUserForm2             controllers.tweet.createUserForm
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(file)
+
+#Home Page
+GET     /home                       controllers.tweet.home
+
+GET     /logout                    controllers.tweet.logout
+GET     /profile                    controllers.tweet.showProfile
+POST    /tweet                      controllers.tweet.addTweet
+POST    /dtweet                     controllers.tweet.deleteTweet
+GET     /search                     controllers.tweet.searchProfile
+
+GET    /follow                     controllers.tweet.follow
+GET    /unfollow                   controllers.tweet.unfollow
+GET    /searchMessage              controllers.tweet.searchMessage
+
+POST    /editmessage                controllers.tweet.editTweet
+GET     /like                       controllers.tweet.likeTweet
+
+POST    /retweet                    controllers.tweet.reTweet
