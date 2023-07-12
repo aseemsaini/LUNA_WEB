@@ -2,6 +2,8 @@
 
 LUNA is a web application developed using the Scala Play framework, MySQL database, HTML, CSS, and JavaScript. It provides users with a platform to share and interact with messages, similar to popular social media platforms.
 
+Website: https://luna-webapp-efddf8658dd2.herokuapp.com/login
+
 ## Features
 
 - User Registration and Login: Users can create new accounts or log in to existing ones to access the application.
